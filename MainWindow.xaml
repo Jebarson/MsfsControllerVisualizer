@@ -1,0 +1,122 @@
+<Window x:Class="Msfs.ControllerVisualizer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Msfs.ControllerVisualizer"
+        xmlns:converters="clr-namespace:Msfs.ControllerVisualizer.Converters"
+        mc:Ignorable="d"
+        Title="MSFS 2024 Controller Visualizer" Height="900" Width="1200">
+    
+    <Window.Resources>
+        <converters:ControllerVisualConverter x:Key="ControllerVisualConverter"/>
+        <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
+    </Window.Resources>
+    
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Export Folder Selection Section -->
+        <Border Grid.Row="0" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" 
+                BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,0,0,10"
+                Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                
+                <TextBlock Grid.Column="0" Text="Export Folder:" 
+                           Foreground="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" 
+                           VerticalAlignment="Center" Margin="0,0,10,0" FontSize="14"/>
+                <TextBox Grid.Column="1" Text="{Binding ExportFolderPath, UpdateSourceTrigger=PropertyChanged}" 
+                         Padding="5" FontSize="13" VerticalContentAlignment="Center" IsReadOnly="True"
+                         ToolTip="Folder containing exported MSFS 2024 profile XML files"/>
+                <Button Grid.Column="2" Content="Browse..." Command="{Binding BrowseForExportFolderCommand}" 
+                        Padding="20,5" Margin="10,0,0,0" FontSize="13" FontWeight="Bold"
+                        ToolTip="Select folder with exported MSFS profiles"/>
+            </Grid>
+        </Border>
+
+        <!-- Controller Selection -->
+        <Border Grid.Row="1" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" 
+                BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,0,0,10"
+                Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+                <TextBlock Grid.Column="0" Text="Controller:" 
+                           Foreground="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" 
+                           VerticalAlignment="Center" Margin="0,0,10,0" FontSize="14"/>
+                <ComboBox Grid.Column="1" 
+                          ItemsSource="{Binding ExportedControllers}" 
+                          SelectedItem="{Binding SelectedExportedController}"
+                          DisplayMemberPath="DisplayName"
+                          Padding="5" FontSize="13"
+                          ToolTip="Select a controller to view its mappings">
+                    <ComboBox.ItemContainerStyle>
+                        <Style TargetType="ComboBoxItem">
+                            <Setter Property="ToolTip" Value="{Binding FileName}"/>
+                        </Style>
+                    </ComboBox.ItemContainerStyle>
+                </ComboBox>
+            </Grid>
+        </Border>
+
+        <!-- Divider -->
+        <Border Grid.Row="2" Height="1" 
+                Background="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" 
+                Margin="0,0,0,10"/>
+
+        <!-- Controller Visual Area -->
+        <Border Grid.Row="3" 
+                Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" 
+                BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" 
+                BorderThickness="1" CornerRadius="5">
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                <Grid>
+                    <!-- Placeholder when no profile is loaded -->
+                    <TextBlock Foreground="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" 
+                               FontSize="16" TextAlignment="Center" 
+                               VerticalAlignment="Center" HorizontalAlignment="Center"
+                               Margin="20" TextWrapping="Wrap">
+                        <Run Text="1. Export your controller profiles from MSFS 2024 to a folder&#x0a;"/><Run Text="2. Click 'Browse...' to select the export folder&#x0a;"/><Run Text="3. Select a controller from the dropdown to view mappings"/>
+                        <TextBlock.Visibility>
+                            <Binding Path="MatchedControllerDefinition" Converter="{StaticResource NullToVisibilityConverter}" ConverterParameter="Inverted"/>
+                        </TextBlock.Visibility>
+                    </TextBlock>
+                    
+                    <!-- Controller Visual -->
+                    <ContentControl HorizontalAlignment="Center" VerticalAlignment="Center"
+                                    Visibility="{Binding MatchedControllerDefinition, Converter={StaticResource NullToVisibilityConverter}}">
+                        <ContentControl.Content>
+                            <MultiBinding Converter="{StaticResource ControllerVisualConverter}">
+                                <Binding Path="MatchedControllerDefinition"/>
+                                <Binding Path="CurrentButtonMappings"/>
+                            </MultiBinding>
+                        </ContentControl.Content>
+                    </ContentControl>
+                </Grid>
+            </ScrollViewer>
+        </Border>
+
+        <!-- Status Bar -->
+        <Border Grid.Row="4" 
+                Background="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" 
+                Padding="10" Margin="0,10,0,0" CornerRadius="3">
+            <TextBlock Text="{Binding StatusMessage}" 
+                       Foreground="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}" 
+                       FontSize="13" TextWrapping="Wrap"/>
+        </Border>
+    </Grid>
+</Window>
