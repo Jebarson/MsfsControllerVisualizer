@@ -8,39 +8,30 @@
         <converters:JoystickButtonMappingConverter x:Key="JoystickButtonMappingConverter" />
         <converters:JoystickButtonTruncateConverter x:Key="JoystickButtonTruncateConverter" MaxLength="20" />
 
-        <!-- Ellipse Styles -->
-        <Style x:Key="GripEllipseStyle" TargetType="Ellipse">
+        <!-- Base Ellipse Style -->
+        <Style x:Key="BaseEllipseStyle" TargetType="Ellipse">
             <Setter Property="Fill" Value="Gray" />
             <Setter Property="Opacity" Value="0.5" />
             <Setter Property="Stroke" Value="#D3D3D3" />
             <Setter Property="StrokeThickness" Value="1" />
-            <Setter Property="Width" Value="200" />
-            <Setter Property="Height" Value="300" />
         </Style>
 
-        <Style x:Key="HatEllipseStyle" TargetType="Ellipse">
-            <Setter Property="Fill" Value="Gray" />
-            <Setter Property="Opacity" Value="0.5" />
-            <Setter Property="Stroke" Value="#D3D3D3" />
-            <Setter Property="StrokeThickness" Value="1" />
+        <Style x:Key="GripEllipseStyle" TargetType="Ellipse" BasedOn="{StaticResource BaseEllipseStyle}">
+            <Setter Property="Width" Value="240" />
+            <Setter Property="Height" Value="340" />
+        </Style>
+
+        <Style x:Key="HatEllipseStyle" TargetType="Ellipse" BasedOn="{StaticResource BaseEllipseStyle}">
             <Setter Property="Width" Value="60" />
             <Setter Property="Height" Value="60" />
         </Style>
 
-        <Style x:Key="CenterHubEllipseStyle" TargetType="Ellipse">
-            <Setter Property="Fill" Value="Gray" />
-            <Setter Property="Opacity" Value="0.5" />
-            <Setter Property="Stroke" Value="#D3D3D3" />
-            <Setter Property="StrokeThickness" Value="1" />
+        <Style x:Key="CenterHubEllipseStyle" TargetType="Ellipse" BasedOn="{StaticResource BaseEllipseStyle}">
             <Setter Property="Width" Value="300" />
             <Setter Property="Height" Value="190" />
         </Style>
 
-        <Style x:Key="IgnitionDialEllipseStyle" TargetType="Ellipse">
-            <Setter Property="Fill" Value="Gray" />
-            <Setter Property="Opacity" Value="0.5" />
-            <Setter Property="Stroke" Value="#D3D3D3" />
-            <Setter Property="StrokeThickness" Value="1" />
+        <Style x:Key="IgnitionDialEllipseStyle" TargetType="Ellipse" BasedOn="{StaticResource BaseEllipseStyle}">
             <Setter Property="Width" Value="120" />
             <Setter Property="Height" Value="120" />
         </Style>
@@ -51,37 +42,33 @@
             <Setter Property="Opacity" Value="0.5" />
             <Setter Property="Stroke" Value="#D3D3D3" />
             <Setter Property="StrokeThickness" Value="1" />
-            <Setter Property="Width" Value="450" />
-            <Setter Property="Height" Value="260" />
+            <Setter Property="Width" Value="480" />
+            <Setter Property="Height" Value="270" />
         </Style>
 
         <!-- Button Styles -->
-        <Style x:Key="StandardButtonStyle" TargetType="Ellipse">
+        <Style x:Key="BaseButtonStyle" TargetType="Ellipse">
             <Setter Property="Width" Value="26" />
             <Setter Property="Height" Value="26" />
+            <Setter Property="Stroke" Value="#D3D3D3" />
+            <Setter Property="StrokeThickness" Value="1" />
+        </Style>
+
+        <Style x:Key="StandardButtonStyle" TargetType="Ellipse" BasedOn="{StaticResource BaseButtonStyle}">
             <Setter Property="Fill" Value="Gray" />
             <Setter Property="Opacity" Value="0.5" />
-            <Setter Property="Stroke" Value="#D3D3D3" />
-            <Setter Property="StrokeThickness" Value="1" />
         </Style>
 
-        <Style x:Key="WhiteButtonStyle" TargetType="Ellipse">
-            <Setter Property="Width" Value="26" />
-            <Setter Property="Height" Value="26" />
+        <Style x:Key="WhiteButtonStyle" TargetType="Ellipse" BasedOn="{StaticResource BaseButtonStyle}">
             <Setter Property="Fill" Value="#ffffff" />
-            <Setter Property="Stroke" Value="#D3D3D3" />
-            <Setter Property="StrokeThickness" Value="1" />
         </Style>
 
-        <Style x:Key="RedButtonStyle" TargetType="Ellipse">
-            <Setter Property="Width" Value="26" />
-            <Setter Property="Height" Value="26" />
+        <Style x:Key="RedButtonStyle" TargetType="Ellipse" BasedOn="{StaticResource BaseButtonStyle}">
             <Setter Property="Fill" Value="#c0392b" />
-            <Setter Property="Stroke" Value="#D3D3D3" />
-            <Setter Property="StrokeThickness" Value="1" />
         </Style>
 
         <!-- Text Styles -->
+        <!-- Button Number Styles -->
         <Style x:Key="ButtonNumberStyle" TargetType="TextBlock">
             <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
             <Setter Property="FontSize" Value="10" />
@@ -97,85 +84,83 @@
             <Setter Property="Foreground" Value="White" />
         </Style>
 
-        <Style x:Key="ButtonBindingRightStyle" TargetType="TextBlock">
-            <Setter Property="Foreground" Value="#228B22" />
-            <Setter Property="FontSize" Value="9" />
-            <Setter Property="TextTrimming" Value="CharacterEllipsis" />
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="Margin" Value="5,0,0,0" />
-        </Style>
-
-        <Style x:Key="ButtonBindingLeftStyle" TargetType="TextBlock">
-            <Setter Property="Foreground" Value="#228B22" />
-            <Setter Property="FontSize" Value="9" />
-            <Setter Property="TextTrimming" Value="CharacterEllipsis" />
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="Margin" Value="0,0,5,0" />
-            <Setter Property="TextAlignment" Value="Right" />
-        </Style>
-
-        <Style x:Key="ButtonBindingBottomStyle" TargetType="TextBlock">
-            <Setter Property="Foreground" Value="#228B22" />
-            <Setter Property="FontSize" Value="8" />
-            <Setter Property="TextTrimming" Value="CharacterEllipsis" />
-            <Setter Property="HorizontalAlignment" Value="Center" />
-            <Setter Property="Margin" Value="0,2,0,0" />
-        </Style>
-
-        <Style x:Key="DirectionLabelStyle" TargetType="TextBlock">
-            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
-            <Setter Property="FontSize" Value="9" />
-        </Style>
-
-        <Style x:Key="DirectionBindingStyle" TargetType="TextBlock">
-            <Setter Property="Foreground" Value="#228B22" />
-            <Setter Property="FontSize" Value="8" />
-        </Style>
-
-        <Style x:Key="SwitchNumberStyle" TargetType="TextBlock">
+        <!-- Base Label Style -->
+        <Style x:Key="BaseLabelStyle" TargetType="TextBlock">
             <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
             <Setter Property="FontSize" Value="10" />
+        </Style>
+
+        <Style x:Key="DirectionLabelStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseLabelStyle}">
+            <Setter Property="FontSize" Value="9" />
+        </Style>
+
+        <Style x:Key="SwitchNumberStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseLabelStyle}">
             <Setter Property="TextAlignment" Value="Center" />
             <Setter Property="Margin" Value="0,2,0,2" />
         </Style>
 
-        <Style x:Key="SwitchBindingStyle" TargetType="TextBlock">
+        <Style x:Key="AxisLabelStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseLabelStyle}">
+            <Setter Property="FontWeight" Value="Normal" />
+        </Style>
+
+        <Style x:Key="IgnitionLabelStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseLabelStyle}" />
+
+        <!-- Base Binding Text Style -->
+        <Style x:Key="BaseBindingTextStyle" TargetType="TextBlock">
             <Setter Property="Foreground" Value="#228B22" />
-            <Setter Property="FontSize" Value="8" />
-            <Setter Property="TextAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="12" />
             <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+        </Style>
+
+        <Style x:Key="ButtonBindingRightStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseBindingTextStyle}">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="8,0,0,0" />
+            <Setter Property="MaxWidth" Value="140" />
+        </Style>
+
+        <Style x:Key="ButtonBindingLeftStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseBindingTextStyle}">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="0,0,8,0" />
+            <Setter Property="TextAlignment" Value="Right" />
+            <Setter Property="MaxWidth" Value="140" />
+        </Style>
+
+        <Style x:Key="ButtonBindingBottomStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseBindingTextStyle}">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="0,3,0,0" />
+            <Setter Property="MaxWidth" Value="140" />
+        </Style>
+
+        <Style x:Key="DirectionBindingStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseBindingTextStyle}">
+            <Setter Property="MaxWidth" Value="45" />
+            <Setter Property="Width" Value="45" />
+        </Style>
+
+        <Style x:Key="SwitchBindingStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseBindingTextStyle}">
+            <Setter Property="TextAlignment" Value="Center" />
             <Setter Property="TextWrapping" Value="Wrap" />
-            <Setter Property="MaxHeight" Value="24" />
+            <Setter Property="MaxHeight" Value="34" />
+            <Setter Property="MaxWidth" Value="90" />
             <Setter Property="Margin" Value="2" />
         </Style>
 
-        <Style x:Key="AxisLabelStyle" TargetType="TextBlock">
-            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
-            <Setter Property="FontSize" Value="10" />
+        <Style x:Key="AxisBindingStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseBindingTextStyle}">
+            <Setter Property="TextAlignment" Value="Center" />
         </Style>
 
-        <Style x:Key="AxisBindingStyle" TargetType="TextBlock">
-            <Setter Property="Foreground" Value="#228B22" />
-            <Setter Property="FontSize" Value="9" />
-        </Style>
-
-        <Style x:Key="IgnitionLabelStyle" TargetType="TextBlock">
-            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
-            <Setter Property="FontSize" Value="10" />
-        </Style>
-
-        <Style x:Key="IgnitionBindingStyle" TargetType="TextBlock">
-            <Setter Property="Foreground" Value="#228B22" />
-            <Setter Property="FontSize" Value="8" />
-            <Setter Property="TextTrimming" Value="CharacterEllipsis" />
-            <Setter Property="MaxWidth" Value="70" />
+        <Style x:Key="IgnitionBindingStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseBindingTextStyle}">
+            <Setter Property="MaxWidth" Value="75" />
         </Style>
 
         <!-- Line and Shape Styles -->
-        <Style x:Key="TickMarkStyle" TargetType="Line">
+        <Style x:Key="BaseLineStyle" TargetType="Line">
             <Setter Property="Stroke" Value="#D3D3D3" />
             <Setter Property="StrokeThickness" Value="1" />
         </Style>
+
+        <Style x:Key="TickMarkStyle" TargetType="Line" BasedOn="{StaticResource BaseLineStyle}" />
+
+        <Style x:Key="AxisLineStyle" TargetType="Line" BasedOn="{StaticResource BaseLineStyle}" />
 
         <Style x:Key="AxisPathStyle" TargetType="Path">
             <Setter Property="Stroke" Value="#D3D3D3" />
@@ -183,287 +168,274 @@
             <Setter Property="Fill" Value="Transparent" />
         </Style>
 
-        <Style x:Key="AxisLineStyle" TargetType="Line">
-            <Setter Property="Stroke" Value="#D3D3D3" />
-            <Setter Property="StrokeThickness" Value="1" />
-        </Style>
-
         <Style x:Key="AxisPolygonStyle" TargetType="Polygon">
             <Setter Property="Fill" Value="#D3D3D3" />
         </Style>
 
         <!-- Switch Styles -->
-        <Style x:Key="MasterSwitchStyle" TargetType="Rectangle">
-            <Setter Property="Width" Value="18" />
-            <Setter Property="Height" Value="36" />
+        <Style x:Key="BaseSwitchStyle" TargetType="Rectangle">
+            <Setter Property="Width" Value="20" />
+            <Setter Property="Height" Value="38" />
+            <Setter Property="Stroke" Value="#D3D3D3" />
+            <Setter Property="StrokeThickness" Value="1" />
+            <Setter Property="Margin" Value="0,3" />
+        </Style>
+
+        <Style x:Key="MasterSwitchStyle" TargetType="Rectangle" BasedOn="{StaticResource BaseSwitchStyle}">
             <Setter Property="Fill" Value="#8B0000" />
-            <Setter Property="Stroke" Value="#D3D3D3" />
-            <Setter Property="StrokeThickness" Value="1" />
-            <Setter Property="Margin" Value="0,2" />
         </Style>
 
-        <Style x:Key="AvionicsSwitchStyle" TargetType="Rectangle">
-            <Setter Property="Width" Value="18" />
-            <Setter Property="Height" Value="36" />
+        <Style x:Key="AvionicsSwitchStyle" TargetType="Rectangle" BasedOn="{StaticResource BaseSwitchStyle}">
             <Setter Property="Fill" Value="White" />
-            <Setter Property="Stroke" Value="#D3D3D3" />
-            <Setter Property="StrokeThickness" Value="1" />
-            <Setter Property="Margin" Value="0,2" />
         </Style>
 
-        <Style x:Key="LightSwitchStyle" TargetType="Rectangle">
-            <Setter Property="Width" Value="18" />
-            <Setter Property="Height" Value="30" />
+        <Style x:Key="LightSwitchStyle" TargetType="Rectangle" BasedOn="{StaticResource BaseSwitchStyle}">
+            <Setter Property="Height" Value="32" />
             <Setter Property="Fill" Value="Gray" />
             <Setter Property="Opacity" Value="0.5" />
-            <Setter Property="Stroke" Value="#D3D3D3" />
-            <Setter Property="StrokeThickness" Value="1" />
-            <Setter Property="Margin" Value="0,2" />
         </Style>
 
     </UserControl.Resources>
 
     <Grid>
-        <Canvas Width="900" Height="600" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Canvas Width="950" Height="650" HorizontalAlignment="Center" VerticalAlignment="Center">
 
             <!-- LEFT YOKE GRIP ASSEMBLY -->
-            <Canvas x:Name="LeftGripCanvas" Canvas.Left="60" Canvas.Top="20">
+            <Canvas x:Name="LeftGripCanvas" Canvas.Top="20">
                 <Ellipse Style="{StaticResource GripEllipseStyle}" />
 
                 <!-- POV Hat Switch -->
-                <Canvas Width="80" Height="80" Canvas.Left="60" Canvas.Top="40">
-                    <Ellipse Canvas.Left="10" Canvas.Top="10" Style="{StaticResource HatEllipseStyle}" />
+                <Canvas Width="180" Height="180" Canvas.Left="30" Canvas.Top="10">
+                    <Ellipse Canvas.Left="60" Canvas.Top="60" Style="{StaticResource HatEllipseStyle}" />
 
-                    <!-- Hat Direction Tick Marks -->
-                    <Line X1="40" Y1="15" X2="40" Y2="22" Style="{StaticResource TickMarkStyle}" />
-                    <Line X1="57" Y1="23" X2="53" Y2="27" Style="{StaticResource TickMarkStyle}" />
-                    <Line X1="65" Y1="40" X2="58" Y2="40" Style="{StaticResource TickMarkStyle}" />
-                    <Line X1="57" Y1="57" X2="53" Y2="53" Style="{StaticResource TickMarkStyle}" />
-                    <Line X1="40" Y1="65" X2="40" Y2="58" Style="{StaticResource TickMarkStyle}" />
-                    <Line X1="23" Y1="57" X2="27" Y2="53" Style="{StaticResource TickMarkStyle}" />
-                    <Line X1="15" Y1="40" X2="22" Y2="40" Style="{StaticResource TickMarkStyle}" />
-                    <Line X1="23" Y1="23" X2="27" Y2="27" Style="{StaticResource TickMarkStyle}" />
+                    <!-- Hat Direction Tick Marks (inside dial) -->
+                    <Line X1="90" Y1="65" X2="90" Y2="72" Style="{StaticResource TickMarkStyle}" />
+                    <Line X1="107" Y1="73" X2="103" Y2="77" Style="{StaticResource TickMarkStyle}" />
+                    <Line X1="115" Y1="90" X2="108" Y2="90" Style="{StaticResource TickMarkStyle}" />
+                    <Line X1="107" Y1="107" X2="103" Y2="103" Style="{StaticResource TickMarkStyle}" />
+                    <Line X1="90" Y1="115" X2="90" Y2="108" Style="{StaticResource TickMarkStyle}" />
+                    <Line X1="73" Y1="107" X2="77" Y2="103" Style="{StaticResource TickMarkStyle}" />
+                    <Line X1="65" Y1="90" X2="72" Y2="90" Style="{StaticResource TickMarkStyle}" />
+                    <Line X1="73" Y1="73" X2="77" Y2="77" Style="{StaticResource TickMarkStyle}" />
 
-                    <!-- Hat Direction Labels -->
-                    <TextBlock Text="U" Style="{StaticResource DirectionLabelStyle}" Canvas.Left="34" Canvas.Top="0" />
-                    <TextBlock Text="U-R" Style="{StaticResource DirectionLabelStyle}" Canvas.Left="55" Canvas.Top="5" />
-                    <TextBlock Text="R" Style="{StaticResource DirectionLabelStyle}" Canvas.Left="70" Canvas.Top="32" />
-                    <TextBlock Text="D-R" Style="{StaticResource DirectionLabelStyle}" Canvas.Left="55" Canvas.Top="58" />
-                    <TextBlock Text="D" Style="{StaticResource DirectionLabelStyle}" Canvas.Left="36" Canvas.Top="70" />
-                    <TextBlock Text="D-L" Style="{StaticResource DirectionLabelStyle}" Canvas.Left="5" Canvas.Top="58" />
-                    <TextBlock Text="L" Style="{StaticResource DirectionLabelStyle}" Canvas.Left="-5" Canvas.Top="32" />
-                    <TextBlock Text="U-L" Style="{StaticResource DirectionLabelStyle}" Canvas.Left="5" Canvas.Top="5" />
+                    <!-- Hat Direction Labels (close to dial) -->
+                    <TextBlock Text="U" Style="{StaticResource DirectionLabelStyle}" Canvas.Left="86" Canvas.Top="50" />
+                    <TextBlock Text="U-R" Style="{StaticResource DirectionLabelStyle}" Canvas.Left="113" Canvas.Top="58" />
+                    <TextBlock Text="R" Style="{StaticResource DirectionLabelStyle}" Canvas.Left="122" Canvas.Top="84" />
+                    <TextBlock Text="D-R" Style="{StaticResource DirectionLabelStyle}" Canvas.Left="113"
+                            Canvas.Top="112" />
+                    <TextBlock Text="D" Style="{StaticResource DirectionLabelStyle}" Canvas.Left="86" Canvas.Top="122" />
+                    <TextBlock Text="D-L" Style="{StaticResource DirectionLabelStyle}" Canvas.Left="46" Canvas.Top="112" />
+                    <TextBlock Text="L" Style="{StaticResource DirectionLabelStyle}" Canvas.Left="42" Canvas.Top="84" />
+                    <TextBlock Text="U-L" Style="{StaticResource DirectionLabelStyle}" Canvas.Left="46" Canvas.Top="58" />
 
-                    <!-- Hat Direction Bindings -->
+
+                    <!-- Hat Direction Bindings (at end of half-length pointer lines) -->
                     <TextBlock
                             Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Pov_Up}"
                             ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Pov_Up}"
-                            Style="{StaticResource DirectionBindingStyle}" Canvas.Left="34" Canvas.Top="12" />
+                            Style="{StaticResource DirectionBindingStyle}" Canvas.Left="67" Canvas.Top="33" />
                     <TextBlock
                             Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Pov_UpRight}"
                             ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Pov_UpRight}"
-                            Style="{StaticResource DirectionBindingStyle}" Canvas.Left="52" Canvas.Top="18" />
+                            Style="{StaticResource DirectionBindingStyle}" Canvas.Left="122" Canvas.Top="52" />
                     <TextBlock
                             Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Pov_Right}"
                             ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Pov_Right}"
-                            Style="{StaticResource DirectionBindingStyle}" Canvas.Left="60" Canvas.Top="32" />
+                            Style="{StaticResource DirectionBindingStyle}" Canvas.Left="137" Canvas.Top="84" />
                     <TextBlock
                             Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Pov_DownRight}"
                             ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Pov_DownRight}"
-                            Style="{StaticResource DirectionBindingStyle}" Canvas.Left="52" Canvas.Top="44" />
+                            Style="{StaticResource DirectionBindingStyle}" Canvas.Left="122" Canvas.Top="112" />
                     <TextBlock
                             Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Pov_Down}"
                             ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Pov_Down}"
-                            Style="{StaticResource DirectionBindingStyle}" Canvas.Left="34" Canvas.Top="52" />
+                            Style="{StaticResource DirectionBindingStyle}" Canvas.Left="67" Canvas.Top="137" />
                     <TextBlock
                             Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Pov_DownLeft}"
                             ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Pov_DownLeft}"
-                            Style="{StaticResource DirectionBindingStyle}" Canvas.Left="18" Canvas.Top="44" />
+                            Style="{StaticResource DirectionBindingStyle}" Canvas.Left="15" Canvas.Top="112" />
                     <TextBlock
                             Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Pov_Left}"
                             ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Pov_Left}"
-                            Style="{StaticResource DirectionBindingStyle}" Canvas.Left="12" Canvas.Top="32" />
+                            Style="{StaticResource DirectionBindingStyle}" Canvas.Left="0" Canvas.Top="84" />
                     <TextBlock
                             Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Pov_Up_Left}"
                             ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Pov_Up_Left}"
-                            Style="{StaticResource DirectionBindingStyle}" Canvas.Left="18" Canvas.Top="18" />
+                            Style="{StaticResource DirectionBindingStyle}" Canvas.Left="15" Canvas.Top="52" />
                 </Canvas>
 
                 <!-- Button 1: Switch -->
-                <StackPanel Orientation="Horizontal" Canvas.Left="190" Canvas.Top="70">
+                <StackPanel Orientation="Horizontal" Canvas.Left="210" Canvas.Top="40">
                     <Grid Width="26" Height="26">
                         <Ellipse Style="{StaticResource WhiteButtonStyle}" />
                         <TextBlock Text="1" Style="{StaticResource WhiteButtonNumberStyle}" />
                     </Grid>
-                    <TextBlock Style="{StaticResource ButtonBindingRightStyle}" MaxWidth="100"
+                    <TextBlock Style="{StaticResource ButtonBindingRightStyle}"
                             Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_1}"
                             ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_1}" />
                 </StackPanel>
 
                 <!-- Button 2: Switch -->
-                <StackPanel Orientation="Horizontal" Canvas.Left="130" Canvas.Top="120">
+                <StackPanel Canvas.Left="180" Canvas.Top="135">
                     <Grid Width="26" Height="26">
                         <Ellipse Style="{StaticResource WhiteButtonStyle}" />
                         <TextBlock Text="2" Style="{StaticResource WhiteButtonNumberStyle}" />
                     </Grid>
-                    <TextBlock Style="{StaticResource ButtonBindingRightStyle}" MaxWidth="100"
+                    <TextBlock Style="{StaticResource ButtonBindingBottomStyle}"
                             Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_2}"
                             ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_2}" />
                 </StackPanel>
 
                 <!-- Button 6: Trim Up (Yoke Left) -->
-                <StackPanel Orientation="Vertical" Canvas.Left="50" Canvas.Top="170">
+                <StackPanel Orientation="Vertical" Canvas.Left="60" Canvas.Top="190">
                     <Grid Width="26" Height="26">
                         <Ellipse Style="{StaticResource StandardButtonStyle}" />
                         <TextBlock Text="6" Style="{StaticResource ButtonNumberStyle}" />
                     </Grid>
-                    <TextBlock Style="{StaticResource ButtonBindingBottomStyle}" MaxWidth="60"
+                    <TextBlock Style="{StaticResource ButtonBindingBottomStyle}"
                             Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_6}"
                             ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_6}" />
                 </StackPanel>
 
                 <!-- Button 5: Trim Down (Yoke Left) -->
-                <StackPanel Orientation="Vertical" Canvas.Left="50" Canvas.Top="210">
+                <StackPanel Orientation="Vertical" Canvas.Left="60" Canvas.Top="245">
                     <Grid Width="26" Height="26">
                         <Ellipse Style="{StaticResource StandardButtonStyle}" />
                         <TextBlock Text="5" Style="{StaticResource ButtonNumberStyle}" />
                     </Grid>
-                    <TextBlock Style="{StaticResource ButtonBindingBottomStyle}" MaxWidth="60"
+                    <TextBlock Style="{StaticResource ButtonBindingBottomStyle}"
                             Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_5}"
                             ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_5}" />
                 </StackPanel>
 
                 <!-- Button 8: Rudder Trim Right (Yoke Left) -->
-                <StackPanel Orientation="Vertical" Canvas.Left="120" Canvas.Top="170">
+                <StackPanel Orientation="Vertical" Canvas.Left="140" Canvas.Top="190">
                     <Grid Width="26" Height="26">
                         <Ellipse Style="{StaticResource StandardButtonStyle}" />
                         <TextBlock Text="8" Style="{StaticResource ButtonNumberStyle}" />
                     </Grid>
-                    <TextBlock Style="{StaticResource ButtonBindingBottomStyle}" MaxWidth="60"
+                    <TextBlock Style="{StaticResource ButtonBindingBottomStyle}"
                             Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_8}"
                             ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_8}" />
                 </StackPanel>
 
                 <!-- Button 7: Rudder Trim Left (Yoke Left) -->
-                <StackPanel Orientation="Vertical" Canvas.Left="120" Canvas.Top="210">
+                <StackPanel Orientation="Vertical" Canvas.Left="140" Canvas.Top="245">
                     <Grid Width="26" Height="26">
                         <Ellipse Style="{StaticResource StandardButtonStyle}" />
                         <TextBlock Text="7" Style="{StaticResource ButtonNumberStyle}" />
                     </Grid>
-                    <TextBlock Style="{StaticResource ButtonBindingBottomStyle}" MaxWidth="60"
+                    <TextBlock Style="{StaticResource ButtonBindingBottomStyle}"
                             Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_7}"
                             ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_7}" />
                 </StackPanel>
             </Canvas>
 
             <!-- CENTER HUB WITH AXIS INDICATORS -->
-            <Canvas x:Name="CenterHubCanvas" Canvas.Left="300" Canvas.Top="95">
+            <Canvas x:Name="CenterHubCanvas" Canvas.Left="320" Canvas.Top="95">
                 <Ellipse Style="{StaticResource CenterHubEllipseStyle}" />
 
                 <!-- Axis Display Area -->
-                <Canvas Width="230" Height="160" Canvas.Top="15" Canvas.Left="35">
+                <Canvas Width="280" Height="190" Canvas.Top="5" Canvas.Left="10">
                     <!-- X Axis (Roll) Semicircle Indicator -->
-                    <Path Canvas.Left="15" Canvas.Top="40" Data="M 0 50 A 50 50 0 0 1 100 50"
+                    <Path Canvas.Left="50" Canvas.Top="60" Data="M 0 50 A 50 50 0 0 1 100 50"
                             Style="{StaticResource AxisPathStyle}" />
-                    <TextBlock Text="X Axis" Style="{StaticResource AxisLabelStyle}" Canvas.Left="50" Canvas.Top="95" />
-                    <TextBlock Style="{StaticResource AxisBindingStyle}" Canvas.Left="50" Canvas.Top="110">
-                        <TextBlock.Text>
-                            <Binding Converter="{StaticResource JoystickButtonMappingConverter}"
-                                     ConverterParameter="Joystick_L-Axis_X" />
-                        </TextBlock.Text>
-                    </TextBlock>
+                    <TextBlock Text="X Axis (Roll)" Style="{StaticResource AxisLabelStyle}" Canvas.Left="70"
+                            Canvas.Top="80" />
+                    <TextBlock Style="{StaticResource AxisBindingStyle}" Canvas.Left="60" Canvas.Top="95" Width="80"
+                            Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter},ConverterParameter=Joystick_L-Axis_X}"
+                            ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter},ConverterParameter=Joystick_L-Axis_X}" />
 
                     <!-- Y Axis (Pitch) Vertical Arrow Indicator -->
-                    <Line X1="180" Y1="30" X2="180" Y2="120" Style="{StaticResource AxisLineStyle}" />
-                    <Polygon Points="180,20 175,30 185,30" Style="{StaticResource AxisPolygonStyle}" />
-                    <Polygon Points="180,130 175,120 185,120" Style="{StaticResource AxisPolygonStyle}" />
-                    <TextBlock Text="Y Axis" Style="{StaticResource AxisLabelStyle}" Canvas.Left="170" Canvas.Top="135" />
-                    <TextBlock Style="{StaticResource AxisBindingStyle}" Canvas.Left="170" Canvas.Top="150">
-                        <TextBlock.Text>
-                            <Binding Converter="{StaticResource JoystickButtonMappingConverter}"
-                                     ConverterParameter="Joystick_L-Axis_Y" />
-                        </TextBlock.Text>
-                    </TextBlock>
+                    <Line X1="220" Y1="40" X2="220" Y2="130" Style="{StaticResource AxisLineStyle}" />
+                    <Polygon Points="220,30 215,40 225,40" Style="{StaticResource AxisPolygonStyle}" />
+                    <Polygon Points="220,140 215,130 225,130" Style="{StaticResource AxisPolygonStyle}" />
+                    <TextBlock Text="Y Axis (Pitch)" Style="{StaticResource AxisLabelStyle}" Canvas.Left="190"
+                            Canvas.Top="80" />
+                    <TextBlock Style="{StaticResource AxisBindingStyle}" Canvas.Left="180" Canvas.Top="95" Width="80"
+                            Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter},ConverterParameter=Joystick_L-Axis_Y}"
+                            ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter},ConverterParameter=Joystick_L-Axis_Y}" />
                 </Canvas>
             </Canvas>
 
             <!-- RIGHT YOKE GRIP ASSEMBLY -->
-            <Canvas x:Name="RightGripCanvas" Canvas.Right="260" Canvas.Top="20">
+            <Canvas x:Name="RightGripCanvas" Canvas.Right="240" Canvas.Top="20">
                 <Ellipse Style="{StaticResource GripEllipseStyle}" />
 
                 <!-- Button 3: POV Hat Down -->
-                <StackPanel Orientation="Horizontal" Canvas.Left="10" Canvas.Top="90">
-                    <TextBlock Style="{StaticResource ButtonBindingLeftStyle}" MaxWidth="100"
-                            Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_3}"
-                            ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_3}" />
+                <StackPanel Canvas.Left="-25" Canvas.Top="105">
                     <Grid Width="26" Height="26">
                         <Ellipse Style="{StaticResource WhiteButtonStyle}" />
                         <TextBlock Text="3" Style="{StaticResource WhiteButtonNumberStyle}" />
                     </Grid>
+                    <TextBlock Style="{StaticResource ButtonBindingRightStyle}"
+                            Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_3}"
+                            ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_3}" />
                 </StackPanel>
 
                 <!-- Button 4: Smoke / Special -->
-                <StackPanel Canvas.Left="110" Canvas.Top="50">
+                <StackPanel Canvas.Left="130" Canvas.Top="55">
                     <Grid Width="26" Height="26">
                         <Ellipse Style="{StaticResource RedButtonStyle}" />
                         <TextBlock Text="4" Style="{StaticResource RedButtonNumberStyle}" />
                     </Grid>
-                    <TextBlock Style="{StaticResource ButtonBindingLeftStyle}" MaxWidth="100"
+                    <TextBlock Style="{StaticResource ButtonBindingLeftStyle}"
                             Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_4}"
                             ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_4}" />
                 </StackPanel>
 
                 <!-- Button 11: Rudder Trim Left (Yoke Right) -->
-                <StackPanel Orientation="Vertical" Canvas.Left="70" Canvas.Top="150">
+                <StackPanel Orientation="Vertical" Canvas.Left="30" Canvas.Top="170">
                     <Grid Width="26" Height="26">
                         <Ellipse Style="{StaticResource StandardButtonStyle}" />
                         <TextBlock Text="11" Style="{StaticResource ButtonNumberStyle}" />
                     </Grid>
-                    <TextBlock Style="{StaticResource ButtonBindingBottomStyle}" MaxWidth="60"
+                    <TextBlock Style="{StaticResource ButtonBindingBottomStyle}"
                             Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_11}"
                             ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_11}" />
                 </StackPanel>
 
                 <!-- Button 12: Rudder Trim Right (Yoke Right) -->
-                <StackPanel Orientation="Vertical" Canvas.Left="110" Canvas.Top="150">
+                <StackPanel Orientation="Vertical" Canvas.Left="130" Canvas.Top="170">
                     <Grid Width="26" Height="26">
                         <Ellipse Style="{StaticResource StandardButtonStyle}" />
                         <TextBlock Text="12" Style="{StaticResource ButtonNumberStyle}" />
                     </Grid>
-                    <TextBlock Style="{StaticResource ButtonBindingBottomStyle}" MaxWidth="60"
+                    <TextBlock Style="{StaticResource ButtonBindingBottomStyle}"
                             Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_12}"
                             ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_12}" />
                 </StackPanel>
 
                 <!-- Button 9: Trim Down (Yoke Right) -->
-                <StackPanel Orientation="Vertical" Canvas.Left="70" Canvas.Top="220">
+                <StackPanel Orientation="Vertical" Canvas.Left="30" Canvas.Top="245">
                     <Grid Width="26" Height="26">
                         <Ellipse Style="{StaticResource StandardButtonStyle}" />
                         <TextBlock Text="9" Style="{StaticResource ButtonNumberStyle}" />
                     </Grid>
-                    <TextBlock Style="{StaticResource ButtonBindingBottomStyle}" MaxWidth="60"
+                    <TextBlock Style="{StaticResource ButtonBindingBottomStyle}"
                             Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_9}"
                             ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_9}" />
                 </StackPanel>
 
                 <!-- Button 10: Trim Up (Yoke Right) -->
-                <StackPanel Orientation="Vertical" Canvas.Left="110" Canvas.Top="220">
+                <StackPanel Orientation="Vertical" Canvas.Left="130" Canvas.Top="245">
                     <Grid Width="26" Height="26">
                         <Ellipse Style="{StaticResource StandardButtonStyle}" />
                         <TextBlock Text="10" Style="{StaticResource ButtonNumberStyle}" />
                     </Grid>
-                    <TextBlock Style="{StaticResource ButtonBindingBottomStyle}" MaxWidth="60"
+                    <TextBlock Style="{StaticResource ButtonBindingBottomStyle}"
                             Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_10}"
                             ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_10}" />
                 </StackPanel>
             </Canvas>
 
             <!-- SWITCH PANEL ASSEMBLY -->
-            <Canvas x:Name="SwitchPanelCanvas" Canvas.Left="60" Canvas.Top="330">
+            <Canvas x:Name="SwitchPanelCanvas" Canvas.Left="60" Canvas.Top="360">
                 <Rectangle Style="{StaticResource SwitchPanelRectangleStyle}" />
 
                 <!-- Top Row: Master and Avionics Switches -->
-                <UniformGrid Columns="4" Canvas.Left="20" Canvas.Top="5" Width="410" Height="130">
+                <UniformGrid Columns="4" Canvas.Left="15" Canvas.Top="5" Width="450" Height="135">
 
                     <!-- Master Alternator Switch (13-14) -->
                     <StackPanel HorizontalAlignment="Center">
@@ -519,7 +491,7 @@
                 </UniformGrid>
 
                 <!-- Bottom Row: Light Switches -->
-                <UniformGrid Columns="5" Canvas.Left="10" Canvas.Top="140" Width="430" Height="120">
+                <UniformGrid Columns="5" Canvas.Left="5" Canvas.Top="145" Width="470" Height="120">
 
                     <!-- Beacon Lights Switch (21-22) -->
                     <StackPanel HorizontalAlignment="Center">
@@ -589,7 +561,7 @@
             </Canvas>
 
             <!-- IGNITION / MAGNETO SWITCH ASSEMBLY (31-35) -->
-            <Canvas x:Name="MagnetoDialCanvas" Canvas.Right="200" Canvas.Top="410">
+            <Canvas x:Name="MagnetoDialCanvas" Canvas.Right="180" Canvas.Top="450">
                 <Ellipse Style="{StaticResource IgnitionDialEllipseStyle}" />
 
                 <!-- Ignition Position Tick Marks -->
@@ -608,7 +580,7 @@
                 </StackPanel>
 
                 <!-- R (32) - Top Left -->
-                <StackPanel Canvas.Left="-50" Canvas.Top="-10">
+                <StackPanel Canvas.Left="-70" Canvas.Top="-10">
                     <TextBlock Text="R (32)" Style="{StaticResource IgnitionLabelStyle}" TextAlignment="Right" />
                     <TextBlock Style="{StaticResource IgnitionBindingStyle}" TextAlignment="Right"
                             Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_32}"
@@ -624,7 +596,7 @@
                 </StackPanel>
 
                 <!-- BOTH (34) - Top Right -->
-                <StackPanel Canvas.Left="70" Canvas.Top="-45">
+                <StackPanel Canvas.Left="110" Canvas.Top="-20">
                     <TextBlock Text="BOTH (34)" Style="{StaticResource IgnitionLabelStyle}" />
                     <TextBlock Style="{StaticResource IgnitionBindingStyle}"
                             Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_34}"

@@ -11,6 +11,7 @@
     <Window.Resources>
         <converters:ControllerVisualConverter x:Key="ControllerVisualConverter"/>
         <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
     </Window.Resources>
     
     <Grid Margin="10">
@@ -79,35 +80,47 @@
                 Margin="0,0,0,10"/>
 
         <!-- Controller Visual Area -->
-        <Border Grid.Row="3" 
-                Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" 
-                BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" 
+        <Border Grid.Row="3"
+                Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"
+                BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"
                 BorderThickness="1" CornerRadius="5">
-            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                <Grid>
-                    <!-- Placeholder when no profile is loaded -->
-                    <TextBlock Foreground="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" 
-                               FontSize="16" TextAlignment="Center" 
-                               VerticalAlignment="Center" HorizontalAlignment="Center"
-                               Margin="20" TextWrapping="Wrap">
-                        <Run Text="1. Export your controller profiles from MSFS 2024 to a folder&#x0a;"/><Run Text="2. Click 'Browse...' to select the export folder&#x0a;"/><Run Text="3. Select a controller from the dropdown to view mappings"/>
-                        <TextBlock.Visibility>
-                            <Binding Path="MatchedControllerDefinition" Converter="{StaticResource NullToVisibilityConverter}" ConverterParameter="Inverted"/>
-                        </TextBlock.Visibility>
-                    </TextBlock>
-                    
-                    <!-- Controller Visual -->
-                    <ContentControl HorizontalAlignment="Center" VerticalAlignment="Center"
-                                    Visibility="{Binding MatchedControllerDefinition, Converter={StaticResource NullToVisibilityConverter}}">
-                        <ContentControl.Content>
-                            <MultiBinding Converter="{StaticResource ControllerVisualConverter}">
-                                <Binding Path="MatchedControllerDefinition"/>
-                                <Binding Path="CurrentButtonMappings"/>
-                            </MultiBinding>
-                        </ContentControl.Content>
-                    </ContentControl>
-                </Grid>
-            </ScrollViewer>
+            <Grid>
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <Grid>
+                        <!-- Placeholder when no profile is loaded -->
+                        <TextBlock Foreground="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"
+                                   FontSize="16" TextAlignment="Center"
+                                   VerticalAlignment="Center" HorizontalAlignment="Center"
+                                   Margin="20" TextWrapping="Wrap">
+                            <Run Text="1. Export your controller profiles from MSFS 2024 to a folder&#x0a;"/><Run Text="2. Click 'Browse...' to select the export folder&#x0a;"/><Run Text="3. Select a controller from the dropdown to view mappings"/>
+                            <TextBlock.Visibility>
+                                <Binding Path="MatchedControllerDefinition" Converter="{StaticResource NullToVisibilityConverter}" ConverterParameter="Inverted"/>
+                            </TextBlock.Visibility>
+                        </TextBlock>
+
+                        <!-- Controller Visual -->
+                        <ContentControl HorizontalAlignment="Center" VerticalAlignment="Center"
+                                        Visibility="{Binding MatchedControllerDefinition, Converter={StaticResource NullToVisibilityConverter}}">
+                            <ContentControl.Content>
+                                <MultiBinding Converter="{StaticResource ControllerVisualConverter}">
+                                    <Binding Path="MatchedControllerDefinition"/>
+                                    <Binding Path="CurrentButtonMappings"/>
+                                </MultiBinding>
+                            </ContentControl.Content>
+                        </ContentControl>
+                    </Grid>
+                </ScrollViewer>
+
+                <!-- Debug Reload Button (bottom right corner, 20x20) -->
+                <Button Command="{Binding ReloadVisualCommand}"
+                        Width="20" Height="20"
+                        HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                        Margin="0,0,5,5"
+                        ToolTip="Reload XAML Visual (Debug Only)"
+                        Visibility="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=IsDebugMode, Converter={StaticResource BooleanToVisibilityConverter}}"
+                        Content="⟳" FontSize="14" FontWeight="Bold"
+                        Padding="0" />
+            </Grid>
         </Border>
 
         <!-- Status Bar -->

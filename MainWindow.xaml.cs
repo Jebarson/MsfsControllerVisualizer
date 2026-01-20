@@ -14,5 +14,17 @@ namespace Msfs.ControllerVisualizer
             InitializeComponent();
             DataContext = new MainViewModel();
         }
+
+        public bool IsDebugMode
+        {
+            get
+            {
+#if DEBUG
+                return true;
+#else
+                return false;
+#endif
+            }
+        }
     }
 }

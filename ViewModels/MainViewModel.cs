@@ -1,6 +1,8 @@
 namespace Msfs.ControllerVisualizer.ViewModels;
 
+using System;
 using System.IO;
+using System.Windows;
 using System.Windows.Input;
 using Msfs.ControllerVisualizer.Models;
 using Msfs.ControllerVisualizer.Services;
@@ -27,6 +29,7 @@ public class MainViewModel : NotifyPropertyBase
         this.definitionLoader = new ControllerDefinitionLoader();
 
         this.BrowseForExportFolderCommand = new Command<object>(parameter => this.BrowseForExportFolder());
+        this.ReloadVisualCommand = new Command<object>(parameter => this.ReloadVisual());
 
         this.LoadSupportedControllers();
     }
@@ -113,6 +116,7 @@ public class MainViewModel : NotifyPropertyBase
     }
 
     public ICommand BrowseForExportFolderCommand { get; }
+    public ICommand ReloadVisualCommand { get; }
 
     private void LoadSupportedControllers()
     {
@@ -242,20 +246,83 @@ public class MainViewModel : NotifyPropertyBase
         try
         {
             List<ButtonMapping> mappings = this.buttonMapper.MapButtons(
-                this.SelectedExportedController.DeviceElement, 
+                this.SelectedExportedController.DeviceElement,
                 this.MatchedControllerDefinition);
 
             this.CurrentButtonMappings = mappings;
 
             int totalButtons = this.MatchedControllerDefinition.Buttons.Count;
             int mappedButtons = mappings.Count;
-            
+
             this.StatusMessage = $"{this.MatchedControllerDefinition.Name}: {mappedButtons} of {totalButtons} buttons mapped ({this.SelectedExportedController.FileName})";
         }
         catch (Exception ex)
         {
             this.StatusMessage = $"Error mapping buttons: {ex.Message}";
             this.CurrentButtonMappings = new List<ButtonMapping>();
+        }
+    }
+
+    private void ReloadVisual()
+    {
+        try
+        {
+            // First, copy XAML files from source to output directory
+            this.CopyControllerXamlFiles();
+
+            // Save current values
+            ControllerDefinition? savedDefinition = this.MatchedControllerDefinition;
+            List<ButtonMapping> savedMappings = this.CurrentButtonMappings;
+
+            // Clear to trigger binding update
+            this.MatchedControllerDefinition = null;
+            this.CurrentButtonMappings = new List<ButtonMapping>();
+
+            // Force UI update
+            System.Windows.Application.Current.Dispatcher.Invoke(() => { }, System.Windows.Threading.DispatcherPriority.Render);
+
+            // Restore values - this will cause the converter to re-run and reload XAML from disk
+            this.MatchedControllerDefinition = savedDefinition;
+            this.CurrentButtonMappings = savedMappings;
+
+            this.StatusMessage = $"Visual reloaded from source at {DateTime.Now:HH:mm:ss}";
+        }
+        catch (Exception ex)
+        {
+            this.StatusMessage = $"Error reloading visual: {ex.Message}";
+        }
+    }
+
+    private void CopyControllerXamlFiles()
+    {
+        // Get the source directory (project directory)
+        // AppDomain.CurrentDomain.BaseDirectory is typically: X:\...\bin\Debug\net10.0-windows\
+        // We need to go up to the project root
+        string binDirectory = AppDomain.CurrentDomain.BaseDirectory;
+        string projectDirectory = Path.GetFullPath(Path.Combine(binDirectory, "..", "..", ".."));
+
+        string sourceControllersPath = Path.Combine(projectDirectory, "Assets", "Controllers");
+        string targetControllersPath = Path.Combine(binDirectory, "Assets", "Controllers");
+
+        if (!Directory.Exists(sourceControllersPath))
+        {
+            throw new DirectoryNotFoundException($"Source directory not found: {sourceControllersPath}");
+        }
+
+        // Ensure target directory exists
+        Directory.CreateDirectory(targetControllersPath);
+
+        // Copy all XAML files
+        string[] xamlFiles = Directory.GetFiles(sourceControllersPath, "*.xaml", SearchOption.TopDirectoryOnly);
+
+        foreach (string sourceFile in xamlFiles)
+        {
+            string fileName = Path.GetFileName(sourceFile);
+            string targetFile = Path.Combine(targetControllersPath, fileName);
+
+            // Copy and overwrite
+            File.Copy(sourceFile, targetFile, overwrite: true);
+            System.Diagnostics.Debug.WriteLine($"Copied: {fileName}");
         }
     }
 }
