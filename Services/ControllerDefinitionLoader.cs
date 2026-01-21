@@ -24,7 +24,7 @@ public class ControllerDefinitionLoader
             if (!File.Exists(jsonPath))
             {
                 System.Diagnostics.Debug.WriteLine($"Controllers definition file not found: {jsonPath}");
-                return new List<ControllerDefinition>();
+                return new();
             }
 
             string json = File.ReadAllText(jsonPath);
@@ -35,12 +35,12 @@ public class ControllerDefinitionLoader
             
             ControllersData? data = JsonSerializer.Deserialize<ControllersData>(json, options);
             
-            return data?.Controllers ?? new List<ControllerDefinition>();
+            return data?.Controllers ?? new();
         }
         catch (Exception ex)
         {
             System.Diagnostics.Debug.WriteLine($"Error loading controller definitions: {ex.Message}");
-            return new List<ControllerDefinition>();
+            return new();
         }
     }
 

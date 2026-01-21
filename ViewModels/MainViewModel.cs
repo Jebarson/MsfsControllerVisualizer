@@ -13,6 +13,7 @@ public class MainViewModel : NotifyPropertyBase
     private readonly ControllerDiscoveryService discoveryService;
     private readonly ControllerButtonMapper buttonMapper;
     private readonly ControllerDefinitionLoader definitionLoader;
+    private readonly PrintService printService;
 
     private string exportFolderPath = string.Empty;
     private string statusMessage = "Ready - Please select a folder containing exported MSFS profile XML files";
@@ -24,12 +25,14 @@ public class MainViewModel : NotifyPropertyBase
 
     public MainViewModel()
     {
-        this.discoveryService = new ControllerDiscoveryService();
-        this.buttonMapper = new ControllerButtonMapper();
-        this.definitionLoader = new ControllerDefinitionLoader();
+        this.discoveryService = new();
+        this.buttonMapper = new();
+        this.definitionLoader = new();
+        this.printService = new();
 
         this.BrowseForExportFolderCommand = new Command<object>(parameter => this.BrowseForExportFolder());
         this.ReloadVisualCommand = new Command<object>(parameter => this.ReloadVisual());
+        this.PrintCommand = new Command<System.Windows.FrameworkElement>(element => this.Print(element));
 
         this.LoadSupportedControllers();
     }
@@ -117,6 +120,7 @@ public class MainViewModel : NotifyPropertyBase
 
     public ICommand BrowseForExportFolderCommand { get; }
     public ICommand ReloadVisualCommand { get; }
+    public ICommand PrintCommand { get; }
 
     private void LoadSupportedControllers()
     {
@@ -134,7 +138,7 @@ public class MainViewModel : NotifyPropertyBase
 
     private void BrowseForExportFolder()
     {
-        using System.Windows.Forms.FolderBrowserDialog dialog = new System.Windows.Forms.FolderBrowserDialog
+        System.Windows.Forms.FolderBrowserDialog dialog = new()
         {
             Description = "Select folder containing exported MSFS profile XML files",
             ShowNewFolderButton = false
@@ -145,16 +149,18 @@ public class MainViewModel : NotifyPropertyBase
         {
             this.ExportFolderPath = dialog.SelectedPath;
         }
+
+        dialog.Dispose();
     }
 
     private void DiscoverControllers()
     {
         if (string.IsNullOrEmpty(this.ExportFolderPath))
         {
-            this.ExportedControllers = new List<ExportedControllerInfo>();
+            this.ExportedControllers = new();
             this.SelectedExportedController = null;
             this.MatchedControllerDefinition = null;
-            this.CurrentButtonMappings = new List<ButtonMapping>();
+            this.CurrentButtonMappings = new();
             return;
         }
 
@@ -200,7 +206,7 @@ public class MainViewModel : NotifyPropertyBase
         catch (Exception ex)
         {
             this.StatusMessage = $"Error scanning folder: {ex.Message}";
-            this.ExportedControllers = new List<ExportedControllerInfo>();
+            this.ExportedControllers = new();
             this.SelectedExportedController = null;
         }
     }
@@ -209,7 +215,7 @@ public class MainViewModel : NotifyPropertyBase
     {
         // Clear previous state
         this.MatchedControllerDefinition = null;
-        this.CurrentButtonMappings = new List<ButtonMapping>();
+        this.CurrentButtonMappings = new();
 
         if (this.SelectedExportedController == null)
         {
@@ -238,7 +244,7 @@ public class MainViewModel : NotifyPropertyBase
     {
         if (this.SelectedExportedController?.DeviceElement == null || this.MatchedControllerDefinition == null)
         {
-            this.CurrentButtonMappings = new List<ButtonMapping>();
+            this.CurrentButtonMappings = new();
             this.StatusMessage = "Cannot load mappings - missing controller data";
             return;
         }
@@ -259,7 +265,7 @@ public class MainViewModel : NotifyPropertyBase
         catch (Exception ex)
         {
             this.StatusMessage = $"Error mapping buttons: {ex.Message}";
-            this.CurrentButtonMappings = new List<ButtonMapping>();
+            this.CurrentButtonMappings = new();
         }
     }
 
@@ -276,7 +282,7 @@ public class MainViewModel : NotifyPropertyBase
 
             // Clear to trigger binding update
             this.MatchedControllerDefinition = null;
-            this.CurrentButtonMappings = new List<ButtonMapping>();
+            this.CurrentButtonMappings = new();
 
             // Force UI update
             System.Windows.Application.Current.Dispatcher.Invoke(() => { }, System.Windows.Threading.DispatcherPriority.Render);
@@ -323,6 +329,33 @@ public class MainViewModel : NotifyPropertyBase
             // Copy and overwrite
             File.Copy(sourceFile, targetFile, overwrite: true);
             System.Diagnostics.Debug.WriteLine($"Copied: {fileName}");
+        }
+    }
+
+    private void Print(System.Windows.FrameworkElement visualElement)
+    {
+        if (visualElement == null)
+        {
+            this.StatusMessage = "Error: Cannot print - no controller visual loaded";
+            return;
+        }
+
+        try
+        {
+            string controllerName = this.MatchedControllerDefinition?.Name ?? "Controller";
+            string documentTitle = $"{controllerName} Layout";
+
+            bool success = this.printService.Print(visualElement, documentTitle);
+
+            if (success)
+            {
+                this.StatusMessage = $"Printed {controllerName} layout at {DateTime.Now:HH:mm:ss}";
+            }
+        }
+        catch (Exception ex)
+        {
+            this.StatusMessage = $"Print error: {ex.Message}";
+            System.Diagnostics.Debug.WriteLine($"Print error: {ex.Message}");
         }
     }
 }

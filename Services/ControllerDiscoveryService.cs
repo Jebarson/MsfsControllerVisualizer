@@ -13,7 +13,7 @@ public class ControllerDiscoveryService
     /// <returns>A list of discovered controller information.</returns>
     public List<ExportedControllerInfo> DiscoverControllersInFolder(string folderPath)
     {
-        List<ExportedControllerInfo> controllers = new List<ExportedControllerInfo>();
+        List<ExportedControllerInfo> controllers = new();
 
         try
         {
@@ -43,7 +43,7 @@ public class ControllerDiscoveryService
     /// <returns>A list of discovered controller information from the file.</returns>
     public List<ExportedControllerInfo> DiscoverControllersInFile(string exportFilePath)
     {
-        List<ExportedControllerInfo> controllers = new List<ExportedControllerInfo>();
+        List<ExportedControllerInfo> controllers = new();
 
         try
         {
@@ -74,7 +74,7 @@ public class ControllerDiscoveryService
 
                 if (!string.IsNullOrEmpty(deviceName) || !string.IsNullOrEmpty(productId))
                 {
-                    ExportedControllerInfo info = new ExportedControllerInfo
+                    ExportedControllerInfo info = new()
                     {
                         DeviceName = deviceName ?? string.Empty,
                         ProductId = productId ?? string.Empty,
@@ -123,7 +123,7 @@ public class ControllerDiscoveryService
     public List<ExportedControllerInfo> GetSupportedControllers(string folderPath, List<ControllerDefinition> supportedControllers)
     {
         List<ExportedControllerInfo> allControllers = this.DiscoverControllersInFolder(folderPath);
-        List<ExportedControllerInfo> supported = new List<ExportedControllerInfo>();
+        List<ExportedControllerInfo> supported = new();
 
         foreach (ExportedControllerInfo controller in allControllers)
         {
@@ -134,7 +134,7 @@ public class ControllerDiscoveryService
         }
 
         // Group by DeviceName to consolidate multiple profiles for the same device
-        List<ExportedControllerInfo> consolidated = new List<ExportedControllerInfo>();
+        List<ExportedControllerInfo> consolidated = new();
         Dictionary<string, List<ExportedControllerInfo>> grouped = supported
             .GroupBy(c => c.DeviceName)
             .ToDictionary(g => g.Key, g => g.ToList());
@@ -195,7 +195,7 @@ public class ControllerDiscoveryService
         ExportedControllerInfo baseProfile = profiles[0];
         
         // Create a merged XElement by combining all Device elements
-        XElement mergedDevice = new XElement(baseProfile.DeviceElement!);
+        XElement mergedDevice = new(baseProfile.DeviceElement!);
         
         // Merge contexts from all profiles
         for (int i = 1; i < profiles.Count; i++)
@@ -211,7 +211,7 @@ public class ControllerDiscoveryService
             }
         }
 
-        return new ExportedControllerInfo
+        return new()
         {
             DeviceName = baseProfile.DeviceName,
             ProductId = baseProfile.ProductId,

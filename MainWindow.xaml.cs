@@ -1,30 +1,29 @@
-﻿using System.Text;
+namespace Msfs.ControllerVisualizer;
+
+using System.Text;
 using System.Windows;
 using Msfs.ControllerVisualizer.ViewModels;
 
-namespace Msfs.ControllerVisualizer
+/// <summary>
+/// Interaction logic for MainWindow.xaml
+/// </summary>
+public partial class MainWindow : Window
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
+    public MainWindow()
     {
-        public MainWindow()
-        {
-            InitializeComponent();
-            DataContext = new MainViewModel();
-        }
+        this.InitializeComponent();
+        this.DataContext = new();
+    }
 
-        public bool IsDebugMode
+    public bool IsDebugMode
+    {
+        get
         {
-            get
-            {
 #if DEBUG
-                return true;
+            return true;
 #else
                 return false;
 #endif
-            }
         }
     }
 }

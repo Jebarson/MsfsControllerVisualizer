@@ -16,7 +16,7 @@ public class ControllerButtonMapper
     /// <returns>A list of button mappings extracted from the configuration.</returns>
     public List<ButtonMapping> MapButtons(XElement deviceElement, ControllerDefinition controllerDefinition)
     {
-        List<ButtonMapping> mappings = new List<ButtonMapping>();
+        List<ButtonMapping> mappings = new();
 
         try
         {
@@ -46,7 +46,7 @@ public class ControllerButtonMapper
                                 // For axes: "Joystick L-Axis X " to "Joystick_L-Axis_X" (trim trailing space, then replace spaces with underscores)
                                 string identifier = this.NormalizeIdentifier(keyInfo);
 
-                                ButtonMapping mapping = new ButtonMapping
+                                ButtonMapping mapping = new()
                                 {
                                     ButtonId = identifier,
                                     MsfsCommand = actionName,

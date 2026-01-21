@@ -115,33 +115,28 @@
         <Style x:Key="ButtonBindingRightStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseBindingTextStyle}">
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="Margin" Value="8,0,0,0" />
-            <Setter Property="MaxWidth" Value="140" />
         </Style>
 
         <Style x:Key="ButtonBindingLeftStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseBindingTextStyle}">
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="Margin" Value="0,0,8,0" />
             <Setter Property="TextAlignment" Value="Right" />
-            <Setter Property="MaxWidth" Value="140" />
         </Style>
 
         <Style x:Key="ButtonBindingBottomStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseBindingTextStyle}">
             <Setter Property="HorizontalAlignment" Value="Center" />
             <Setter Property="Margin" Value="0,3,0,0" />
-            <Setter Property="MaxWidth" Value="140" />
         </Style>
 
         <Style x:Key="DirectionBindingStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseBindingTextStyle}">
-            <Setter Property="MaxWidth" Value="45" />
-            <Setter Property="Width" Value="45" />
+            <Setter Property="MinWidth" Value="45" />
         </Style>
 
         <Style x:Key="SwitchBindingStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseBindingTextStyle}">
             <Setter Property="TextAlignment" Value="Center" />
             <Setter Property="TextWrapping" Value="Wrap" />
-            <Setter Property="MaxHeight" Value="34" />
-            <Setter Property="MaxWidth" Value="90" />
-            <Setter Property="Margin" Value="2" />
+            <Setter Property="MaxHeight" Value="60" />
+            <Setter Property="MinWidth" Value="90" />
         </Style>
 
         <Style x:Key="AxisBindingStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseBindingTextStyle}">
@@ -149,7 +144,7 @@
         </Style>
 
         <Style x:Key="IgnitionBindingStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseBindingTextStyle}">
-            <Setter Property="MaxWidth" Value="75" />
+            <Setter Property="MinWidth" Value="75" />
         </Style>
 
         <!-- Line and Shape Styles -->
@@ -198,10 +193,10 @@
     </UserControl.Resources>
 
     <Grid>
-        <Canvas Width="950" Height="650" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Canvas Width="1200" Height="650" HorizontalAlignment="Center" VerticalAlignment="Center">
 
             <!-- LEFT YOKE GRIP ASSEMBLY -->
-            <Canvas x:Name="LeftGripCanvas" Canvas.Top="20">
+            <Canvas x:Name="LeftGripCanvas" Canvas.Left="80" Canvas.Top="20">
                 <Ellipse Style="{StaticResource GripEllipseStyle}" />
 
                 <!-- POV Hat Switch -->
@@ -333,7 +328,7 @@
             </Canvas>
 
             <!-- CENTER HUB WITH AXIS INDICATORS -->
-            <Canvas x:Name="CenterHubCanvas" Canvas.Left="320" Canvas.Top="95">
+            <Canvas x:Name="CenterHubCanvas" Canvas.Left="450" Canvas.Top="95">
                 <Ellipse Style="{StaticResource CenterHubEllipseStyle}" />
 
                 <!-- Axis Display Area -->
@@ -341,6 +336,8 @@
                     <!-- X Axis (Roll) Semicircle Indicator -->
                     <Path Canvas.Left="50" Canvas.Top="60" Data="M 0 50 A 50 50 0 0 1 100 50"
                             Style="{StaticResource AxisPathStyle}" />
+                    <Polygon Points="50,120 45,110 55,110" Style="{StaticResource AxisPolygonStyle}" />
+                    <Polygon Points="150,120 145,110 155,110" Style="{StaticResource AxisPolygonStyle}" />
                     <TextBlock Text="X Axis (Roll)" Style="{StaticResource AxisLabelStyle}" Canvas.Left="70"
                             Canvas.Top="80" />
                     <TextBlock Style="{StaticResource AxisBindingStyle}" Canvas.Left="60" Canvas.Top="95" Width="80"
@@ -360,7 +357,7 @@
             </Canvas>
 
             <!-- RIGHT YOKE GRIP ASSEMBLY -->
-            <Canvas x:Name="RightGripCanvas" Canvas.Right="240" Canvas.Top="20">
+            <Canvas x:Name="RightGripCanvas" Canvas.Left="840" Canvas.Top="20">
                 <Ellipse Style="{StaticResource GripEllipseStyle}" />
 
                 <!-- Button 3: POV Hat Down -->
@@ -431,7 +428,7 @@
             </Canvas>
 
             <!-- SWITCH PANEL ASSEMBLY -->
-            <Canvas x:Name="SwitchPanelCanvas" Canvas.Left="60" Canvas.Top="360">
+            <Canvas x:Name="SwitchPanelCanvas" Canvas.Left="260" Canvas.Top="360">
                 <Rectangle Style="{StaticResource SwitchPanelRectangleStyle}" />
 
                 <!-- Top Row: Master and Avionics Switches -->
@@ -561,7 +558,7 @@
             </Canvas>
 
             <!-- IGNITION / MAGNETO SWITCH ASSEMBLY (31-35) -->
-            <Canvas x:Name="MagnetoDialCanvas" Canvas.Right="180" Canvas.Top="450">
+            <Canvas x:Name="MagnetoDialCanvas" Canvas.Left="950" Canvas.Top="450">
                 <Ellipse Style="{StaticResource IgnitionDialEllipseStyle}" />
 
                 <!-- Ignition Position Tick Marks -->
