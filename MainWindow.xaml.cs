@@ -12,7 +12,7 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         this.InitializeComponent();
-        this.DataContext = new();
+        this.DataContext = new MainViewModel();
     }
 
     public bool IsDebugMode

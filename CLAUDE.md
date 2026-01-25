@@ -106,12 +106,11 @@ The converters rely on static state set by ControllerVisualConverter before XAML
    - `deviceName`: Substring to match against XML DeviceName attribute
    - `productId`: USB Product ID for precise matching
    - `visualFile`: XAML filename
-   - `buttons`: Array with id, name, and visualId
 
 2. Create XAML visual file in `Assets/Controllers/`:
    - Define UserControl with button visuals
    - Use `{StaticResource JoystickButtonMappingConverter}` with `ConverterParameter=Joystick_Button_N`
-   - Ensure visualId matches button definitions in JSON
+   - The XAML is the single source of truth for button definitions and labels
 
 3. Visual file must include converter namespace:
    ```xaml

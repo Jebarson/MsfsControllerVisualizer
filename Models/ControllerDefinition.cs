@@ -24,9 +24,4 @@ public class ControllerDefinition
     /// Gets or sets the filename of the XAML visual representation file.
     /// </summary>
     public string VisualFile { get; set; } = string.Empty;
-
-    /// <summary>
-    /// Gets or sets the list of button definitions for this controller.
-    /// </summary>
-    public List<ButtonDefinition> Buttons { get; set; } = new();
 }

@@ -257,10 +257,9 @@ public class MainViewModel : NotifyPropertyBase
 
             this.CurrentButtonMappings = mappings;
 
-            int totalButtons = this.MatchedControllerDefinition.Buttons.Count;
             int mappedButtons = mappings.Count;
 
-            this.StatusMessage = $"{this.MatchedControllerDefinition.Name}: {mappedButtons} of {totalButtons} buttons mapped ({this.SelectedExportedController.FileName})";
+            this.StatusMessage = $"{this.MatchedControllerDefinition.Name}: {mappedButtons} buttons mapped ({this.SelectedExportedController.FileName})";
         }
         catch (Exception ex)
         {

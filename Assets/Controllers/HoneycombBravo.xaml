@@ -1,188 +1,627 @@
 <UserControl xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             Width="800" Height="600">
-    <Canvas Background="#2D2D30">
-        <!-- Main Body -->
-        <Rectangle Canvas.Left="50" Canvas.Top="50" Width="700" Height="500" Fill="#3A3A3A" Stroke="#555" StrokeThickness="2" RadiusX="5" RadiusY="5"/>
-        
-        <!-- Toggle Switches Panel -->
-        <Rectangle Canvas.Left="70" Canvas.Top="70" Width="660" Height="120" Fill="#2A2A2A" Stroke="#666" StrokeThickness="1" RadiusX="3" RadiusY="3"/>
-        <TextBlock Canvas.Left="330" Canvas.Top="80" Text="TOGGLE SWITCHES" FontSize="12" Foreground="#888" FontWeight="Bold"/>
-        
-        <!-- Top Row Toggle Switches (0-6) -->
-        <Border x:Name="btn_0" Canvas.Left="80" Canvas.Top="100" Background="#444" BorderBrush="#666" BorderThickness="1" CornerRadius="3" Padding="5">
-            <StackPanel>
-                <TextBlock Text="BTN 0" FontSize="8" Foreground="#AAA" HorizontalAlignment="Center"/>
-                <TextBlock Text="Battery" FontSize="9" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center"/>
-                <TextBlock x:Name="btn_0_mapping" Text="[Not Mapped]" FontSize="10" Foreground="#4EC9B0" FontWeight="Bold" HorizontalAlignment="Center" TextWrapping="Wrap"/>
-            </StackPanel>
-        </Border>
-        
-        <Border x:Name="btn_1" Canvas.Left="160" Canvas.Top="100" Background="#444" BorderBrush="#666" BorderThickness="1" CornerRadius="3" Padding="5">
-            <StackPanel>
-                <TextBlock Text="BTN 1" FontSize="8" Foreground="#AAA" HorizontalAlignment="Center"/>
-                <TextBlock Text="Alternator" FontSize="9" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center"/>
-                <TextBlock x:Name="btn_1_mapping" Text="[Not Mapped]" FontSize="10" Foreground="#4EC9B0" FontWeight="Bold" HorizontalAlignment="Center" TextWrapping="Wrap"/>
-            </StackPanel>
-        </Border>
-        
-        <Border x:Name="btn_2" Canvas.Left="240" Canvas.Top="100" Background="#444" BorderBrush="#666" BorderThickness="1" CornerRadius="3" Padding="5">
-            <StackPanel>
-                <TextBlock Text="BTN 2" FontSize="8" Foreground="#AAA" HorizontalAlignment="Center"/>
-                <TextBlock Text="Avionics" FontSize="9" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center"/>
-                <TextBlock x:Name="btn_2_mapping" Text="[Not Mapped]" FontSize="10" Foreground="#4EC9B0" FontWeight="Bold" HorizontalAlignment="Center" TextWrapping="Wrap"/>
-            </StackPanel>
-        </Border>
-        
-        <Border x:Name="btn_3" Canvas.Left="320" Canvas.Top="100" Background="#444" BorderBrush="#666" BorderThickness="1" CornerRadius="3" Padding="5">
-            <StackPanel>
-                <TextBlock Text="BTN 3" FontSize="8" Foreground="#AAA" HorizontalAlignment="Center"/>
-                <TextBlock Text="Fuel Pump" FontSize="9" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center"/>
-                <TextBlock x:Name="btn_3_mapping" Text="[Not Mapped]" FontSize="10" Foreground="#4EC9B0" FontWeight="Bold" HorizontalAlignment="Center" TextWrapping="Wrap"/>
-            </StackPanel>
-        </Border>
-        
-        <Border x:Name="btn_4" Canvas.Left="400" Canvas.Top="100" Background="#444" BorderBrush="#666" BorderThickness="1" CornerRadius="3" Padding="5">
-            <StackPanel>
-                <TextBlock Text="BTN 4" FontSize="8" Foreground="#AAA" HorizontalAlignment="Center"/>
-                <TextBlock Text="De-Ice" FontSize="9" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center"/>
-                <TextBlock x:Name="btn_4_mapping" Text="[Not Mapped]" FontSize="10" Foreground="#4EC9B0" FontWeight="Bold" HorizontalAlignment="Center" TextWrapping="Wrap"/>
-            </StackPanel>
-        </Border>
-        
-        <Border x:Name="btn_5" Canvas.Left="480" Canvas.Top="100" Background="#444" BorderBrush="#666" BorderThickness="1" CornerRadius="3" Padding="5">
-            <StackPanel>
-                <TextBlock Text="BTN 5" FontSize="8" Foreground="#AAA" HorizontalAlignment="Center"/>
-                <TextBlock Text="Pitot Heat" FontSize="9" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center"/>
-                <TextBlock x:Name="btn_5_mapping" Text="[Not Mapped]" FontSize="10" Foreground="#4EC9B0" FontWeight="Bold" HorizontalAlignment="Center" TextWrapping="Wrap"/>
-            </StackPanel>
-        </Border>
-        
-        <Border x:Name="btn_6" Canvas.Left="560" Canvas.Top="100" Background="#444" BorderBrush="#666" BorderThickness="1" CornerRadius="3" Padding="5">
-            <StackPanel>
-                <TextBlock Text="BTN 6" FontSize="8" Foreground="#AAA" HorizontalAlignment="Center"/>
-                <TextBlock Text="Cowl Flaps" FontSize="9" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center"/>
-                <TextBlock x:Name="btn_6_mapping" Text="[Not Mapped]" FontSize="10" Foreground="#4EC9B0" FontWeight="Bold" HorizontalAlignment="Center" TextWrapping="Wrap"/>
-            </StackPanel>
-        </Border>
-        
-        <Border x:Name="btn_7" Canvas.Left="640" Canvas.Top="100" Background="#444" BorderBrush="#666" BorderThickness="1" CornerRadius="3" Padding="5">
-            <StackPanel>
-                <TextBlock Text="BTN 7" FontSize="8" Foreground="#AAA" HorizontalAlignment="Center"/>
-                <TextBlock Text="Panel" FontSize="9" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center"/>
-                <TextBlock x:Name="btn_7_mapping" Text="[Not Mapped]" FontSize="10" Foreground="#4EC9B0" FontWeight="Bold" HorizontalAlignment="Center" TextWrapping="Wrap"/>
-            </StackPanel>
-        </Border>
-        
-        <!-- Light Switches Panel (8-12) -->
-        <Rectangle Canvas.Left="70" Canvas.Top="210" Width="330" Height="120" Fill="#2A2A2A" Stroke="#666" StrokeThickness="1" RadiusX="3" RadiusY="3"/>
-        <TextBlock Canvas.Left="180" Canvas.Top="220" Text="LIGHTS" FontSize="12" Foreground="#888" FontWeight="Bold"/>
-        
-        <Border x:Name="btn_8" Canvas.Left="80" Canvas.Top="245" Background="#444" BorderBrush="#666" BorderThickness="1" CornerRadius="3" Padding="5">
-            <StackPanel>
-                <TextBlock Text="BTN 8" FontSize="8" Foreground="#AAA" HorizontalAlignment="Center"/>
-                <TextBlock Text="Beacon" FontSize="9" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center"/>
-                <TextBlock x:Name="btn_8_mapping" Text="[Not Mapped]" FontSize="10" Foreground="#4EC9B0" FontWeight="Bold" HorizontalAlignment="Center" TextWrapping="Wrap"/>
-            </StackPanel>
-        </Border>
-        
-        <Border x:Name="btn_9" Canvas.Left="150" Canvas.Top="245" Background="#444" BorderBrush="#666" BorderThickness="1" CornerRadius="3" Padding="5">
-            <StackPanel>
-                <TextBlock Text="BTN 9" FontSize="8" Foreground="#AAA" HorizontalAlignment="Center"/>
-                <TextBlock Text="Landing" FontSize="9" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center"/>
-                <TextBlock x:Name="btn_9_mapping" Text="[Not Mapped]" FontSize="10" Foreground="#4EC9B0" FontWeight="Bold" HorizontalAlignment="Center" TextWrapping="Wrap"/>
-            </StackPanel>
-        </Border>
-        
-        <Border x:Name="btn_10" Canvas.Left="220" Canvas.Top="245" Background="#444" BorderBrush="#666" BorderThickness="1" CornerRadius="3" Padding="5">
-            <StackPanel>
-                <TextBlock Text="BTN 10" FontSize="8" Foreground="#AAA" HorizontalAlignment="Center"/>
-                <TextBlock Text="Taxi" FontSize="9" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center"/>
-                <TextBlock x:Name="btn_10_mapping" Text="[Not Mapped]" FontSize="10" Foreground="#4EC9B0" FontWeight="Bold" HorizontalAlignment="Center" TextWrapping="Wrap"/>
-            </StackPanel>
-        </Border>
-        
-        <Border x:Name="btn_11" Canvas.Left="290" Canvas.Top="245" Background="#444" BorderBrush="#666" BorderThickness="1" CornerRadius="3" Padding="5">
-            <StackPanel>
-                <TextBlock Text="BTN 11" FontSize="8" Foreground="#AAA" HorizontalAlignment="Center"/>
-                <TextBlock Text="Nav" FontSize="9" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center"/>
-                <TextBlock x:Name="btn_11_mapping" Text="[Not Mapped]" FontSize="10" Foreground="#4EC9B0" FontWeight="Bold" HorizontalAlignment="Center" TextWrapping="Wrap"/>
-            </StackPanel>
-        </Border>
-        
-        <Border x:Name="btn_12" Canvas.Left="80" Canvas.Top="295" Background="#444" BorderBrush="#666" BorderThickness="1" CornerRadius="3" Padding="5">
-            <StackPanel>
-                <TextBlock Text="BTN 12" FontSize="8" Foreground="#AAA" HorizontalAlignment="Center"/>
-                <TextBlock Text="Strobe" FontSize="9" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center"/>
-                <TextBlock x:Name="btn_12_mapping" Text="[Not Mapped]" FontSize="10" Foreground="#4EC9B0" FontWeight="Bold" HorizontalAlignment="Center" TextWrapping="Wrap"/>
-            </StackPanel>
-        </Border>
-        
-        <!-- Landing Gear Lever (13) -->
-        <Rectangle Canvas.Left="430" Canvas.Top="210" Width="300" Height="120" Fill="#2A2A2A" Stroke="#666" StrokeThickness="1" RadiusX="3" RadiusY="3"/>
-        <TextBlock Canvas.Left="530" Canvas.Top="220" Text="LANDING GEAR" FontSize="12" Foreground="#888" FontWeight="Bold"/>
-        
-        <Border x:Name="btn_13" Canvas.Left="510" Canvas.Top="250" Background="#660000" BorderBrush="#AA0000" BorderThickness="2" CornerRadius="5" Padding="10">
-            <StackPanel>
-                <TextBlock Text="Button 13" FontSize="10" Foreground="#AAA" HorizontalAlignment="Center"/>
-                <TextBlock Text="GEAR LEVER" FontSize="12" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center"/>
-                <TextBlock x:Name="btn_13_mapping" Text="[Not Mapped]" FontSize="12" Foreground="#4EC9B0" FontWeight="Bold" HorizontalAlignment="Center" TextWrapping="Wrap"/>
-            </StackPanel>
-        </Border>
-        
-        <!-- Throttle Levers Area -->
-        <Rectangle Canvas.Left="70" Canvas.Top="350" Width="660" Height="180" Fill="#2A2A2A" Stroke="#666" StrokeThickness="1" RadiusX="3" RadiusY="3"/>
-        <TextBlock Canvas.Left="340" Canvas.Top="360" Text="THROTTLE QUADRANT" FontSize="12" Foreground="#888" FontWeight="Bold"/>
-        
-        <!-- Throttle Axis Indicators -->
-        <Border Canvas.Left="90" Canvas.Top="390" Background="#333" BorderBrush="#555" BorderThickness="1" CornerRadius="3" Padding="5">
-            <StackPanel>
-                <TextBlock Text="Throttle 1" FontSize="9" Foreground="White" FontWeight="Bold"/>
-                <TextBlock x:Name="axis_throttle1" Text="[Axis 0]" FontSize="10" Foreground="#4EC9B0" FontWeight="Bold"/>
-            </StackPanel>
-        </Border>
-        
-        <Border Canvas.Left="180" Canvas.Top="390" Background="#333" BorderBrush="#555" BorderThickness="1" CornerRadius="3" Padding="5">
-            <StackPanel>
-                <TextBlock Text="Throttle 2" FontSize="9" Foreground="White" FontWeight="Bold"/>
-                <TextBlock x:Name="axis_throttle2" Text="[Axis 1]" FontSize="10" Foreground="#4EC9B0" FontWeight="Bold"/>
-            </StackPanel>
-        </Border>
-        
-        <Border Canvas.Left="270" Canvas.Top="390" Background="#333" BorderBrush="#555" BorderThickness="1" CornerRadius="3" Padding="5">
-            <StackPanel>
-                <TextBlock Text="Prop 1" FontSize="9" Foreground="White" FontWeight="Bold"/>
-                <TextBlock x:Name="axis_prop1" Text="[Axis 2]" FontSize="10" Foreground="#4EC9B0" FontWeight="Bold"/>
-            </StackPanel>
-        </Border>
-        
-        <Border Canvas.Left="350" Canvas.Top="390" Background="#333" BorderBrush="#555" BorderThickness="1" CornerRadius="3" Padding="5">
-            <StackPanel>
-                <TextBlock Text="Prop 2" FontSize="9" Foreground="White" FontWeight="Bold"/>
-                <TextBlock x:Name="axis_prop2" Text="[Axis 3]" FontSize="10" Foreground="#4EC9B0" FontWeight="Bold"/>
-            </StackPanel>
-        </Border>
-        
-        <Border Canvas.Left="430" Canvas.Top="390" Background="#333" BorderBrush="#555" BorderThickness="1" CornerRadius="3" Padding="5">
-            <StackPanel>
-                <TextBlock Text="Mixture 1" FontSize="9" Foreground="White" FontWeight="Bold"/>
-                <TextBlock x:Name="axis_mixture1" Text="[Axis 4]" FontSize="10" Foreground="#4EC9B0" FontWeight="Bold"/>
-            </StackPanel>
-        </Border>
-        
-        <Border Canvas.Left="520" Canvas.Top="390" Background="#333" BorderBrush="#555" BorderThickness="1" CornerRadius="3" Padding="5">
-            <StackPanel>
-                <TextBlock Text="Mixture 2" FontSize="9" Foreground="White" FontWeight="Bold"/>
-                <TextBlock x:Name="axis_mixture2" Text="[Axis 5]" FontSize="10" Foreground="#4EC9B0" FontWeight="Bold"/>
-            </StackPanel>
-        </Border>
-        
-        <!-- Visual representation of levers -->
-        <Rectangle Canvas.Left="110" Canvas.Top="460" Width="20" Height="60" Fill="#555" Stroke="#777" StrokeThickness="1" RadiusX="3" RadiusY="3"/>
-        <Rectangle Canvas.Left="200" Canvas.Top="460" Width="20" Height="60" Fill="#555" Stroke="#777" StrokeThickness="1" RadiusX="3" RadiusY="3"/>
-        <Rectangle Canvas.Left="290" Canvas.Top="470" Width="15" Height="50" Fill="#444" Stroke="#666" StrokeThickness="1" RadiusX="2" RadiusY="2"/>
-        <Rectangle Canvas.Left="370" Canvas.Top="470" Width="15" Height="50" Fill="#444" Stroke="#666" StrokeThickness="1" RadiusX="2" RadiusY="2"/>
-        <Rectangle Canvas.Left="450" Canvas.Top="475" Width="15" Height="45" Fill="#AA3333" Stroke="#CC5555" StrokeThickness="1" RadiusX="2" RadiusY="2"/>
-        <Rectangle Canvas.Left="540" Canvas.Top="475" Width="15" Height="45" Fill="#AA3333" Stroke="#CC5555" StrokeThickness="1" RadiusX="2" RadiusY="2"/>
-    </Canvas>
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:converters="clr-namespace:Msfs.ControllerVisualizer.Converters;assembly=Msfs.ControllerVisualizer">
+
+    <UserControl.Resources>
+
+        <!-- Joystick Button Mapping Converters -->
+        <converters:JoystickButtonMappingConverter x:Key="JoystickButtonMappingConverter" />
+        <converters:JoystickButtonTruncateConverter x:Key="JoystickButtonTruncateConverter" MaxLength="18" />
+
+        <!-- Color Resources -->
+        <SolidColorBrush x:Key="PanelFillBrush" Color="Gray" />
+        <SolidColorBrush x:Key="StrokeBrush" Color="#D3D3D3" />
+        <SolidColorBrush x:Key="WhiteFillBrush" Color="#ffffff" />
+        <SolidColorBrush x:Key="BlackFillBrush" Color="#2c2c2c" />
+        <SolidColorBrush x:Key="BlueFillBrush" Color="#4A90E2" />
+        <SolidColorBrush x:Key="RedFillBrush" Color="#E24A4A" />
+        <SolidColorBrush x:Key="GreenFillBrush" Color="Green" />
+        <SolidColorBrush x:Key="BlackTextBrush" Color="Black" />
+        <SolidColorBrush x:Key="BindingTextBrush" Color="#228B22" />
+
+        <!-- Panel Styles -->
+        <Style x:Key="BasePanelStyle" TargetType="Rectangle">
+            <Setter Property="Fill" Value="{StaticResource PanelFillBrush}" />
+            <Setter Property="Opacity" Value="0.5" />
+            <Setter Property="Stroke" Value="{StaticResource StrokeBrush}" />
+            <Setter Property="StrokeThickness" Value="1" />
+        </Style>
+
+        <!-- Button Styles -->
+        <Style x:Key="BaseButtonStyle" TargetType="Ellipse">
+            <Setter Property="Width" Value="26" />
+            <Setter Property="Height" Value="26" />
+            <Setter Property="Stroke" Value="{StaticResource StrokeBrush}" />
+            <Setter Property="StrokeThickness" Value="1" />
+        </Style>
+
+        <Style x:Key="StandardButtonStyle" TargetType="Ellipse" BasedOn="{StaticResource BaseButtonStyle}">
+            <Setter Property="Fill" Value="{StaticResource PanelFillBrush}" />
+            <Setter Property="Opacity" Value="0.5" />
+        </Style>
+
+        <Style x:Key="WhiteButtonStyle" TargetType="Ellipse" BasedOn="{StaticResource BaseButtonStyle}">
+            <Setter Property="Fill" Value="{StaticResource WhiteFillBrush}" />
+        </Style>
+
+        <!-- Text Styles -->
+        <Style x:Key="ButtonNumberStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="FontSize" Value="10" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+
+        <Style x:Key="WhiteButtonNumberStyle" TargetType="TextBlock" BasedOn="{StaticResource ButtonNumberStyle}">
+            <Setter Property="Foreground" Value="{StaticResource BlackTextBrush}" />
+        </Style>
+
+        <Style x:Key="BaseLabelStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="FontSize" Value="10" />
+        </Style>
+
+        <Style x:Key="SmallLabelStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseLabelStyle}">
+            <Setter Property="FontSize" Value="8" />
+        </Style>
+
+        <Style x:Key="LabelCenterStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseLabelStyle}">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+        </Style>
+
+        <Style x:Key="LabelRightStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseLabelStyle}">
+            <Setter Property="Width" Value="55" />
+            <Setter Property="TextAlignment" Value="Right" />
+        </Style>
+
+        <Style x:Key="SectionLabelStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseLabelStyle}">
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontSize" Value="11" />
+        </Style>
+
+        <Style x:Key="BaseBindingTextStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource BindingTextBrush}" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+        </Style>
+
+        <Style x:Key="BindingCenterStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseBindingTextStyle}">
+            <Setter Property="Width" Value="95" />
+            <Setter Property="TextAlignment" Value="Center" />
+        </Style>
+
+        <Style x:Key="BindingRightStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseBindingTextStyle}">
+            <Setter Property="Width" Value="85" />
+            <Setter Property="TextAlignment" Value="Right" />
+        </Style>
+
+        <Style x:Key="ButtonBindingBottomStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseBindingTextStyle}">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="0,3,0,0" />
+        </Style>
+
+        <Style x:Key="SwitchBindingStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseBindingTextStyle}">
+            <Setter Property="TextAlignment" Value="Center" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="MaxHeight" Value="60" />
+            <Setter Property="MinWidth" Value="90" />
+            <Setter Property="MinHeight" Value="18" />
+        </Style>
+
+        <!-- Switch Styles -->
+        <Style x:Key="ToggleSwitchStyle" TargetType="Rectangle">
+            <Setter Property="Width" Value="18" />
+            <Setter Property="Height" Value="35" />
+            <Setter Property="Fill" Value="{StaticResource PanelFillBrush}" />
+            <Setter Property="Opacity" Value="0.5" />
+            <Setter Property="Stroke" Value="{StaticResource StrokeBrush}" />
+            <Setter Property="StrokeThickness" Value="1" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+        </Style>
+
+        <!-- Gear Indicator Styles -->
+        <Style x:Key="GearIndicatorStyle" TargetType="Ellipse">
+            <Setter Property="Width" Value="20" />
+            <Setter Property="Height" Value="20" />
+            <Setter Property="Fill" Value="{StaticResource GreenFillBrush}" />
+            <Setter Property="Opacity" Value="0.4" />
+            <Setter Property="Stroke" Value="{StaticResource StrokeBrush}" />
+            <Setter Property="StrokeThickness" Value="1" />
+        </Style>
+
+        <!-- Lever Styles -->
+        <Style x:Key="ThrottleLeverStyle" TargetType="Rectangle">
+            <Setter Property="Width" Value="22" />
+            <Setter Property="Height" Value="80" />
+            <Setter Property="Stroke" Value="{StaticResource StrokeBrush}" />
+            <Setter Property="StrokeThickness" Value="1" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="0,5,0,0" />
+        </Style>
+
+        <Style x:Key="GrayLeverStyle" TargetType="Rectangle" BasedOn="{StaticResource ThrottleLeverStyle}">
+            <Setter Property="Fill" Value="{StaticResource PanelFillBrush}" />
+            <Setter Property="Opacity" Value="0.6" />
+        </Style>
+
+        <Style x:Key="BlackLeverStyle" TargetType="Rectangle" BasedOn="{StaticResource ThrottleLeverStyle}">
+            <Setter Property="Fill" Value="{StaticResource BlackFillBrush}" />
+        </Style>
+
+        <Style x:Key="BlueLeverStyle" TargetType="Rectangle" BasedOn="{StaticResource ThrottleLeverStyle}">
+            <Setter Property="Fill" Value="{StaticResource BlueFillBrush}" />
+        </Style>
+
+        <Style x:Key="RedLeverStyle" TargetType="Rectangle" BasedOn="{StaticResource ThrottleLeverStyle}">
+            <Setter Property="Fill" Value="{StaticResource RedFillBrush}" />
+        </Style>
+
+        <!-- Knob Styles -->
+        <Style x:Key="DialStyle" TargetType="Ellipse">
+            <Setter Property="Width" Value="45" />
+            <Setter Property="Height" Value="45" />
+            <Setter Property="Fill" Value="{StaticResource PanelFillBrush}" />
+            <Setter Property="Opacity" Value="0.5" />
+            <Setter Property="Stroke" Value="{StaticResource StrokeBrush}" />
+            <Setter Property="StrokeThickness" Value="1" />
+        </Style>
+
+        <!-- Axis Arrow Styles -->
+        <Style x:Key="AxisPathStyle" TargetType="Path">
+            <Setter Property="Stroke" Value="{StaticResource StrokeBrush}" />
+            <Setter Property="StrokeThickness" Value="1" />
+            <Setter Property="Fill" Value="Transparent" />
+        </Style>
+
+        <Style x:Key="AxisPolygonStyle" TargetType="Polygon">
+            <Setter Property="Fill" Value="{StaticResource StrokeBrush}" />
+        </Style>
+
+        <!-- Line Styles -->
+        <Style x:Key="BaseLineStyle" TargetType="Line">
+            <Setter Property="Stroke" Value="{StaticResource StrokeBrush}" />
+            <Setter Property="StrokeThickness" Value="1" />
+        </Style>
+
+    </UserControl.Resources>
+
+    <Grid>
+        <Canvas Width="1200" Height="700" HorizontalAlignment="Center" VerticalAlignment="Center">
+
+            <!-- TOP AUTOPILOT PANEL -->
+            <Canvas x:Name="AutopilotPanelCanvas" Canvas.Left="200" Canvas.Top="10">
+                <Rectangle Width="990" Height="150" Style="{StaticResource BasePanelStyle}" />
+
+                <!-- LEFT DIAL (5-position rotary selector) - Clockwise from 17 (bottom) to 21 (top) -->
+                <Canvas Canvas.Left="100" Canvas.Top="50">
+                    <Ellipse Style="{StaticResource DialStyle}" />
+
+                    <!-- IAS (17) - Bottom (6 o'clock) -->
+                    <Line X1="22.5" Y1="45" X2="22.5" Y2="70" Style="{StaticResource BaseLineStyle}" />
+                    <TextBlock Text="17-IAS" Style="{StaticResource LabelCenterStyle}" Canvas.Left="10" Canvas.Top="62" />
+                    <TextBlock Style="{StaticResource BindingCenterStyle}" Canvas.Left="-25" Canvas.Top="70"
+                            Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_17}"
+                            ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_17}" />
+
+                    <!-- CRS (18) - Bottom Left (7-8 o'clock) -->
+                    <Line X1="7" Y1="37" X2="-18" Y2="52" Style="{StaticResource BaseLineStyle}" />
+                    <TextBlock Text="18-CRS" Style="{StaticResource LabelRightStyle}" Canvas.Left="-75" Canvas.Top="42" />
+                    <TextBlock Style="{StaticResource BindingRightStyle}" Canvas.Left="-105" Canvas.Top="50"
+                            Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_18}"
+                            ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_18}" />
+
+                    <!-- HDG (19) - Left (9 o'clock) -->
+                    <Line X1="0" Y1="22.5" X2="-25" Y2="22.5" Style="{StaticResource BaseLineStyle}" />
+                    <TextBlock Text="19-HDG" Style="{StaticResource LabelRightStyle}" Canvas.Left="-75" Canvas.Top="9" />
+                    <TextBlock Style="{StaticResource BindingRightStyle}" Canvas.Left="-105" Canvas.Top="17"
+                            Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_19}"
+                            ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_19}" />
+
+                    <!-- V/S (20) - Top Left (10-11 o'clock) -->
+                    <Line X1="7" Y1="8" X2="-18" Y2="-7" Style="{StaticResource BaseLineStyle}" />
+                    <TextBlock Text="20-V/S" Style="{StaticResource LabelRightStyle}" Canvas.Left="-75" Canvas.Top="-23" />
+                    <TextBlock Style="{StaticResource BindingRightStyle}" Canvas.Left="-105" Canvas.Top="-15"
+                            Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_20}"
+                            ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_20}" />
+
+                    <!-- ALT (21) - Top (12 o'clock) -->
+                    <Line X1="22.5" Y1="0" X2="22.5" Y2="-25" Style="{StaticResource BaseLineStyle}" />
+                    <TextBlock Text="21-ALT" Style="{StaticResource LabelCenterStyle}" Canvas.Left="10" Canvas.Top="-48" />
+                    <TextBlock Style="{StaticResource BindingCenterStyle}" Canvas.Left="-25" Canvas.Top="-40"
+                            Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_21}"
+                            ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_21}" />
+                </Canvas>
+
+                <!-- CENTER PUSH BUTTONS (1-7) -->
+                <!-- Button 1: HDG -->
+                <StackPanel Orientation="Vertical" Canvas.Left="170" Canvas.Top="60">
+                    <Grid Width="26" Height="26">
+                        <Ellipse Style="{StaticResource StandardButtonStyle}" />
+                        <TextBlock Text="1" Style="{StaticResource ButtonNumberStyle}" />
+                    </Grid>
+                    <TextBlock Text="HDG" Style="{StaticResource LabelCenterStyle}" />
+                    <TextBlock Style="{StaticResource ButtonBindingBottomStyle}"
+                            Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_1}"
+                            ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_1}" />
+                </StackPanel>
+
+                <!-- Button 2: NAV -->
+                <StackPanel Orientation="Vertical" Canvas.Left="250" Canvas.Top="60">
+                    <Grid Width="26" Height="26">
+                        <Ellipse Style="{StaticResource StandardButtonStyle}" />
+                        <TextBlock Text="2" Style="{StaticResource ButtonNumberStyle}" />
+                    </Grid>
+                    <TextBlock Text="NAV" Style="{StaticResource LabelCenterStyle}" />
+                    <TextBlock Style="{StaticResource ButtonBindingBottomStyle}"
+                            Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_2}"
+                            ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_2}" />
+                </StackPanel>
+
+                <!-- Button 3: APR -->
+                <StackPanel Orientation="Vertical" Canvas.Left="330" Canvas.Top="60">
+                    <Grid Width="26" Height="26">
+                        <Ellipse Style="{StaticResource StandardButtonStyle}" />
+                        <TextBlock Text="3" Style="{StaticResource ButtonNumberStyle}" />
+                    </Grid>
+                    <TextBlock Text="APR" Style="{StaticResource LabelCenterStyle}" />
+                    <TextBlock Style="{StaticResource ButtonBindingBottomStyle}"
+                            Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_3}"
+                            ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_3}" />
+                </StackPanel>
+
+                <!-- Button 4: REV -->
+                <StackPanel Orientation="Vertical" Canvas.Left="410" Canvas.Top="60">
+                    <Grid Width="26" Height="26">
+                        <Ellipse Style="{StaticResource StandardButtonStyle}" />
+                        <TextBlock Text="4" Style="{StaticResource ButtonNumberStyle}" />
+                    </Grid>
+                    <TextBlock Text="REV" Style="{StaticResource LabelCenterStyle}" />
+                    <TextBlock Style="{StaticResource ButtonBindingBottomStyle}"
+                            Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_4}"
+                            ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_4}" />
+                </StackPanel>
+
+                <!-- Button 5: ALT -->
+                <StackPanel Orientation="Vertical" Canvas.Left="490" Canvas.Top="60">
+                    <Grid Width="26" Height="26">
+                        <Ellipse Style="{StaticResource StandardButtonStyle}" />
+                        <TextBlock Text="5" Style="{StaticResource ButtonNumberStyle}" />
+                    </Grid>
+                    <TextBlock Text="ALT" Style="{StaticResource LabelCenterStyle}" />
+                    <TextBlock Style="{StaticResource ButtonBindingBottomStyle}"
+                            Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_5}"
+                            ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_5}" />
+                </StackPanel>
+
+                <!-- Button 6: V/S -->
+                <StackPanel Orientation="Vertical" Canvas.Left="570" Canvas.Top="60">
+                    <Grid Width="26" Height="26">
+                        <Ellipse Style="{StaticResource StandardButtonStyle}" />
+                        <TextBlock Text="6" Style="{StaticResource ButtonNumberStyle}" />
+                    </Grid>
+                    <TextBlock Text="V/S" Style="{StaticResource LabelCenterStyle}" />
+                    <TextBlock Style="{StaticResource ButtonBindingBottomStyle}"
+                            Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_6}"
+                            ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_6}" />
+                </StackPanel>
+
+                <!-- Button 7: IAS -->
+                <StackPanel Orientation="Vertical" Canvas.Left="650" Canvas.Top="60">
+                    <Grid Width="26" Height="26">
+                        <Ellipse Style="{StaticResource StandardButtonStyle}" />
+                        <TextBlock Text="7" Style="{StaticResource ButtonNumberStyle}" />
+                    </Grid>
+                    <TextBlock Text="IAS" Style="{StaticResource LabelCenterStyle}" />
+                    <TextBlock Style="{StaticResource ButtonBindingBottomStyle}"
+                            Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_7}"
+                            ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_7}" />
+                </StackPanel>
+
+                <!-- RIGHT KNOB (Buttons 14 - left, 15 - right) with rotation arrows -->
+                <Canvas Canvas.Left="770" Canvas.Top="50">
+                    <Ellipse Style="{StaticResource DialStyle}" />
+
+                    <!-- Semicircular arc with arrows inside the knob -->
+                    <Path Canvas.Left="7.5" Canvas.Top="8" Data="M 0 15 A 15 15 0 0 1 30 15"
+                            Style="{StaticResource AxisPathStyle}" />
+                    <Polygon Points="8.5,32 6.5,27 11,27" Style="{StaticResource AxisPolygonStyle}" />
+                    <Polygon Points="37.5,32 35,27 40,26" Style="{StaticResource AxisPolygonStyle}" />
+
+                    <!--Button 14 label (left)-->
+                    <StackPanel Canvas.Left="-50" Canvas.Top="50">
+                        <TextBlock Text="14" Style="{StaticResource LabelRightStyle}" />
+                        <TextBlock Style="{StaticResource ButtonBindingBottomStyle}" HorizontalAlignment="Right"
+                                Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_14}"
+                                ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_14}" />
+                    </StackPanel>
+
+                    <!--Button 13 label (right)-->
+                    <StackPanel Canvas.Left="40" Canvas.Top="50">
+                        <TextBlock Text="13" Style="{StaticResource BaseLabelStyle}" />
+                        <TextBlock Style="{StaticResource ButtonBindingBottomStyle}"
+                                Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_13}"
+                                ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_13}" />
+                    </StackPanel>
+                </Canvas>
+
+                <!-- Button 8: AUTO PILOT -->
+                <StackPanel Orientation="Vertical" Canvas.Left="850" Canvas.Top="60">
+                    <Grid Width="26" Height="26">
+                        <Ellipse Style="{StaticResource StandardButtonStyle}" />
+                        <TextBlock Text="8" Style="{StaticResource ButtonNumberStyle}" />
+                    </Grid>
+                    <TextBlock Text="A/P" Style="{StaticResource LabelCenterStyle}" />
+                    <TextBlock Style="{StaticResource ButtonBindingBottomStyle}"
+                            Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_8}"
+                            ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_8}" />
+                </StackPanel>
+            </Canvas>
+
+            <!-- LEFT SIDE - LANDING GEAR SECTION -->
+            <Canvas x:Name="GearCanvas" Canvas.Left="30" Canvas.Top="180">
+                <Rectangle Width="150" Height="210" Style="{StaticResource BasePanelStyle}" />
+
+                <!-- Gear Indicator -->
+                <Canvas Canvas.Left="45" Canvas.Top="15" Width="60" Height="70">
+                    <!-- N - Nose -->
+                    <Ellipse Style="{StaticResource GearIndicatorStyle}" Canvas.Left="20" Canvas.Top="5" />
+                    <TextBlock Text="N" Style="{StaticResource BaseLabelStyle}" Canvas.Left="26" Canvas.Top="8" />
+
+                    <!-- L - Left -->
+                    <Ellipse Style="{StaticResource GearIndicatorStyle}" Canvas.Left="-5" Canvas.Top="33" />
+                    <TextBlock Text="L" Style="{StaticResource BaseLabelStyle}" Canvas.Left="1" Canvas.Top="36" />
+
+                    <!-- R - Right -->
+                    <Ellipse Style="{StaticResource GearIndicatorStyle}" Canvas.Left="45" Canvas.Top="33" />
+                    <TextBlock Text="R" Style="{StaticResource BaseLabelStyle}" Canvas.Left="52" Canvas.Top="36" />
+
+                    <TextBlock Text="GEAR" Style="{StaticResource SectionLabelStyle}" Canvas.Left="15" Canvas.Top="25" />
+                </Canvas>
+
+                <!-- Gear buttons - vertically stacked -->
+                <StackPanel Canvas.Left="30" Canvas.Top="80">
+                    <!-- Button 31: Gear Up -->
+                    <StackPanel Orientation="Vertical" Margin="0,0,0,10">
+                        <Grid Width="26" Height="26">
+                            <Ellipse Style="{StaticResource StandardButtonStyle}" />
+                            <TextBlock Text="31" Style="{StaticResource ButtonNumberStyle}" />
+                        </Grid>
+                        <TextBlock Text="UP" Style="{StaticResource LabelCenterStyle}" />
+                        <TextBlock Style="{StaticResource SwitchBindingStyle}"
+                                Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_31}"
+                                ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_31}" />
+                    </StackPanel>
+
+                    <!-- Button 32: Gear Down -->
+                    <StackPanel Orientation="Vertical">
+                        <Grid Width="26" Height="26">
+                            <Ellipse Style="{StaticResource StandardButtonStyle}" />
+                            <TextBlock Text="32" Style="{StaticResource ButtonNumberStyle}" />
+                        </Grid>
+                        <TextBlock Text="DOWN" Style="{StaticResource LabelCenterStyle}" />
+                        <TextBlock Style="{StaticResource SwitchBindingStyle}"
+                                Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_32}"
+                                ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_32}" />
+                    </StackPanel>
+                </StackPanel>
+            </Canvas>
+
+            <!-- CENTER - TOGGLE SWITCHES (34-47: 7 switches with up/down) -->
+            <Canvas x:Name="ToggleSwitchesCanvas" Canvas.Left="200" Canvas.Top="180">
+                <Rectangle Width="850" Height="135" Style="{StaticResource BasePanelStyle}" />
+
+                <UniformGrid Columns="7" Canvas.Left="25" Canvas.Top="25" Width="800" Height="100">
+                    <!-- Switch 1: 34 (up), 35 (down) -->
+                    <StackPanel>
+                        <TextBlock Text="34" Style="{StaticResource ButtonNumberStyle}" />
+                        <TextBlock Style="{StaticResource SwitchBindingStyle}"
+                                Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_34}"
+                                ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_34}" />
+                        <Rectangle Style="{StaticResource ToggleSwitchStyle}" />
+                        <TextBlock Text="35" Style="{StaticResource ButtonNumberStyle}" />
+                        <TextBlock Style="{StaticResource SwitchBindingStyle}"
+                                Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_35}"
+                                ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_35}" />
+                    </StackPanel>
+
+                    <!-- Switch 2: 36 (up), 37 (down) -->
+                    <StackPanel>
+                        <TextBlock Text="36" Style="{StaticResource ButtonNumberStyle}" />
+                        <TextBlock Style="{StaticResource SwitchBindingStyle}"
+                                Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_36}"
+                                ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_36}" />
+                        <Rectangle Style="{StaticResource ToggleSwitchStyle}" />
+                        <TextBlock Text="37" Style="{StaticResource ButtonNumberStyle}" />
+                        <TextBlock Style="{StaticResource SwitchBindingStyle}"
+                                Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_37}"
+                                ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_37}" />
+                    </StackPanel>
+
+                    <!-- Switch 3: 38 (up), 39 (down) -->
+                    <StackPanel>
+                        <TextBlock Text="38" Style="{StaticResource ButtonNumberStyle}" />
+                        <TextBlock Style="{StaticResource SwitchBindingStyle}"
+                                Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_38}"
+                                ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_38}" />
+                        <Rectangle Style="{StaticResource ToggleSwitchStyle}" />
+                        <TextBlock Text="39" Style="{StaticResource ButtonNumberStyle}" />
+                        <TextBlock Style="{StaticResource SwitchBindingStyle}"
+                                Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_39}"
+                                ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_39}" />
+                    </StackPanel>
+
+                    <!-- Switch 4: 40 (up), 41 (down) -->
+                    <StackPanel>
+                        <TextBlock Text="40" Style="{StaticResource ButtonNumberStyle}" />
+                        <TextBlock Style="{StaticResource SwitchBindingStyle}"
+                                Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_40}"
+                                ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_40}" />
+                        <Rectangle Style="{StaticResource ToggleSwitchStyle}" />
+                        <TextBlock Text="41" Style="{StaticResource ButtonNumberStyle}" />
+                        <TextBlock Style="{StaticResource SwitchBindingStyle}"
+                                Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_41}"
+                                ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_41}" />
+                    </StackPanel>
+
+                    <!-- Switch 5: 42 (up), 43 (down) -->
+                    <StackPanel>
+                        <TextBlock Text="42" Style="{StaticResource ButtonNumberStyle}" />
+                        <TextBlock Style="{StaticResource SwitchBindingStyle}"
+                                Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_42}"
+                                ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_42}" />
+                        <Rectangle Style="{StaticResource ToggleSwitchStyle}" />
+                        <TextBlock Text="43" Style="{StaticResource ButtonNumberStyle}" />
+                        <TextBlock Style="{StaticResource SwitchBindingStyle}"
+                                Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_43}"
+                                ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_43}" />
+                    </StackPanel>
+
+                    <!-- Switch 6: 44 (up), 45 (down) -->
+                    <StackPanel>
+                        <TextBlock Text="44" Style="{StaticResource ButtonNumberStyle}" />
+                        <TextBlock Style="{StaticResource SwitchBindingStyle}"
+                                Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_44}"
+                                ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_44}" />
+                        <Rectangle Style="{StaticResource ToggleSwitchStyle}" />
+                        <TextBlock Text="45" Style="{StaticResource ButtonNumberStyle}" />
+                        <TextBlock Style="{StaticResource SwitchBindingStyle}"
+                                Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_45}"
+                                ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_45}" />
+                    </StackPanel>
+
+                    <!-- Switch 7: 46 (up), 47 (down) -->
+                    <StackPanel>
+                        <TextBlock Text="46" Style="{StaticResource ButtonNumberStyle}" />
+                        <TextBlock Style="{StaticResource SwitchBindingStyle}"
+                                Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_46}"
+                                ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_46}" />
+                        <Rectangle Style="{StaticResource ToggleSwitchStyle}" />
+                        <TextBlock Text="47" Style="{StaticResource ButtonNumberStyle}" />
+                        <TextBlock Style="{StaticResource SwitchBindingStyle}"
+                                Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_47}"
+                                ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_47}" />
+                    </StackPanel>
+                </UniformGrid>
+            </Canvas>
+
+            <!-- RIGHT SIDE - FLAPS LEVER -->
+            <Canvas x:Name="FlapsCanvas" Canvas.Left="1070" Canvas.Top="180">
+                <Rectangle Width="120" Height="210" Style="{StaticResource BasePanelStyle}" />
+                <TextBlock Text="FLAPS" Style="{StaticResource SectionLabelStyle}" Canvas.Left="45" Canvas.Top="5" />
+
+                <!-- Flaps buttons - vertically stacked -->
+                <StackPanel Canvas.Left="20" Canvas.Top="35">
+                    <!-- Button 16: Flaps Up -->
+                    <StackPanel Orientation="Vertical" Margin="0,0,0,10">
+                        <Grid Width="26" Height="26">
+                            <Ellipse Style="{StaticResource WhiteButtonStyle}" />
+                            <TextBlock Text="16" Style="{StaticResource WhiteButtonNumberStyle}" />
+                        </Grid>
+                        <TextBlock Text="UP" Style="{StaticResource LabelCenterStyle}" />
+                        <TextBlock Style="{StaticResource SwitchBindingStyle}"
+                                Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_16}"
+                                ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_16}" />
+                    </StackPanel>
+
+                    <!-- Button 15: Flaps Down -->
+                    <StackPanel Orientation="Vertical">
+                        <Grid Width="26" Height="26">
+                            <Ellipse Style="{StaticResource WhiteButtonStyle}" />
+                            <TextBlock Text="15" Style="{StaticResource WhiteButtonNumberStyle}" />
+                        </Grid>
+                        <TextBlock Text="DOWN" Style="{StaticResource LabelCenterStyle}" />
+                        <TextBlock Style="{StaticResource SwitchBindingStyle}"
+                                Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_15}"
+                                ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_15}" />
+                    </StackPanel>
+                </StackPanel>
+            </Canvas>
+
+            <!-- BOTTOM - THROTTLE QUADRANT -->
+            <Canvas x:Name="ThrottleQuadrantCanvas" Canvas.Left="200" Canvas.Top="335">
+                <Rectangle Width="850" Height="210" Style="{StaticResource BasePanelStyle}" />
+
+                <!-- 7 Levers: Trim Wheel + 6 Throttle Levers with colored knobs -->
+                <Grid Canvas.Left="25" Canvas.Top="40" Width="800" Height="150">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Trim Wheel (GRAY LEVER) -->
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="Trim Wheel" Style="{StaticResource LabelCenterStyle}" />
+                        <TextBlock Style="{StaticResource ButtonBindingBottomStyle}"
+                                Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_22}"
+                                ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_22}" />
+                        <Rectangle Style="{StaticResource GrayLeverStyle}" />
+                        <TextBlock Style="{StaticResource ButtonBindingBottomStyle}"
+                                Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_23}"
+                                ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_23}" />
+                    </StackPanel>
+
+                    <!-- Throttle 1 (BLACK) -->
+                    <StackPanel Grid.Column="1">
+                        <TextBlock Text="Throttle 1" Style="{StaticResource LabelCenterStyle}" />
+                        <TextBlock Style="{StaticResource ButtonBindingBottomStyle}"
+                                Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_L-Axis_Y}"
+                                ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_L-Axis_Y}" />
+                        <Rectangle Style="{StaticResource BlackLeverStyle}" />
+                    </StackPanel>
+
+                    <!-- Throttle 2 (BLACK) -->
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Text="Throttle 2" Style="{StaticResource LabelCenterStyle}" />
+                        <TextBlock Style="{StaticResource ButtonBindingBottomStyle}"
+                                Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_L-Axis_X}"
+                                ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_L-Axis_X}" />
+                        <Rectangle Style="{StaticResource BlackLeverStyle}" />
+                    </StackPanel>
+
+                    <!-- Prop 1 (BLUE) -->
+                    <StackPanel Grid.Column="3">
+                        <TextBlock Text="Prop 1" Style="{StaticResource LabelCenterStyle}" />
+                        <TextBlock Style="{StaticResource ButtonBindingBottomStyle}"
+                                Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_R-Axis_Z}"
+                                ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_R-Axis_Z}" />
+                        <Rectangle Style="{StaticResource BlueLeverStyle}" />
+                    </StackPanel>
+
+                    <!-- Prop 2 (BLUE) -->
+                    <StackPanel Grid.Column="4">
+                        <TextBlock Text="Prop 2" Style="{StaticResource LabelCenterStyle}" />
+                        <TextBlock Style="{StaticResource ButtonBindingBottomStyle}"
+                                Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_R-Axis_Y}"
+                                ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_R-Axis_Y}" />
+                        <Rectangle Style="{StaticResource BlueLeverStyle}" />
+                    </StackPanel>
+
+                    <!-- Mixture 1 (RED) -->
+                    <StackPanel Grid.Column="5">
+                        <TextBlock Text="Mixture 1" Style="{StaticResource LabelCenterStyle}" />
+                        <TextBlock Style="{StaticResource ButtonBindingBottomStyle}"
+                                Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_R-Axis_X}"
+                                ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_R-Axis_X}" />
+                        <Rectangle Style="{StaticResource RedLeverStyle}" />
+                    </StackPanel>
+
+                    <!-- Mixture 2 (RED) -->
+                    <StackPanel Grid.Column="6">
+                        <TextBlock Text="Mixture 2" Style="{StaticResource LabelCenterStyle}" />
+                        <TextBlock Style="{StaticResource ButtonBindingBottomStyle}"
+                                Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_L-Axis_Z}"
+                                ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_L-Axis_Z}" />
+                        <Rectangle Style="{StaticResource RedLeverStyle}" />
+                    </StackPanel>
+                </Grid>
+
+            </Canvas>
+
+        </Canvas>
+    </Grid>
 </UserControl>
