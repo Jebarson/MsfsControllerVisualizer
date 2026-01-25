@@ -1,4 +1,7 @@
-﻿<Application x:Class="Msfs.ControllerVisualizer.App"
+<!-- Copyright (c) 2024 Jebarson. All rights reserved.
+     Licensed under terms specified in COPYRIGHT.md - Free for personal use only. -->
+
+<Application x:Class="Msfs.ControllerVisualizer.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Msfs.ControllerVisualizer"

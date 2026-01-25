@@ -1,9 +1,16 @@
+// Copyright (c) 2024 Jebarson. All rights reserved.
+// Licensed under terms specified in COPYRIGHT.md - Free for personal use only.
+
 namespace Msfs.ControllerVisualizer.Services;
 
 using System.IO;
 using System.Xml.Linq;
 using Msfs.ControllerVisualizer.Models;
 
+/// <summary>
+/// Provides services for discovering and matching controller devices from MSFS exported XML profiles.
+/// Scans folders and files for controller configurations and consolidates multiple profiles.
+/// </summary>
 public class ControllerDiscoveryService
 {
     /// <summary>

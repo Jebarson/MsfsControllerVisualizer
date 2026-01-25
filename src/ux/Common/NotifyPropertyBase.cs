@@ -1,3 +1,6 @@
+// Copyright (c) 2024 Jebarson. All rights reserved.
+// Licensed under terms specified in COPYRIGHT.md - Free for personal use only.
+
 namespace Msfs.ControllerVisualizer.Common;
 
 using System.ComponentModel;
@@ -23,3 +26,4 @@ public class NotifyPropertyBase : INotifyPropertyChanged
         this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
 }
+

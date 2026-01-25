@@ -1,3 +1,6 @@
+// Copyright (c) 2024 Jebarson. All rights reserved.
+// Licensed under terms specified in COPYRIGHT.md - Free for personal use only.
+
 namespace Msfs.ControllerVisualizer.Services;
 
 using System;
@@ -10,16 +13,27 @@ using System.Windows.Media.Imaging;
 
 /// <summary>
 /// Provides services for printing visual elements to a printer.
+/// Handles rendering, conversion to PNG, and print dialog management.
 /// </summary>
 public class PrintService
 {
+    private const string DefaultDocumentTitle = "Controller Layout";
+    private const string PrintErrorTitle = "Print Error";
+    private const string ControllerLayoutPrefix = "ControllerLayout_";
+    private const string PngExtension = ".png";
+    private const double DefaultDpi = 600;
+    private const double DpiScale = 96.0;
+    private const double DefaultWidth = 1200;
+    private const double DefaultHeight = 650;
+    private const double MarginSize = 24;
+
     /// <summary>
     /// Opens a print dialog and prints the specified visual element.
     /// </summary>
     /// <param name="visualElement">The visual element to print (e.g., Viewbox, Canvas, UserControl).</param>
     /// <param name="documentTitle">The title of the print job.</param>
     /// <returns>True if the print was successful, false if cancelled or failed.</returns>
-    public bool Print(FrameworkElement visualElement, string documentTitle = "Controller Layout")
+    public bool Print(FrameworkElement visualElement, string documentTitle = DefaultDocumentTitle)
     {
         if (visualElement == null)
         {
@@ -42,7 +56,7 @@ public class PrintService
 
             if (tempPngPath == null || !File.Exists(tempPngPath))
             {
-                MessageBox.Show("Failed to create temporary image file for printing.", "Print Error",
+                MessageBox.Show("Failed to create temporary image file for printing.", PrintErrorTitle,
                     MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
@@ -82,8 +96,7 @@ public class PrintService
                 System.Diagnostics.Debug.WriteLine($"Printable area: {printableSize.Width}x{printableSize.Height}");
 
                 // Define narrow margins (0.25 inches = 24 pixels at 96 DPI)
-                double marginSize = 24;
-                double contentWidth = printableSize.Width - (marginSize * 2);
+                double contentWidth = printableSize.Width - (MarginSize * 2);
                 double contentHeight = printableSize.Height;
 
                 // Create main container with margins
@@ -101,7 +114,7 @@ public class PrintService
                     Height = contentHeight,
                     Stretch = Stretch.Uniform,
                     StretchDirection = StretchDirection.Both,
-                    Margin = new(marginSize, 0, marginSize, 0)
+                    Margin = new(MarginSize, 0, MarginSize, 0)
                 };
 
                 // Put the image in an Image control inside the Viewbox
@@ -130,7 +143,7 @@ public class PrintService
         catch (Exception ex)
         {
             System.Diagnostics.Debug.WriteLine($"Print error: {ex.Message}");
-            MessageBox.Show($"Failed to print: {ex.Message}", "Print Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show($"Failed to print: {ex.Message}", PrintErrorTitle, MessageBoxButton.OK, MessageBoxImage.Error);
             return false;
         }
         finally
@@ -175,18 +188,18 @@ public class PrintService
             // If still no size, use default
             if (width == 0 || height == 0)
             {
-                width = 1200;
-                height = 650;
+                width = DefaultWidth;
+                height = DefaultHeight;
             }
 
             System.Diagnostics.Debug.WriteLine($"Rendering element with size: {width}x{height}");
 
             // Use 600 DPI for maximum quality printing (professional print quality)
             // PNG supports arbitrary DPI values - 600 provides excellent quality without excessive file size
-            double dpi = 600;
+            double dpi = DefaultDpi;
 
             // Calculate scaled dimensions for higher DPI
-            double scale = dpi / 96.0;
+            double scale = dpi / DpiScale;
             int pixelWidth = (int)Math.Ceiling(width * scale);
             int pixelHeight = (int)Math.Ceiling(height * scale);
 
@@ -231,7 +244,7 @@ public class PrintService
             encoder.Frames.Add(BitmapFrame.Create(bitmap));
 
             // Save to temporary file
-            string tempPath = Path.Combine(Path.GetTempPath(), $"ControllerLayout_{Guid.NewGuid()}.png");
+            string tempPath = Path.Combine(Path.GetTempPath(), $"{ControllerLayoutPrefix}{Guid.NewGuid()}{PngExtension}");
 
             using (FileStream fileStream = new(tempPath, FileMode.Create, FileAccess.Write))
             {
@@ -245,10 +258,9 @@ public class PrintService
         catch (Exception ex)
         {
             System.Diagnostics.Debug.WriteLine($"Error saving visual as PNG: {ex.Message}");
-            MessageBox.Show($"Failed to create image: {ex.Message}", "Print Error",
+            MessageBox.Show($"Failed to create image: {ex.Message}", PrintErrorTitle,
                 MessageBoxButton.OK, MessageBoxImage.Error);
             return null;
         }
     }
-
 }

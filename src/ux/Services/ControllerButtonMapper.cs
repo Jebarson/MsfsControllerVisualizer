@@ -1,3 +1,6 @@
+// Copyright (c) 2024 Jebarson. All rights reserved.
+// Licensed under terms specified in COPYRIGHT.md - Free for personal use only.
+
 namespace Msfs.ControllerVisualizer.Services;
 
 using System.Xml.Linq;
@@ -5,9 +8,12 @@ using Msfs.ControllerVisualizer.Models;
 
 /// <summary>
 /// Provides services for mapping controller buttons to MSFS commands from XML configuration.
+/// Extracts button bindings and their associated actions from parsed device XML elements.
 /// </summary>
 public class ControllerButtonMapper
 {
+    private const string KeyPrefix = "KEY_";
+
     /// <summary>
     /// Maps all button bindings from a device XML element to a list of button mappings.
     /// </summary>
@@ -90,9 +96,9 @@ public class ControllerButtonMapper
     /// <returns>A formatted friendly name (e.g., "Magneto Start").</returns>
     private string ConvertActionToFriendly(string actionName)
     {
-        if (actionName.StartsWith("KEY_", StringComparison.OrdinalIgnoreCase))
+        if (actionName.StartsWith(KeyPrefix, StringComparison.OrdinalIgnoreCase))
         {
-            actionName = actionName.Substring(4);
+            actionName = actionName.Substring(KeyPrefix.Length);
         }
 
         string[] words = actionName.Split('_', StringSplitOptions.RemoveEmptyEntries);

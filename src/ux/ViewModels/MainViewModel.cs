@@ -1,3 +1,6 @@
+// Copyright (c) 2024 Jebarson. All rights reserved.
+// Licensed under terms specified in COPYRIGHT.md - Free for personal use only.
+
 namespace Msfs.ControllerVisualizer.ViewModels;
 
 using System;
@@ -8,8 +11,16 @@ using Msfs.ControllerVisualizer.Models;
 using Msfs.ControllerVisualizer.Services;
 using Msfs.ControllerVisualizer.Common;
 
+/// <summary>
+/// MainViewModel manages the primary UI logic for the MSFS Controller Visualizer application.
+/// It handles controller discovery, selection, button mapping, and visual rendering.
+/// </summary>
 public class MainViewModel : NotifyPropertyBase
 {
+    private const string RelativePathFormat = "..{0}..{0}..";
+    private const string AssetsControllersPath = "Assets{0}Controllers";
+    private const string XamlExtension = "*.xaml";
+
     private readonly ControllerDiscoveryService discoveryService;
     private readonly ControllerButtonMapper buttonMapper;
     private readonly ControllerDefinitionLoader definitionLoader;
@@ -23,6 +34,10 @@ public class MainViewModel : NotifyPropertyBase
     private ControllerDefinition? matchedControllerDefinition;
     private List<ButtonMapping> currentButtonMappings = new();
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="MainViewModel"/> class.
+    /// Sets up the required services and command handlers.
+    /// </summary>
     public MainViewModel()
     {
         this.discoveryService = new();
@@ -37,6 +52,9 @@ public class MainViewModel : NotifyPropertyBase
         this.LoadSupportedControllers();
     }
 
+    /// <summary>
+    /// Gets or sets the path to the folder containing exported MSFS profile XML files.
+    /// </summary>
     public string ExportFolderPath
     {
         get => this.exportFolderPath;
@@ -51,6 +69,9 @@ public class MainViewModel : NotifyPropertyBase
         }
     }
 
+    /// <summary>
+    /// Gets or sets the current status message displayed to the user.
+    /// </summary>
     public string StatusMessage
     {
         get => this.statusMessage;
@@ -64,6 +85,9 @@ public class MainViewModel : NotifyPropertyBase
         }
     }
 
+    /// <summary>
+    /// Gets the list of supported controller definitions.
+    /// </summary>
     public List<ControllerDefinition> SupportedControllers
     {
         get => this.supportedControllers;
@@ -74,6 +98,9 @@ public class MainViewModel : NotifyPropertyBase
         }
     }
 
+    /// <summary>
+    /// Gets the list of exported controllers discovered in the selected folder.
+    /// </summary>
     public List<ExportedControllerInfo> ExportedControllers
     {
         get => this.exportedControllers;
@@ -84,6 +111,9 @@ public class MainViewModel : NotifyPropertyBase
         }
     }
 
+    /// <summary>
+    /// Gets or sets the currently selected exported controller.
+    /// </summary>
     public ExportedControllerInfo? SelectedExportedController
     {
         get => this.selectedExportedController;
@@ -98,6 +128,9 @@ public class MainViewModel : NotifyPropertyBase
         }
     }
 
+    /// <summary>
+    /// Gets the controller definition matched to the selected exported controller.
+    /// </summary>
     public ControllerDefinition? MatchedControllerDefinition
     {
         get => this.matchedControllerDefinition;
@@ -108,6 +141,9 @@ public class MainViewModel : NotifyPropertyBase
         }
     }
 
+    /// <summary>
+    /// Gets the list of button mappings for the currently selected controller.
+    /// </summary>
     public List<ButtonMapping> CurrentButtonMappings
     {
         get => this.currentButtonMappings;
@@ -118,8 +154,19 @@ public class MainViewModel : NotifyPropertyBase
         }
     }
 
+    /// <summary>
+    /// Gets the command to browse for an export folder.
+    /// </summary>
     public ICommand BrowseForExportFolderCommand { get; }
+
+    /// <summary>
+    /// Gets the command to reload the visual representation of the controller.
+    /// </summary>
     public ICommand ReloadVisualCommand { get; }
+
+    /// <summary>
+    /// Gets the command to print the controller layout.
+    /// </summary>
     public ICommand PrintCommand { get; }
 
     private void LoadSupportedControllers()
@@ -304,10 +351,10 @@ public class MainViewModel : NotifyPropertyBase
         // AppDomain.CurrentDomain.BaseDirectory is typically: X:\...\bin\Debug\net10.0-windows\
         // We need to go up to the project root
         string binDirectory = AppDomain.CurrentDomain.BaseDirectory;
-        string projectDirectory = Path.GetFullPath(Path.Combine(binDirectory, "..", "..", ".."));
+        string projectDirectory = Path.GetFullPath(Path.Combine(binDirectory, RelativePathFormat));
 
-        string sourceControllersPath = Path.Combine(projectDirectory, "Assets", "Controllers");
-        string targetControllersPath = Path.Combine(binDirectory, "Assets", "Controllers");
+        string sourceControllersPath = Path.Combine(projectDirectory, string.Format(AssetsControllersPath, Path.DirectorySeparatorChar));
+        string targetControllersPath = Path.Combine(binDirectory, string.Format(AssetsControllersPath, Path.DirectorySeparatorChar));
 
         if (!Directory.Exists(sourceControllersPath))
         {
@@ -318,7 +365,7 @@ public class MainViewModel : NotifyPropertyBase
         Directory.CreateDirectory(targetControllersPath);
 
         // Copy all XAML files
-        string[] xamlFiles = Directory.GetFiles(sourceControllersPath, "*.xaml", SearchOption.TopDirectoryOnly);
+        string[] xamlFiles = Directory.GetFiles(sourceControllersPath, XamlExtension, SearchOption.TopDirectoryOnly);
 
         foreach (string sourceFile in xamlFiles)
         {

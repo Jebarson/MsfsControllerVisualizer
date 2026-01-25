@@ -1,3 +1,6 @@
+// Copyright (c) 2024 Jebarson. All rights reserved.
+// Licensed under terms specified in COPYRIGHT.md - Free for personal use only.
+
 namespace Msfs.ControllerVisualizer.Services;
 
 using System.IO;
@@ -6,6 +9,7 @@ using Msfs.ControllerVisualizer.Models;
 
 /// <summary>
 /// Provides services for loading and retrieving controller definitions from JSON configuration.
+/// Loads controller metadata from the controllers.json file and provides lookup methods.
 /// </summary>
 public class ControllerDefinitionLoader
 {

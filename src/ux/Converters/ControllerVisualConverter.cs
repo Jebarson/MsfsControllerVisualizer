@@ -1,3 +1,6 @@
+// Copyright (c) 2024 Jebarson. All rights reserved.
+// Licensed under terms specified in COPYRIGHT.md - Free for personal use only.
+
 using System.Globalization;
 using System.IO;
 using System.Windows;
@@ -8,8 +11,20 @@ using Msfs.ControllerVisualizer.Models;
 
 namespace Msfs.ControllerVisualizer.Converters;
 
+/// <summary>
+/// Converts a controller definition and button mappings to a visual XAML user control.
+/// Dynamically loads and renders XAML files based on the controller definition.
+/// </summary>
 public class ControllerVisualConverter : IMultiValueConverter
 {
+    /// <summary>
+    /// Converts controller definition and button mappings to a rendered visual user control.
+    /// </summary>
+    /// <param name="values">Array containing [ControllerDefinition, List&lt;ButtonMapping&gt;].</param>
+    /// <param name="targetType">The target type for conversion.</param>
+    /// <param name="parameter">Converter parameter (not used).</param>
+    /// <param name="culture">Culture information for conversion.</param>
+    /// <returns>A UserControl representing the controller visual, or null if conversion fails.</returns>
     public object? Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
     {
         if (values.Length < 2 || values[0] == null || values[1] == null)
@@ -64,6 +79,9 @@ public class ControllerVisualConverter : IMultiValueConverter
         }
     }
 
+    /// <summary>
+    /// Not implemented - conversion back is not supported.
+    /// </summary>
     public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
     {
         throw new NotImplementedException();

@@ -1,3 +1,6 @@
+// Copyright (c) 2024 Jebarson. All rights reserved.
+// Licensed under terms specified in COPYRIGHT.md - Free for personal use only.
+
 namespace Msfs.ControllerVisualizer.Converters;
 
 using System.Globalization;
@@ -6,6 +9,7 @@ using Msfs.ControllerVisualizer.Models;
 
 /// <summary>
 /// Converts joystick button identifiers to their mapped friendly names from MSFS configuration.
+/// Supports multiple mappings per button by joining them with commas.
 /// </summary>
 public class JoystickButtonMappingConverter : IValueConverter
 {
