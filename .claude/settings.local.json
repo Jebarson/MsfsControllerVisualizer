@@ -1,7 +1,13 @@
 {
   "permissions": {
     "allow": [
-      "Bash(dotnet build:*)"
+      "Bash(dotnet build:*)",
+      "Bash(test:*)",
+      "Bash(find:*)",
+      "Bash(ls:*)",
+      "Bash(dotnet test:*)",
+      "Bash(git checkout:*)",
+      "Bash(git reset:*)"
     ]
   }
 }

@@ -3,186 +3,60 @@
         xmlns:converters="clr-namespace:Msfs.ControllerVisualizer.Converters;assembly=Msfs.ControllerVisualizer">
 
     <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ControllerStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
 
-        <!-- Joystick Button Mapping Converters -->
-        <converters:JoystickButtonMappingConverter x:Key="JoystickButtonMappingConverter" />
-        <converters:JoystickButtonTruncateConverter x:Key="JoystickButtonTruncateConverter" MaxLength="18" />
+            <!-- Controller-specific brushes -->
+            <SolidColorBrush x:Key="BlueFillBrush" Color="#4A90E2" />
+            <SolidColorBrush x:Key="RedFillBrush" Color="#E24A4A" />
+            <SolidColorBrush x:Key="GreenFillBrush" Color="Green" />
 
-        <!-- Color Resources -->
-        <SolidColorBrush x:Key="PanelFillBrush" Color="Gray" />
-        <SolidColorBrush x:Key="StrokeBrush" Color="#D3D3D3" />
-        <SolidColorBrush x:Key="WhiteFillBrush" Color="#ffffff" />
-        <SolidColorBrush x:Key="BlackFillBrush" Color="#2c2c2c" />
-        <SolidColorBrush x:Key="BlueFillBrush" Color="#4A90E2" />
-        <SolidColorBrush x:Key="RedFillBrush" Color="#E24A4A" />
-        <SolidColorBrush x:Key="GreenFillBrush" Color="Green" />
-        <SolidColorBrush x:Key="BlackTextBrush" Color="Black" />
-        <SolidColorBrush x:Key="BindingTextBrush" Color="#228B22" />
+            <!-- Override truncation length for Bravo visuals -->
+            <converters:JoystickButtonTruncateConverter x:Key="JoystickButtonTruncateConverter" MaxLength="18" />
 
-        <!-- Panel Styles -->
-        <Style x:Key="BasePanelStyle" TargetType="Rectangle">
-            <Setter Property="Fill" Value="{StaticResource PanelFillBrush}" />
-            <Setter Property="Opacity" Value="0.5" />
-            <Setter Property="Stroke" Value="{StaticResource StrokeBrush}" />
-            <Setter Property="StrokeThickness" Value="1" />
-        </Style>
+            <!-- Dial / indicator styles -->
+            <Style x:Key="DialStyle" TargetType="Ellipse" BasedOn="{StaticResource BaseEllipseStyle}">
+                <Setter Property="Width" Value="45" />
+                <Setter Property="Height" Value="45" />
+            </Style>
 
-        <!-- Button Styles -->
-        <Style x:Key="BaseButtonStyle" TargetType="Ellipse">
-            <Setter Property="Width" Value="26" />
-            <Setter Property="Height" Value="26" />
-            <Setter Property="Stroke" Value="{StaticResource StrokeBrush}" />
-            <Setter Property="StrokeThickness" Value="1" />
-        </Style>
+            <Style x:Key="GearIndicatorStyle" TargetType="Ellipse">
+                <Setter Property="Width" Value="20" />
+                <Setter Property="Height" Value="20" />
+                <Setter Property="Fill" Value="{StaticResource GreenFillBrush}" />
+                <Setter Property="Opacity" Value="0.4" />
+                <Setter Property="Stroke" Value="{StaticResource StrokeBrush}" />
+                <Setter Property="StrokeThickness" Value="1" />
+            </Style>
 
-        <Style x:Key="StandardButtonStyle" TargetType="Ellipse" BasedOn="{StaticResource BaseButtonStyle}">
-            <Setter Property="Fill" Value="{StaticResource PanelFillBrush}" />
-            <Setter Property="Opacity" Value="0.5" />
-        </Style>
+            <!-- Lever styles -->
+            <Style x:Key="ThrottleLeverStyle" TargetType="Rectangle" BasedOn="{StaticResource BasePanelStyle}">
+                <Setter Property="Width" Value="22" />
+                <Setter Property="Height" Value="80" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="Margin" Value="0,5,0,0" />
+                <Setter Property="Opacity" Value="1" />
+            </Style>
 
-        <Style x:Key="WhiteButtonStyle" TargetType="Ellipse" BasedOn="{StaticResource BaseButtonStyle}">
-            <Setter Property="Fill" Value="{StaticResource WhiteFillBrush}" />
-        </Style>
+            <Style x:Key="GrayLeverStyle" TargetType="Rectangle" BasedOn="{StaticResource ThrottleLeverStyle}">
+                <Setter Property="Fill" Value="{StaticResource PanelFillBrush}" />
+                <Setter Property="Opacity" Value="0.6" />
+            </Style>
 
-        <!-- Text Styles -->
-        <Style x:Key="ButtonNumberStyle" TargetType="TextBlock">
-            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
-            <Setter Property="FontSize" Value="10" />
-            <Setter Property="HorizontalAlignment" Value="Center" />
-            <Setter Property="VerticalAlignment" Value="Center" />
-        </Style>
+            <Style x:Key="BlackLeverStyle" TargetType="Rectangle" BasedOn="{StaticResource ThrottleLeverStyle}">
+                <Setter Property="Fill" Value="{StaticResource BlackFillBrush}" />
+            </Style>
 
-        <Style x:Key="WhiteButtonNumberStyle" TargetType="TextBlock" BasedOn="{StaticResource ButtonNumberStyle}">
-            <Setter Property="Foreground" Value="{StaticResource BlackTextBrush}" />
-        </Style>
+            <Style x:Key="BlueLeverStyle" TargetType="Rectangle" BasedOn="{StaticResource ThrottleLeverStyle}">
+                <Setter Property="Fill" Value="{StaticResource BlueFillBrush}" />
+            </Style>
 
-        <Style x:Key="BaseLabelStyle" TargetType="TextBlock">
-            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
-            <Setter Property="FontSize" Value="10" />
-        </Style>
-
-        <Style x:Key="SmallLabelStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseLabelStyle}">
-            <Setter Property="FontSize" Value="8" />
-        </Style>
-
-        <Style x:Key="LabelCenterStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseLabelStyle}">
-            <Setter Property="HorizontalAlignment" Value="Center" />
-        </Style>
-
-        <Style x:Key="LabelRightStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseLabelStyle}">
-            <Setter Property="Width" Value="55" />
-            <Setter Property="TextAlignment" Value="Right" />
-        </Style>
-
-        <Style x:Key="SectionLabelStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseLabelStyle}">
-            <Setter Property="FontWeight" Value="Bold" />
-            <Setter Property="FontSize" Value="11" />
-        </Style>
-
-        <Style x:Key="BaseBindingTextStyle" TargetType="TextBlock">
-            <Setter Property="Foreground" Value="{StaticResource BindingTextBrush}" />
-            <Setter Property="FontSize" Value="12" />
-            <Setter Property="TextTrimming" Value="CharacterEllipsis" />
-        </Style>
-
-        <Style x:Key="BindingCenterStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseBindingTextStyle}">
-            <Setter Property="Width" Value="95" />
-            <Setter Property="TextAlignment" Value="Center" />
-        </Style>
-
-        <Style x:Key="BindingRightStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseBindingTextStyle}">
-            <Setter Property="Width" Value="85" />
-            <Setter Property="TextAlignment" Value="Right" />
-        </Style>
-
-        <Style x:Key="ButtonBindingBottomStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseBindingTextStyle}">
-            <Setter Property="HorizontalAlignment" Value="Center" />
-            <Setter Property="Margin" Value="0,3,0,0" />
-        </Style>
-
-        <Style x:Key="SwitchBindingStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseBindingTextStyle}">
-            <Setter Property="TextAlignment" Value="Center" />
-            <Setter Property="TextWrapping" Value="Wrap" />
-            <Setter Property="MaxHeight" Value="60" />
-            <Setter Property="MinWidth" Value="90" />
-            <Setter Property="MinHeight" Value="18" />
-        </Style>
-
-        <!-- Switch Styles -->
-        <Style x:Key="ToggleSwitchStyle" TargetType="Rectangle">
-            <Setter Property="Width" Value="18" />
-            <Setter Property="Height" Value="35" />
-            <Setter Property="Fill" Value="{StaticResource PanelFillBrush}" />
-            <Setter Property="Opacity" Value="0.5" />
-            <Setter Property="Stroke" Value="{StaticResource StrokeBrush}" />
-            <Setter Property="StrokeThickness" Value="1" />
-            <Setter Property="HorizontalAlignment" Value="Center" />
-        </Style>
-
-        <!-- Gear Indicator Styles -->
-        <Style x:Key="GearIndicatorStyle" TargetType="Ellipse">
-            <Setter Property="Width" Value="20" />
-            <Setter Property="Height" Value="20" />
-            <Setter Property="Fill" Value="{StaticResource GreenFillBrush}" />
-            <Setter Property="Opacity" Value="0.4" />
-            <Setter Property="Stroke" Value="{StaticResource StrokeBrush}" />
-            <Setter Property="StrokeThickness" Value="1" />
-        </Style>
-
-        <!-- Lever Styles -->
-        <Style x:Key="ThrottleLeverStyle" TargetType="Rectangle">
-            <Setter Property="Width" Value="22" />
-            <Setter Property="Height" Value="80" />
-            <Setter Property="Stroke" Value="{StaticResource StrokeBrush}" />
-            <Setter Property="StrokeThickness" Value="1" />
-            <Setter Property="HorizontalAlignment" Value="Center" />
-            <Setter Property="Margin" Value="0,5,0,0" />
-        </Style>
-
-        <Style x:Key="GrayLeverStyle" TargetType="Rectangle" BasedOn="{StaticResource ThrottleLeverStyle}">
-            <Setter Property="Fill" Value="{StaticResource PanelFillBrush}" />
-            <Setter Property="Opacity" Value="0.6" />
-        </Style>
-
-        <Style x:Key="BlackLeverStyle" TargetType="Rectangle" BasedOn="{StaticResource ThrottleLeverStyle}">
-            <Setter Property="Fill" Value="{StaticResource BlackFillBrush}" />
-        </Style>
-
-        <Style x:Key="BlueLeverStyle" TargetType="Rectangle" BasedOn="{StaticResource ThrottleLeverStyle}">
-            <Setter Property="Fill" Value="{StaticResource BlueFillBrush}" />
-        </Style>
-
-        <Style x:Key="RedLeverStyle" TargetType="Rectangle" BasedOn="{StaticResource ThrottleLeverStyle}">
-            <Setter Property="Fill" Value="{StaticResource RedFillBrush}" />
-        </Style>
-
-        <!-- Knob Styles -->
-        <Style x:Key="DialStyle" TargetType="Ellipse">
-            <Setter Property="Width" Value="45" />
-            <Setter Property="Height" Value="45" />
-            <Setter Property="Fill" Value="{StaticResource PanelFillBrush}" />
-            <Setter Property="Opacity" Value="0.5" />
-            <Setter Property="Stroke" Value="{StaticResource StrokeBrush}" />
-            <Setter Property="StrokeThickness" Value="1" />
-        </Style>
-
-        <!-- Axis Arrow Styles -->
-        <Style x:Key="AxisPathStyle" TargetType="Path">
-            <Setter Property="Stroke" Value="{StaticResource StrokeBrush}" />
-            <Setter Property="StrokeThickness" Value="1" />
-            <Setter Property="Fill" Value="Transparent" />
-        </Style>
-
-        <Style x:Key="AxisPolygonStyle" TargetType="Polygon">
-            <Setter Property="Fill" Value="{StaticResource StrokeBrush}" />
-        </Style>
-
-        <!-- Line Styles -->
-        <Style x:Key="BaseLineStyle" TargetType="Line">
-            <Setter Property="Stroke" Value="{StaticResource StrokeBrush}" />
-            <Setter Property="StrokeThickness" Value="1" />
-        </Style>
-
+            <Style x:Key="RedLeverStyle" TargetType="Rectangle" BasedOn="{StaticResource ThrottleLeverStyle}">
+                <Setter Property="Fill" Value="{StaticResource RedFillBrush}" />
+            </Style>
+        </ResourceDictionary>
     </UserControl.Resources>
 
     <Grid>

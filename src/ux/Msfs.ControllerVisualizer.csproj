@@ -15,8 +15,16 @@
 		<Content Include="Mock\**\*.*" CopyToOutputDirectory="PreserveNewest" />
 	</ItemGroup>
 	<ItemGroup>
+	  <Page Remove="Assets\Controllers\ControllerStyles.xaml" />
+	</ItemGroup>
+	<ItemGroup>
 		<None Update="Assets\**\*">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
+	</ItemGroup>
+	<ItemGroup>
+	  <Content Update="Assets\Controllers\ControllerStyles.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Content>
 	</ItemGroup>
 </Project>

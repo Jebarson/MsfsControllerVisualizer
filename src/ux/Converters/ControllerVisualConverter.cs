@@ -41,12 +41,15 @@ public class ControllerVisualConverter : IMultiValueConverter
             JoystickButtonTruncateConverter.SetCurrentMappings(buttonMappings);
 
             // Create a parser context with mappings for namespace prefixes
-            ParserContext context = new();
+            using FileStream stream = File.OpenRead(visualPath);
+            ParserContext context = new()
+            {
+                BaseUri = new Uri(visualPath, UriKind.Absolute)
+            };
             context.XmlnsDictionary.Add("", "http://schemas.microsoft.com/winfx/2006/xaml/presentation");
             context.XmlnsDictionary.Add("x", "http://schemas.microsoft.com/winfx/2006/xaml");
             context.XmlnsDictionary.Add("converters", "clr-namespace:Msfs.ControllerVisualizer.Converters;assembly=Msfs.ControllerVisualizer");
 
-            using FileStream stream = File.OpenRead(visualPath);
             WpfUserControl visual = (WpfUserControl)XamlReader.Load(stream, context);
 
             // Set a simple DataContext - the converter will handle the actual mapping lookup

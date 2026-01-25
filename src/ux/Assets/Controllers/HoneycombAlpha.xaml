@@ -3,193 +3,94 @@
         xmlns:converters="clr-namespace:Msfs.ControllerVisualizer.Converters;assembly=Msfs.ControllerVisualizer">
 
     <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ControllerStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
 
-        <!-- Joystick Button Mapping Converters -->
-        <converters:JoystickButtonMappingConverter x:Key="JoystickButtonMappingConverter" />
-        <converters:JoystickButtonTruncateConverter x:Key="JoystickButtonTruncateConverter" MaxLength="20" />
+            <!-- Alpha-specific brushes -->
+            <SolidColorBrush x:Key="AlphaRedFillBrush" Color="#C0392B" />
 
-        <!-- Base Ellipse Style -->
-        <Style x:Key="BaseEllipseStyle" TargetType="Ellipse">
-            <Setter Property="Fill" Value="Gray" />
-            <Setter Property="Opacity" Value="0.5" />
-            <Setter Property="Stroke" Value="#D3D3D3" />
-            <Setter Property="StrokeThickness" Value="1" />
-        </Style>
+            <!-- Base Ellipse sizes (use shared BaseEllipseStyle) -->
+            <Style x:Key="GripEllipseStyle" TargetType="Ellipse" BasedOn="{StaticResource BaseEllipseStyle}">
+                <Setter Property="Width" Value="240" />
+                <Setter Property="Height" Value="340" />
+            </Style>
 
-        <Style x:Key="GripEllipseStyle" TargetType="Ellipse" BasedOn="{StaticResource BaseEllipseStyle}">
-            <Setter Property="Width" Value="240" />
-            <Setter Property="Height" Value="340" />
-        </Style>
+            <Style x:Key="HatEllipseStyle" TargetType="Ellipse" BasedOn="{StaticResource BaseEllipseStyle}">
+                <Setter Property="Width" Value="60" />
+                <Setter Property="Height" Value="60" />
+            </Style>
 
-        <Style x:Key="HatEllipseStyle" TargetType="Ellipse" BasedOn="{StaticResource BaseEllipseStyle}">
-            <Setter Property="Width" Value="60" />
-            <Setter Property="Height" Value="60" />
-        </Style>
+            <Style x:Key="CenterHubEllipseStyle" TargetType="Ellipse" BasedOn="{StaticResource BaseEllipseStyle}">
+                <Setter Property="Width" Value="300" />
+                <Setter Property="Height" Value="190" />
+            </Style>
 
-        <Style x:Key="CenterHubEllipseStyle" TargetType="Ellipse" BasedOn="{StaticResource BaseEllipseStyle}">
-            <Setter Property="Width" Value="300" />
-            <Setter Property="Height" Value="190" />
-        </Style>
+            <Style x:Key="IgnitionDialEllipseStyle" TargetType="Ellipse" BasedOn="{StaticResource BaseEllipseStyle}">
+                <Setter Property="Width" Value="120" />
+                <Setter Property="Height" Value="120" />
+            </Style>
 
-        <Style x:Key="IgnitionDialEllipseStyle" TargetType="Ellipse" BasedOn="{StaticResource BaseEllipseStyle}">
-            <Setter Property="Width" Value="120" />
-            <Setter Property="Height" Value="120" />
-        </Style>
+            <!-- Switch panel sizing -->
+            <Style x:Key="SwitchPanelRectangleStyle" TargetType="Rectangle" BasedOn="{StaticResource BasePanelStyle}">
+                <Setter Property="Width" Value="480" />
+                <Setter Property="Height" Value="270" />
+            </Style>
 
-        <!-- Rectangle Styles -->
-        <Style x:Key="SwitchPanelRectangleStyle" TargetType="Rectangle">
-            <Setter Property="Fill" Value="Gray" />
-            <Setter Property="Opacity" Value="0.5" />
-            <Setter Property="Stroke" Value="#D3D3D3" />
-            <Setter Property="StrokeThickness" Value="1" />
-            <Setter Property="Width" Value="480" />
-            <Setter Property="Height" Value="270" />
-        </Style>
+            <!-- Button color variants -->
+            <Style x:Key="RedButtonStyle" TargetType="Ellipse" BasedOn="{StaticResource BaseButtonStyle}">
+                <Setter Property="Fill" Value="{StaticResource AlphaRedFillBrush}" />
+            </Style>
 
-        <!-- Button Styles -->
-        <Style x:Key="BaseButtonStyle" TargetType="Ellipse">
-            <Setter Property="Width" Value="26" />
-            <Setter Property="Height" Value="26" />
-            <Setter Property="Stroke" Value="#D3D3D3" />
-            <Setter Property="StrokeThickness" Value="1" />
-        </Style>
+            <!-- Text variants -->
+            <Style x:Key="RedButtonNumberStyle" TargetType="TextBlock" BasedOn="{StaticResource ButtonNumberStyle}">
+                <Setter Property="Foreground" Value="White" />
+            </Style>
 
-        <Style x:Key="StandardButtonStyle" TargetType="Ellipse" BasedOn="{StaticResource BaseButtonStyle}">
-            <Setter Property="Fill" Value="Gray" />
-            <Setter Property="Opacity" Value="0.5" />
-        </Style>
+            <Style x:Key="DirectionLabelStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseLabelStyle}">
+                <Setter Property="FontSize" Value="9" />
+            </Style>
 
-        <Style x:Key="WhiteButtonStyle" TargetType="Ellipse" BasedOn="{StaticResource BaseButtonStyle}">
-            <Setter Property="Fill" Value="#ffffff" />
-        </Style>
+            <Style x:Key="SwitchNumberStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseLabelStyle}">
+                <Setter Property="TextAlignment" Value="Center" />
+                <Setter Property="Margin" Value="0,2,0,2" />
+            </Style>
 
-        <Style x:Key="RedButtonStyle" TargetType="Ellipse" BasedOn="{StaticResource BaseButtonStyle}">
-            <Setter Property="Fill" Value="#c0392b" />
-        </Style>
+            <Style x:Key="AxisLabelStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseLabelStyle}">
+                <Setter Property="FontWeight" Value="Normal" />
+            </Style>
 
-        <!-- Text Styles -->
-        <!-- Button Number Styles -->
-        <Style x:Key="ButtonNumberStyle" TargetType="TextBlock">
-            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
-            <Setter Property="FontSize" Value="10" />
-            <Setter Property="HorizontalAlignment" Value="Center" />
-            <Setter Property="VerticalAlignment" Value="Center" />
-        </Style>
+            <Style x:Key="IgnitionLabelStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseLabelStyle}" />
 
-        <Style x:Key="WhiteButtonNumberStyle" TargetType="TextBlock" BasedOn="{StaticResource ButtonNumberStyle}">
-            <Setter Property="Foreground" Value="Black" />
-        </Style>
+            <!-- Binding text variants -->
+            <Style x:Key="DirectionBindingStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseBindingTextStyle}">
+                <Setter Property="MinWidth" Value="45" />
+            </Style>
 
-        <Style x:Key="RedButtonNumberStyle" TargetType="TextBlock" BasedOn="{StaticResource ButtonNumberStyle}">
-            <Setter Property="Foreground" Value="White" />
-        </Style>
+            <Style x:Key="AxisBindingStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseBindingTextStyle}">
+                <Setter Property="TextAlignment" Value="Center" />
+            </Style>
 
-        <!-- Base Label Style -->
-        <Style x:Key="BaseLabelStyle" TargetType="TextBlock">
-            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
-            <Setter Property="FontSize" Value="10" />
-        </Style>
+            <Style x:Key="IgnitionBindingStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseBindingTextStyle}">
+                <Setter Property="MinWidth" Value="75" />
+            </Style>
 
-        <Style x:Key="DirectionLabelStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseLabelStyle}">
-            <Setter Property="FontSize" Value="9" />
-        </Style>
+            <!-- Switch Styles -->
+            <Style x:Key="MasterSwitchStyle" TargetType="Rectangle" BasedOn="{StaticResource BaseSwitchStyle}">
+                <Setter Property="Fill" Value="#8B0000" />
+            </Style>
 
-        <Style x:Key="SwitchNumberStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseLabelStyle}">
-            <Setter Property="TextAlignment" Value="Center" />
-            <Setter Property="Margin" Value="0,2,0,2" />
-        </Style>
+            <Style x:Key="AvionicsSwitchStyle" TargetType="Rectangle" BasedOn="{StaticResource BaseSwitchStyle}">
+                <Setter Property="Fill" Value="White" />
+            </Style>
 
-        <Style x:Key="AxisLabelStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseLabelStyle}">
-            <Setter Property="FontWeight" Value="Normal" />
-        </Style>
-
-        <Style x:Key="IgnitionLabelStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseLabelStyle}" />
-
-        <!-- Base Binding Text Style -->
-        <Style x:Key="BaseBindingTextStyle" TargetType="TextBlock">
-            <Setter Property="Foreground" Value="#228B22" />
-            <Setter Property="FontSize" Value="12" />
-            <Setter Property="TextTrimming" Value="CharacterEllipsis" />
-        </Style>
-
-        <Style x:Key="ButtonBindingRightStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseBindingTextStyle}">
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="Margin" Value="8,0,0,0" />
-        </Style>
-
-        <Style x:Key="ButtonBindingLeftStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseBindingTextStyle}">
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="Margin" Value="0,0,8,0" />
-            <Setter Property="TextAlignment" Value="Right" />
-        </Style>
-
-        <Style x:Key="ButtonBindingBottomStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseBindingTextStyle}">
-            <Setter Property="HorizontalAlignment" Value="Center" />
-            <Setter Property="Margin" Value="0,3,0,0" />
-        </Style>
-
-        <Style x:Key="DirectionBindingStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseBindingTextStyle}">
-            <Setter Property="MinWidth" Value="45" />
-        </Style>
-
-        <Style x:Key="SwitchBindingStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseBindingTextStyle}">
-            <Setter Property="TextAlignment" Value="Center" />
-            <Setter Property="TextWrapping" Value="Wrap" />
-            <Setter Property="MaxHeight" Value="60" />
-            <Setter Property="MinWidth" Value="90" />
-        </Style>
-
-        <Style x:Key="AxisBindingStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseBindingTextStyle}">
-            <Setter Property="TextAlignment" Value="Center" />
-        </Style>
-
-        <Style x:Key="IgnitionBindingStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseBindingTextStyle}">
-            <Setter Property="MinWidth" Value="75" />
-        </Style>
-
-        <!-- Line and Shape Styles -->
-        <Style x:Key="BaseLineStyle" TargetType="Line">
-            <Setter Property="Stroke" Value="#D3D3D3" />
-            <Setter Property="StrokeThickness" Value="1" />
-        </Style>
-
-        <Style x:Key="TickMarkStyle" TargetType="Line" BasedOn="{StaticResource BaseLineStyle}" />
-
-        <Style x:Key="AxisLineStyle" TargetType="Line" BasedOn="{StaticResource BaseLineStyle}" />
-
-        <Style x:Key="AxisPathStyle" TargetType="Path">
-            <Setter Property="Stroke" Value="#D3D3D3" />
-            <Setter Property="StrokeThickness" Value="1" />
-            <Setter Property="Fill" Value="Transparent" />
-        </Style>
-
-        <Style x:Key="AxisPolygonStyle" TargetType="Polygon">
-            <Setter Property="Fill" Value="#D3D3D3" />
-        </Style>
-
-        <!-- Switch Styles -->
-        <Style x:Key="BaseSwitchStyle" TargetType="Rectangle">
-            <Setter Property="Width" Value="20" />
-            <Setter Property="Height" Value="38" />
-            <Setter Property="Stroke" Value="#D3D3D3" />
-            <Setter Property="StrokeThickness" Value="1" />
-            <Setter Property="Margin" Value="0,3" />
-        </Style>
-
-        <Style x:Key="MasterSwitchStyle" TargetType="Rectangle" BasedOn="{StaticResource BaseSwitchStyle}">
-            <Setter Property="Fill" Value="#8B0000" />
-        </Style>
-
-        <Style x:Key="AvionicsSwitchStyle" TargetType="Rectangle" BasedOn="{StaticResource BaseSwitchStyle}">
-            <Setter Property="Fill" Value="White" />
-        </Style>
-
-        <Style x:Key="LightSwitchStyle" TargetType="Rectangle" BasedOn="{StaticResource BaseSwitchStyle}">
-            <Setter Property="Height" Value="32" />
-            <Setter Property="Fill" Value="Gray" />
-            <Setter Property="Opacity" Value="0.5" />
-        </Style>
-
+            <Style x:Key="LightSwitchStyle" TargetType="Rectangle" BasedOn="{StaticResource BaseSwitchStyle}">
+                <Setter Property="Height" Value="32" />
+                <Setter Property="Fill" Value="{StaticResource PanelFillBrush}" />
+                <Setter Property="Opacity" Value="0.5" />
+            </Style>
+        </ResourceDictionary>
     </UserControl.Resources>
 
     <Grid>

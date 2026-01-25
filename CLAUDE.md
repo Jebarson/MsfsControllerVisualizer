@@ -12,20 +12,50 @@ MSFS Controller Visualizer is a WPF application that visualizes Microsoft Flight
 - Windows Forms (for folder browser dialog)
 - Target: Windows desktop only
 
+## Repository Structure
+
+```
+X:\Msfs.ControllerVisualizer\
+├── src/
+│   ├── Msfs.ControllerVisualizer.slnx   # Solution file
+│   ├── ux/                               # WPF application project
+│   │   ├── Msfs.ControllerVisualizer.csproj
+│   │   ├── Assets/Controllers/           # Controller definitions and visuals
+│   │   ├── Services/                     # Business logic
+│   │   ├── ViewModels/                   # MVVM view models
+│   │   ├── Converters/                   # WPF value converters
+│   │   ├── Models/                       # Data models
+│   │   └── Common/                       # Shared utilities
+│   └── test/                             # Unit test project
+│       ├── Msfs.ControllerVisualizer.Tests.csproj
+│       ├── UnitTest1.cs
+│       └── Mocks/                        # Sample MSFS XML files for testing
+├── .git/
+└── CLAUDE.md
+```
+
 ## Build and Run Commands
 
+All commands should be run from the `src/` directory:
+
 ```powershell
-# Build the project
+# Navigate to src directory
+cd src
+
+# Build the solution
 dotnet build
 
 # Run the application
-dotnet run
+dotnet run --project ux
+
+# Run tests
+dotnet test
 
 # Clean build artifacts
 dotnet clean
 
 # Publish for deployment
-dotnet publish -c Release
+dotnet publish -c Release --project ux
 ```
 
 ## Architecture
@@ -57,7 +87,7 @@ dotnet publish -c Release
 - `ControllerButtonMapper`: Button binding extraction and normalization
 
 **Models:**
-- `ControllerDefinition`: Metadata for supported controllers (name, ProductID, XAML visual file, button definitions)
+- `ControllerDefinition`: Metadata for supported controllers (name, ProductID, XAML visual file)
 - `ExportedControllerInfo`: Discovered device info with source XML element
 - `ButtonMapping`: Links button ID to MSFS command and friendly name
 
@@ -101,13 +131,13 @@ The converters rely on static state set by ControllerVisualConverter before XAML
 
 ## Adding New Controllers
 
-1. Add controller metadata to `Assets/Controllers/controllers.json`:
+1. Add controller metadata to `src/ux/Assets/Controllers/controllers.json`:
    - `name`: Display name
    - `deviceName`: Substring to match against XML DeviceName attribute
    - `productId`: USB Product ID for precise matching
    - `visualFile`: XAML filename
 
-2. Create XAML visual file in `Assets/Controllers/`:
+2. Create XAML visual file in `src/ux/Assets/Controllers/`:
    - Define UserControl with button visuals
    - Use `{StaticResource JoystickButtonMappingConverter}` with `ConverterParameter=Joystick_Button_N`
    - The XAML is the single source of truth for button definitions and labels
@@ -119,17 +149,21 @@ The converters rely on static state set by ControllerVisualConverter before XAML
 
 ## Project Structure
 
+### WPF Application (`src/ux/`)
 - `Assets/`: Static resources
   - `Controllers/controllers.json`: Controller definitions
   - `Controllers/*.xaml`: Visual representations
-  - `msfs-commands.json`: MSFS command reference
-- `Mock/`: Sample MSFS exported XML files for testing
+  - `Controllers/Images/`: Controller reference images (not currently used in application)
 - `Services/`: Business logic (discovery, loading, mapping)
 - `Models/`: Data structures
 - `ViewModels/`: MVVM view models
 - `Converters/`: WPF value converters
 - `Common/`: Utilities (Command, NotifyPropertyBase, EventExtensions)
-- `UpdateXamlParameters.ps1`: Utility script for batch updating XAML ConverterParameter values
+
+### Test Project (`src/test/`)
+- `Msfs.ControllerVisualizer.Tests.csproj`: Unit test project (xUnit)
+- `UnitTest1.cs`: Sample test file
+- `Mocks/`: Sample MSFS exported XML files for testing (copied to test output)
 
 ## Important Implementation Details
 
@@ -141,4 +175,4 @@ The converters rely on static state set by ControllerVisualConverter before XAML
 
 - **XML Declaration Handling**: The XML parser strips `<?xml ...?>` declarations before wrapping content to avoid parsing errors with multiple root elements.
 
-- **Debug Reload Button**: A 20x20 reload button (⟳) appears in the bottom-right corner of the controller visual area when running in DEBUG mode. Clicking it performs two operations: (1) copies all XAML files from the source project directory (`Assets/Controllers/*.xaml`) to the output directory (`bin/Debug/net10.0-windows/Assets/Controllers/`), then (2) forces the ControllerVisualConverter to re-run by temporarily clearing the bound properties to null and restoring them. This allows you to edit XAML files in Visual Studio and see changes immediately without rebuilding. The button visibility is controlled by the `IsDebugMode` property in MainWindow.xaml.cs using conditional compilation (`#if DEBUG`). The copy mechanism is in `CopyControllerXamlFiles()` which navigates from `bin/Debug/net10.0-windows/` up three levels to the project root.
+- **Debug Reload Button**: A 20x20 reload button (⟳) appears in the bottom-right corner of the controller visual area when running in DEBUG mode. Clicking it performs two operations: (1) copies all XAML files from the source project directory (`src/ux/Assets/Controllers/*.xaml`) to the output directory (`src/ux/bin/Debug/net10.0-windows/Assets/Controllers/`), then (2) forces the ControllerVisualConverter to re-run by temporarily clearing the bound properties to null and restoring them. This allows you to edit XAML files in Visual Studio and see changes immediately without rebuilding. The button visibility is controlled by the `IsDebugMode` property in MainWindow.xaml.cs using conditional compilation (`#if DEBUG`). The copy mechanism is in `CopyControllerXamlFiles()` which navigates from `bin/Debug/net10.0-windows/` up to the project root.

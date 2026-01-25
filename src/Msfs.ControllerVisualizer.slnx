@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/test/">
+    <Project Path="test/Msfs.ControllerVisualizer.Tests.csproj" />
+  </Folder>
+  <Folder Name="/ux/">
+    <Project Path="ux/Msfs.ControllerVisualizer.csproj" />
+  </Folder>
+</Solution>
