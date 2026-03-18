@@ -3,7 +3,10 @@
 
 namespace Msfs.ControllerVisualizer.Converters;
 
+using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Windows.Data;
 using Msfs.ControllerVisualizer.Models;
 
@@ -35,7 +38,9 @@ public class JoystickButtonMappingConverter : IValueConverter
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
         if (parameter == null)
+        {
             return string.Empty;
+        }
 
         string bindingPath = parameter.ToString() ?? string.Empty;
 
@@ -47,7 +52,9 @@ public class JoystickButtonMappingConverter : IValueConverter
                 .ToList();
 
             if (maps.Count == 1)
+            {
                 return maps[0].FriendlyName;
+            }
 
             if (maps.Count > 1)
             {
@@ -63,6 +70,11 @@ public class JoystickButtonMappingConverter : IValueConverter
     /// <summary>
     /// Not implemented - conversion back is not supported.
     /// </summary>
+    /// <param name="value">The value to convert back.</param>
+    /// <param name="targetType">The requested target type.</param>
+    /// <param name="parameter">The converter parameter.</param>
+    /// <param name="culture">Culture information for conversion.</param>
+    /// <returns>This method does not return a value because it always throws.</returns>
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
         throw new NotImplementedException();

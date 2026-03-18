@@ -3,8 +3,11 @@
 
 namespace Msfs.ControllerVisualizer.Tests.Xaml;
 
+using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.ExceptionServices;
+using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Markup;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -21,6 +24,10 @@ public class XamlLoadingTests
     private static readonly string AssetsDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets", "Controllers");
     private static readonly string MocksDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Mocks");
 
+    /// <summary>
+    /// Verifies that each controller visual XAML file loads as a <see cref="UserControl"/>.
+    /// </summary>
+    /// <param name="xamlFile">The controller visual XAML file name.</param>
     [TestMethod]
     [DataRow("HoneycombAlpha.xaml")]
     [DataRow("HoneycombBravo.xaml")]
@@ -40,9 +47,9 @@ public class XamlLoadingTests
             using FileStream stream = File.OpenRead(xamlPath);
             ParserContext context = new()
             {
-                BaseUri = new Uri(xamlPath, UriKind.Absolute)
+                BaseUri = new Uri(xamlPath, UriKind.Absolute),
             };
-            context.XmlnsDictionary.Add("", "http://schemas.microsoft.com/winfx/2006/xaml/presentation");
+            context.XmlnsDictionary.Add(string.Empty, "http://schemas.microsoft.com/winfx/2006/xaml/presentation");
             context.XmlnsDictionary.Add("x", "http://schemas.microsoft.com/winfx/2006/xaml");
             context.XmlnsDictionary.Add("converters", "clr-namespace:Msfs.ControllerVisualizer.Converters;assembly=Msfs.ControllerVisualizer");
 
@@ -52,6 +59,11 @@ public class XamlLoadingTests
         });
     }
 
+    /// <summary>
+    /// Verifies that controller visuals load successfully when populated with mock controller data.
+    /// </summary>
+    /// <param name="mockXmlFile">The mock XML file containing controller bindings.</param>
+    /// <param name="expectedXamlFile">The expected visual XAML file.</param>
     [TestMethod]
     [DataRow("Alpha Flight Controls 2024 Planes.xml", "HoneycombAlpha.xaml")]
     [DataRow("Bravo Throttle Quadrant 2024 Planes.xml", "HoneycombBravo.xaml")]
@@ -91,9 +103,9 @@ public class XamlLoadingTests
             using FileStream stream = File.OpenRead(xamlPath);
             ParserContext context = new()
             {
-                BaseUri = new Uri(xamlPath, UriKind.Absolute)
+                BaseUri = new Uri(xamlPath, UriKind.Absolute),
             };
-            context.XmlnsDictionary.Add("", "http://schemas.microsoft.com/winfx/2006/xaml/presentation");
+            context.XmlnsDictionary.Add(string.Empty, "http://schemas.microsoft.com/winfx/2006/xaml/presentation");
             context.XmlnsDictionary.Add("x", "http://schemas.microsoft.com/winfx/2006/xaml");
             context.XmlnsDictionary.Add("converters", "clr-namespace:Msfs.ControllerVisualizer.Converters;assembly=Msfs.ControllerVisualizer");
 
@@ -103,6 +115,10 @@ public class XamlLoadingTests
         });
     }
 
+    /// <summary>
+    /// Verifies that mock XML bindings produce valid mappings for XAML converter parameters.
+    /// </summary>
+    /// <param name="mockXmlFile">The mock XML file containing controller bindings.</param>
     [TestMethod]
     [DataRow("MFD COUGAR Right 2024 Planes.xml")]
     public void MockXmlWithBindingsProducesMappingsForXamlConverterParameters(string mockXmlFile)
@@ -133,6 +149,9 @@ public class XamlLoadingTests
         }
     }
 
+    /// <summary>
+    /// Verifies that the controller visual converter returns null when all values are null.
+    /// </summary>
     [TestMethod]
     public void ControllerVisualConverterReturnsNullForNullValues()
     {
@@ -143,6 +162,9 @@ public class XamlLoadingTests
         Assert.IsNull(result);
     }
 
+    /// <summary>
+    /// Verifies that the controller visual converter returns null when insufficient values are provided.
+    /// </summary>
     [TestMethod]
     public void ControllerVisualConverterReturnsNullForInsufficientValues()
     {
@@ -153,6 +175,9 @@ public class XamlLoadingTests
         Assert.IsNull(result);
     }
 
+    /// <summary>
+    /// Verifies that the controller visual converter returns null when the visual file is missing.
+    /// </summary>
     [TestMethod]
     public void ControllerVisualConverterReturnsNullForMissingVisualFile()
     {
@@ -164,7 +189,7 @@ public class XamlLoadingTests
                 Name = "Nonexistent",
                 DeviceName = "Nonexistent",
                 ProductId = "0000",
-                VisualFile = "NonexistentFile.xaml"
+                VisualFile = "NonexistentFile.xaml",
             };
             List<ButtonMapping> mappings = [];
 
@@ -174,6 +199,9 @@ public class XamlLoadingTests
         });
     }
 
+    /// <summary>
+    /// Verifies that the controller visual converter throws <see cref="NotImplementedException"/> from ConvertBack.
+    /// </summary>
     [TestMethod]
     public void ControllerVisualConverterConvertBackThrowsNotImplementedException()
     {

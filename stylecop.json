@@ -1,0 +1,17 @@
+{
+  "settings": {
+    "documentationRules": {
+      "companyName": "Jebarson",
+      "copyrightText": "Copyright (c) 2024 Jebarson. All rights reserved.\nLicensed under terms specified in COPYRIGHT.md - Free for personal use only.",
+      "documentExposedElements": true,
+      "documentInternalElements": true,
+      "documentPrivateElements": false,
+      "documentPrivateFields": false,
+      "xmlHeader": false
+    },
+    "orderingRules": {
+      "usingDirectivesPlacement": "insideNamespace",
+      "systemUsingDirectivesFirst": true
+    }
+  }
+}

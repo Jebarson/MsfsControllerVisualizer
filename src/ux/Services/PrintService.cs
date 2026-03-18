@@ -17,7 +17,7 @@ using PrintDialog = PrintDialogX.PrintDialog;
 /// </summary>
 public class PrintService
 {
-    private const string defaultDocumentTitle = "Controller Layout";
+    private const string DefaultDocumentTitle = "Controller Layout";
 
     /// <summary>
     /// Opens PrintDialogX and prints the specified visual element.
@@ -25,7 +25,7 @@ public class PrintService
     /// <param name="visualElement">The visual element to print (e.g., Viewbox, Canvas, UserControl).</param>
     /// <param name="documentTitle">The title of the print job.</param>
     /// <returns>True if printing was successful, false if cancelled or failed.</returns>
-    public bool Print(FrameworkElement visualElement, string documentTitle = defaultDocumentTitle)
+    public bool Print(FrameworkElement visualElement, string documentTitle = DefaultDocumentTitle)
     {
         if (visualElement == null)
         {
@@ -50,14 +50,14 @@ public class PrintService
 
             // Set document size (standard letter size - 8.5" x 11")
             printDocument.DocumentSize = new PrintDialogX.Enums.Size(PrintDialogX.Enums.Size.DefinedSize.NorthAmericaLetterRotated);
-            
+
             // Set margins (0.25 inches for minimal whitespace)
             printDocument.DocumentMargin = 24.0; // 0.25 inches at 96 DPI
-            
+
             // Create a single page with the visual content
             PrintPage page = new();
             page.Content = this.CreatePageContent(elementToPrint);
-            
+
             printDocument.Pages.Add(page);
 
             System.Diagnostics.Debug.WriteLine($"Print document created with 1 page");
@@ -112,7 +112,7 @@ public class PrintService
             Stretch = Stretch.Uniform,
             StretchDirection = StretchDirection.DownOnly,
             HorizontalAlignment = HorizontalAlignment.Center,
-            VerticalAlignment = VerticalAlignment.Center
+            VerticalAlignment = VerticalAlignment.Center,
         };
 
         // Create element container
@@ -120,7 +120,7 @@ public class PrintService
         {
             Width = elementWidth,
             Height = elementHeight,
-            Background = Brushes.White
+            Background = Brushes.White,
         };
 
         // Capture element with VisualBrush
@@ -130,8 +130,8 @@ public class PrintService
             Height = elementHeight,
             Fill = new VisualBrush(element)
             {
-                Stretch = Stretch.Fill
-            }
+                Stretch = Stretch.Fill,
+            },
         };
 
         elementContainer.Children.Add(rect);

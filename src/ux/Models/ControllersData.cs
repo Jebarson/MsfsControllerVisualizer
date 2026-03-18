@@ -3,6 +3,8 @@
 
 namespace Msfs.ControllerVisualizer.Models;
 
+using System.Collections.Generic;
+
 /// <summary>
 /// Root data structure for controllers configuration file.
 /// </summary>

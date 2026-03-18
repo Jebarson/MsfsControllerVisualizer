@@ -3,10 +3,11 @@
 
 namespace Msfs.ControllerVisualizer.Tests.Converters;
 
+using System;
 using System.Globalization;
 using System.Windows;
-using Msfs.ControllerVisualizer.Converters;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Msfs.ControllerVisualizer.Converters;
 
 /// <summary>
 /// Unit tests for the <see cref="NullToVisibilityConverter"/> class.
@@ -16,12 +17,18 @@ public class NullToVisibilityConverterTests
 {
     private NullToVisibilityConverter converter = null!;
 
+    /// <summary>
+    /// Initializes the converter under test.
+    /// </summary>
     [TestInitialize]
     public void Setup()
     {
         this.converter = new();
     }
 
+    /// <summary>
+    /// Verifies that Convert returns <see cref="Visibility.Collapsed"/> for a null value.
+    /// </summary>
     [TestMethod]
     public void ConvertReturnsCollapsedForNullValue()
     {
@@ -30,6 +37,9 @@ public class NullToVisibilityConverterTests
         Assert.AreEqual(Visibility.Collapsed, result);
     }
 
+    /// <summary>
+    /// Verifies that Convert returns <see cref="Visibility.Visible"/> for a non-null value.
+    /// </summary>
     [TestMethod]
     public void ConvertReturnsVisibleForNonNullValue()
     {
@@ -38,6 +48,9 @@ public class NullToVisibilityConverterTests
         Assert.AreEqual(Visibility.Visible, result);
     }
 
+    /// <summary>
+    /// Verifies that Convert returns <see cref="Visibility.Visible"/> for a null value when inverted.
+    /// </summary>
     [TestMethod]
     public void ConvertReturnsVisibleForNullValueWhenInverted()
     {
@@ -46,6 +59,9 @@ public class NullToVisibilityConverterTests
         Assert.AreEqual(Visibility.Visible, result);
     }
 
+    /// <summary>
+    /// Verifies that Convert returns <see cref="Visibility.Collapsed"/> for a non-null value when inverted.
+    /// </summary>
     [TestMethod]
     public void ConvertReturnsCollapsedForNonNullValueWhenInverted()
     {
@@ -54,6 +70,9 @@ public class NullToVisibilityConverterTests
         Assert.AreEqual(Visibility.Collapsed, result);
     }
 
+    /// <summary>
+    /// Verifies that ConvertBack throws a <see cref="NotImplementedException"/>.
+    /// </summary>
     [TestMethod]
     public void ConvertBackThrowsNotImplementedException()
     {

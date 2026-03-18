@@ -1,14 +1,15 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
 		<TargetFramework>net10.0-windows</TargetFramework>
 		<Nullable>enable</Nullable>
-		<ImplicitUsings>enable</ImplicitUsings>
+		<ImplicitUsings>disable</ImplicitUsings>
 		<UseWPF>true</UseWPF>
 		<UseWindowsForms>true</UseWindowsForms>
 		<AssemblyName>MSFSControllerVisualizer</AssemblyName>
 		<AssemblyTitle>Msfs Controller Visualizer</AssemblyTitle>
 		<ApplicationIcon>logo.ico</ApplicationIcon>
+		<WarningsAsErrors>true</WarningsAsErrors>
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="PrintDialogX" Version="3.4.0" />
@@ -21,7 +22,7 @@
 		<Page Remove="Assets\Controllers\*.xaml" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Content Include="logo.ico" />
+		<Content Include="logo.ico" />
 	</ItemGroup>
 	<ItemGroup>
 		<None Update="Assets\**\*">
@@ -32,8 +33,5 @@
 		<Content Update="Assets\Controllers\ControllerStyles.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</Content>
-	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="Assets\Branding\" />
 	</ItemGroup>
 </Project>

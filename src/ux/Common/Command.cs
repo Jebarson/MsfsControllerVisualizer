@@ -10,8 +10,7 @@ using System.Linq;
 using System.Windows.Input;
 
 /// <summary>
-/// Class for binding all the commands to do filtered command binding. Implements the <see cref="System.Windows.Input.ICommand"/> Implements the
-/// <see cref="System.IDisposable"/>
+/// Class for binding commands to filtered command binding. Implements <see cref="System.Windows.Input.ICommand"/> and <see cref="System.IDisposable"/>.
 /// </summary>
 /// <typeparam name="T">The type of command parameter.</typeparam>
 /// <seealso cref="System.Windows.Input.ICommand"/>
@@ -28,7 +27,7 @@ internal class Command<T> : ICommand, IDisposable
     /// </summary>
     /// <param name="execute">The execute method.</param>
     public Command(Action<T> execute)
-      : this(execute, null)
+        : this(execute, null)
     {
     }
 
@@ -37,7 +36,8 @@ internal class Command<T> : ICommand, IDisposable
     /// </summary>
     /// <param name="execute">The execute method.</param>
     /// <param name="canExecute">The can execute method.</param>
-    public Command(Action<T> execute, Predicate<T>? canExecute) : this(execute, canExecute, null, null)
+    public Command(Action<T> execute, Predicate<T>? canExecute)
+        : this(execute, canExecute, null, null)
     {
     }
 

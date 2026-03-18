@@ -63,7 +63,7 @@ public class ExportedControllerInfo
     /// <summary>
     /// Gets the file name (without path) from the source file path.
     /// </summary>
-    public string FileName => !string.IsNullOrEmpty(this.SourceFilePath) 
-        ? Path.GetFileName(this.SourceFilePath) 
+    public string FileName => !string.IsNullOrEmpty(this.SourceFilePath)
+        ? Path.GetFileName(this.SourceFilePath)
         : string.Empty;
 }

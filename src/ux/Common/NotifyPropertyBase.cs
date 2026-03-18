@@ -7,7 +7,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 /// <summary>
-/// Base to implement property change notification. Implements the <see cref="System.ComponentModel.INotifyPropertyChanged"/>
+/// Base to implement property change notification. Implements the <see cref="System.ComponentModel.INotifyPropertyChanged"/>.
 /// </summary>
 /// <seealso cref="System.ComponentModel.INotifyPropertyChanged"/>
 public class NotifyPropertyBase : INotifyPropertyChanged
@@ -26,4 +26,3 @@ public class NotifyPropertyBase : INotifyPropertyChanged
         this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
 }
-

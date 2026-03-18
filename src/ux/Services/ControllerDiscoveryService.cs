@@ -3,7 +3,10 @@
 
 namespace Msfs.ControllerVisualizer.Services;
 
+using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Xml.Linq;
 using Msfs.ControllerVisualizer.Models;
 
@@ -25,7 +28,9 @@ public class ControllerDiscoveryService
         try
         {
             if (!Directory.Exists(folderPath))
+            {
                 return controllers;
+            }
 
             string[] xmlFiles = Directory.GetFiles(folderPath, "*.xml", SearchOption.TopDirectoryOnly);
 
@@ -55,21 +60,23 @@ public class ControllerDiscoveryService
         try
         {
             if (!File.Exists(exportFilePath))
+            {
                 return controllers;
+            }
 
             // Read the entire file content
             string xmlContent = File.ReadAllText(exportFilePath);
-            
+
             // Remove XML declaration if present (<?xml ... ?>)
             int xmlDeclEnd = xmlContent.IndexOf("?>", StringComparison.Ordinal);
             if (xmlDeclEnd > 0 && xmlContent.TrimStart().StartsWith("<?xml", StringComparison.OrdinalIgnoreCase))
             {
                 xmlContent = xmlContent.Substring(xmlDeclEnd + 2).TrimStart();
             }
-            
+
             // Wrap content in a temporary root element to handle multiple root elements
             string wrappedXml = $"<Root>{xmlContent}</Root>";
-            
+
             XDocument doc = XDocument.Parse(wrappedXml);
             IEnumerable<XElement> devices = doc.Descendants("Device");
 
@@ -87,7 +94,7 @@ public class ControllerDiscoveryService
                         ProductId = productId ?? string.Empty,
                         Guid = guid ?? string.Empty,
                         SourceFilePath = exportFilePath,
-                        DeviceElement = device
+                        DeviceElement = device,
                     };
 
                     controllers.Add(info);
@@ -200,10 +207,10 @@ public class ControllerDiscoveryService
     {
         // Use the first profile as the base
         ExportedControllerInfo baseProfile = profiles[0];
-        
+
         // Create a merged XElement by combining all Device elements
         XElement mergedDevice = new(baseProfile.DeviceElement!);
-        
+
         // Merge contexts from all profiles
         for (int i = 1; i < profiles.Count; i++)
         {
@@ -224,7 +231,7 @@ public class ControllerDiscoveryService
             ProductId = baseProfile.ProductId,
             Guid = baseProfile.Guid,
             SourceFilePath = string.Join("; ", profiles.Select(p => Path.GetFileName(p.SourceFilePath))),
-            DeviceElement = mergedDevice
+            DeviceElement = mergedDevice,
         };
     }
 }

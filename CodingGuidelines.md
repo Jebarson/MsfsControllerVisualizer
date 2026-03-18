@@ -25,6 +25,9 @@ Follow the official Microsoft C# naming conventions as published at:
 - Type parameters should use `T` or descriptive names prefixed with `T` (e.g., `TResult`).
 - File-scoped namespaces are preferred (e.g., `namespace Foo.Bar;`).
 - `using` directives should be placed inside the namespace declaration (file-scoped style) to scope imports.
+- **Implicit usings must be disabled** in project files. Every source file must declare each required `using` directive explicitly.
+
+Do not rely on SDK-provided implicit framework namespaces or project-wide injected usings. If a file depends on `System`, `System.Collections.Generic`, `Microsoft.VisualStudio.TestTools.UnitTesting`, or any other namespace, that file must include the corresponding `using` directive itself.
 
 ---
 

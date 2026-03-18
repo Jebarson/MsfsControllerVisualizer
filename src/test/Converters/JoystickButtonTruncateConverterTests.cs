@@ -3,10 +3,12 @@
 
 namespace Msfs.ControllerVisualizer.Tests.Converters;
 
+using System;
+using System.Collections.Generic;
 using System.Globalization;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Msfs.ControllerVisualizer.Converters;
 using Msfs.ControllerVisualizer.Models;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 /// <summary>
 /// Unit tests for the <see cref="JoystickButtonTruncateConverter"/> class.
@@ -16,12 +18,18 @@ public class JoystickButtonTruncateConverterTests
 {
     private JoystickButtonTruncateConverter converter = null!;
 
+    /// <summary>
+    /// Initializes the converter under test.
+    /// </summary>
     [TestInitialize]
     public void Setup()
     {
         this.converter = new();
     }
 
+    /// <summary>
+    /// Verifies that Convert returns the full text when it is shorter than the maximum length.
+    /// </summary>
     [TestMethod]
     public void ConvertReturnsFullTextWhenShorterThanMaxLength()
     {
@@ -36,6 +44,9 @@ public class JoystickButtonTruncateConverterTests
         Assert.AreEqual("Ap Master", result);
     }
 
+    /// <summary>
+    /// Verifies that Convert truncates text and appends an ellipsis when it exceeds the maximum length.
+    /// </summary>
     [TestMethod]
     public void ConvertTruncatesWithEllipsisWhenExceedsMaxLength()
     {
@@ -51,6 +62,9 @@ public class JoystickButtonTruncateConverterTests
         Assert.AreEqual("Toggle Master B...", result);
     }
 
+    /// <summary>
+    /// Verifies that Convert returns the full text when it exactly matches the maximum length.
+    /// </summary>
     [TestMethod]
     public void ConvertReturnsFullTextWhenExactlyMaxLength()
     {
@@ -66,6 +80,9 @@ public class JoystickButtonTruncateConverterTests
         Assert.AreEqual("Ap Master", result);
     }
 
+    /// <summary>
+    /// Verifies that Convert returns an empty string when no mapping exists.
+    /// </summary>
     [TestMethod]
     public void ConvertReturnsEmptyStringWhenNoMappingFound()
     {
@@ -77,6 +94,9 @@ public class JoystickButtonTruncateConverterTests
         Assert.AreEqual(string.Empty, result);
     }
 
+    /// <summary>
+    /// Verifies that Convert respects a custom maximum length value.
+    /// </summary>
     [TestMethod]
     public void ConvertRespectsCustomMaxLength()
     {
@@ -92,6 +112,9 @@ public class JoystickButtonTruncateConverterTests
         Assert.AreEqual("Ap Maste...", result);
     }
 
+    /// <summary>
+    /// Verifies that ConvertBack throws a <see cref="NotImplementedException"/>.
+    /// </summary>
     [TestMethod]
     public void ConvertBackThrowsNotImplementedException()
     {

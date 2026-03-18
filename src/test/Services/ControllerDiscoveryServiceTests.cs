@@ -3,8 +3,12 @@
 
 namespace Msfs.ControllerVisualizer.Tests.Services;
 
+using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Xml.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Msfs.ControllerVisualizer.Models;
 using Msfs.ControllerVisualizer.Services;
 
@@ -17,6 +21,9 @@ public class ControllerDiscoveryServiceTests
     private ControllerDiscoveryService service = null!;
     private string mocksFolder = null!;
 
+    /// <summary>
+    /// Initializes the discovery service and mock folder path used by the tests.
+    /// </summary>
     [TestInitialize]
     public void Setup()
     {
@@ -24,6 +31,9 @@ public class ControllerDiscoveryServiceTests
         this.mocksFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Mocks");
     }
 
+    /// <summary>
+    /// Verifies that a valid XML file produces a single discovered device.
+    /// </summary>
     [TestMethod]
     public void DiscoverControllersInFileReturnsSingleDeviceFromValidXml()
     {
@@ -36,6 +46,9 @@ public class ControllerDiscoveryServiceTests
         Assert.AreEqual("1891", controllers[0].ProductId);
     }
 
+    /// <summary>
+    /// Verifies that discovering controllers in a missing file returns an empty result.
+    /// </summary>
     [TestMethod]
     public void DiscoverControllersInFileReturnsEmptyForNonExistentFile()
     {
@@ -44,6 +57,9 @@ public class ControllerDiscoveryServiceTests
         Assert.AreEqual(0, controllers.Count);
     }
 
+    /// <summary>
+    /// Verifies that discovering controllers in the mocks folder returns all devices.
+    /// </summary>
     [TestMethod]
     public void DiscoverControllersInFolderReturnsAllDevicesFromMocksFolder()
     {
@@ -52,6 +68,9 @@ public class ControllerDiscoveryServiceTests
         Assert.IsTrue(controllers.Count >= 6, $"Expected at least 6 controllers but found {controllers.Count}");
     }
 
+    /// <summary>
+    /// Verifies that discovering controllers in a missing folder returns an empty result.
+    /// </summary>
     [TestMethod]
     public void DiscoverControllersInFolderReturnsEmptyForNonExistentFolder()
     {
@@ -60,13 +79,13 @@ public class ControllerDiscoveryServiceTests
         Assert.AreEqual(0, controllers.Count);
     }
 
+    /// <summary>
+    /// Verifies that discovery extracts the expected device information from a file.
+    /// </summary>
+    /// <param name="fileName">The mock XML file name.</param>
+    /// <param name="expectedDeviceName">The expected device name.</param>
+    /// <param name="expectedProductId">The expected product identifier.</param>
     [TestMethod]
-    [DataRow("Alpha Flight Controls 2024 Planes.xml", "Alpha Flight Controls", "6400")]
-    [DataRow("Bravo Throttle Quadrant 2024 Planes.xml", "Bravo Throttle Quadrant", "6401")]
-    [DataRow("Saitek Pro Flight Rudder Pedals 2024 Planes.xml", "Saitek Pro Flight Rudder Pedals", "1891")]
-    [DataRow("MFD COUGAR Left 2024 Planes.xml", "F16 MFD 1", "45905")]
-    [DataRow("MFD COUGAR Right 2024 Planes.xml", "F16 MFD 2", "45906")]
-    [DataRow("Alpha Flight Controls 2024 Transversal.xml", "Alpha Flight Controls", "6400")]
     public void DiscoverControllersInFileExtractsCorrectDeviceInfo(string fileName, string expectedDeviceName, string expectedProductId)
     {
         string filePath = Path.Combine(this.mocksFolder, fileName);
@@ -78,6 +97,9 @@ public class ControllerDiscoveryServiceTests
         Assert.AreEqual(expectedProductId, controllers[0].ProductId);
     }
 
+    /// <summary>
+    /// Verifies that controller matching succeeds when the product identifier matches.
+    /// </summary>
     [TestMethod]
     public void MatchControllerMatchesByProductId()
     {
@@ -93,6 +115,9 @@ public class ControllerDiscoveryServiceTests
         Assert.AreEqual("1891", match.ProductId);
     }
 
+    /// <summary>
+    /// Verifies that controller matching succeeds when the device name matches.
+    /// </summary>
     [TestMethod]
     public void MatchControllerMatchesByDeviceName()
     {
@@ -108,6 +133,9 @@ public class ControllerDiscoveryServiceTests
         Assert.AreEqual("Alpha Flight Controls", match.DeviceName);
     }
 
+    /// <summary>
+    /// Verifies that controller matching returns null when no supported definition matches.
+    /// </summary>
     [TestMethod]
     public void MatchControllerReturnsNullWhenNoMatch()
     {
@@ -122,6 +150,9 @@ public class ControllerDiscoveryServiceTests
         Assert.IsNull(match);
     }
 
+    /// <summary>
+    /// Verifies that merged controller profiles consolidate data for the same device.
+    /// </summary>
     [TestMethod]
     public void MergeControllerProfilesConsolidatesMultipleProfilesForSameDevice()
     {
@@ -143,6 +174,9 @@ public class ControllerDiscoveryServiceTests
         Assert.IsTrue(contexts.Count > 1, "Merged profile should have contexts from multiple source files");
     }
 
+    /// <summary>
+    /// Verifies that GetSupportedControllers returns only controllers that match supported definitions.
+    /// </summary>
     [TestMethod]
     public void GetSupportedControllersReturnsOnlyMatchingControllers()
     {

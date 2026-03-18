@@ -8,9 +8,8 @@ using System.Data;
 using WpfApplication = System.Windows.Application;
 
 /// <summary>
-/// Application definition
+/// Application definition.
 /// </summary>
 public partial class App : WpfApplication
 {
 }
-

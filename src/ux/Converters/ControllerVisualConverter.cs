@@ -1,14 +1,15 @@
 // Copyright (c) 2024 Jebarson. All rights reserved.
 // Licensed under terms specified in COPYRIGHT.md - Free for personal use only.
 
+namespace Msfs.ControllerVisualizer.Converters;
+
+using System;
 using System.Globalization;
 using System.IO;
 using System.Windows.Data;
 using System.Windows.Markup;
 using Msfs.ControllerVisualizer.Models;
 using WpfUserControl = System.Windows.Controls.UserControl;
-
-namespace Msfs.ControllerVisualizer.Converters;
 
 /// <summary>
 /// Converts a controller definition and button mappings to a visual XAML user control.
@@ -27,13 +28,17 @@ public class ControllerVisualConverter : IMultiValueConverter
     public object? Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
     {
         if (values.Length < 2 || values[0] == null || values[1] == null)
+        {
             return null;
+        }
 
         ControllerDefinition? controllerDef = values[0] as ControllerDefinition;
         System.Collections.Generic.List<ButtonMapping>? buttonMappings = values[1] as System.Collections.Generic.List<ButtonMapping>;
 
         if (controllerDef == null || buttonMappings == null)
+        {
             return null;
+        }
 
         try
         {
@@ -41,8 +46,7 @@ public class ControllerVisualConverter : IMultiValueConverter
                 AppDomain.CurrentDomain.BaseDirectory,
                 "Assets",
                 "Controllers",
-                controllerDef.VisualFile
-            );
+                controllerDef.VisualFile);
 
             if (!File.Exists(visualPath))
             {
@@ -58,9 +62,9 @@ public class ControllerVisualConverter : IMultiValueConverter
             using FileStream stream = File.OpenRead(visualPath);
             ParserContext context = new()
             {
-                BaseUri = new Uri(visualPath, UriKind.Absolute)
+                BaseUri = new Uri(visualPath, UriKind.Absolute),
             };
-            context.XmlnsDictionary.Add("", "http://schemas.microsoft.com/winfx/2006/xaml/presentation");
+            context.XmlnsDictionary.Add(string.Empty, "http://schemas.microsoft.com/winfx/2006/xaml/presentation");
             context.XmlnsDictionary.Add("x", "http://schemas.microsoft.com/winfx/2006/xaml");
             context.XmlnsDictionary.Add("converters", "clr-namespace:Msfs.ControllerVisualizer.Converters;assembly=Msfs.ControllerVisualizer");
 
@@ -81,6 +85,11 @@ public class ControllerVisualConverter : IMultiValueConverter
     /// <summary>
     /// Not implemented - conversion back is not supported.
     /// </summary>
+    /// <param name="value">The value to convert back.</param>
+    /// <param name="targetTypes">The requested target types.</param>
+    /// <param name="parameter">The converter parameter.</param>
+    /// <param name="culture">Culture information for conversion.</param>
+    /// <returns>This method does not return a value because it always throws.</returns>
     public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
     {
         throw new NotImplementedException();

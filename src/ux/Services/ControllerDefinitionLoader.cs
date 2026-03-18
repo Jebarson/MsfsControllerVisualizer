@@ -3,7 +3,10 @@
 
 namespace Msfs.ControllerVisualizer.Services;
 
+using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
 using Msfs.ControllerVisualizer.Models;
 
@@ -23,8 +26,8 @@ public class ControllerDefinitionLoader
     {
         try
         {
-            string jsonPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, controllersJsonPath);
-            
+            string jsonPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, this.controllersJsonPath);
+
             if (!File.Exists(jsonPath))
             {
                 System.Diagnostics.Debug.WriteLine($"Controllers definition file not found: {jsonPath}");
@@ -32,13 +35,13 @@ public class ControllerDefinitionLoader
             }
 
             string json = File.ReadAllText(jsonPath);
-            JsonSerializerOptions options = new() 
-            { 
-                PropertyNameCaseInsensitive = true 
+            JsonSerializerOptions options = new()
+            {
+                PropertyNameCaseInsensitive = true,
             };
-            
+
             ControllersData? data = JsonSerializer.Deserialize<ControllersData>(json, options);
-            
+
             return data?.Controllers ?? new();
         }
         catch (Exception ex)
@@ -56,7 +59,7 @@ public class ControllerDefinitionLoader
     /// <returns>The matching controller definition, or null if not found.</returns>
     public ControllerDefinition? GetControllerById(string controllerId, List<ControllerDefinition> controllers)
     {
-        return controllers.FirstOrDefault(c => 
+        return controllers.FirstOrDefault(c =>
             c.Name.Equals(controllerId, StringComparison.OrdinalIgnoreCase) ||
             c.ProductId.Equals(controllerId, StringComparison.OrdinalIgnoreCase));
     }
@@ -69,7 +72,7 @@ public class ControllerDefinitionLoader
     /// <returns>The matching controller definition, or null if not found.</returns>
     public ControllerDefinition? GetControllerByName(string name, List<ControllerDefinition> controllers)
     {
-        return controllers.FirstOrDefault(c => 
+        return controllers.FirstOrDefault(c =>
             c.Name.Equals(name, StringComparison.OrdinalIgnoreCase) ||
             c.DeviceName.Equals(name, StringComparison.OrdinalIgnoreCase));
     }

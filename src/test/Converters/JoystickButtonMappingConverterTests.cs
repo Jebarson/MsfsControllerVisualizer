@@ -3,10 +3,12 @@
 
 namespace Msfs.ControllerVisualizer.Tests.Converters;
 
+using System;
+using System.Collections.Generic;
 using System.Globalization;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Msfs.ControllerVisualizer.Converters;
 using Msfs.ControllerVisualizer.Models;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 /// <summary>
 /// Unit tests for the <see cref="JoystickButtonMappingConverter"/> class.
@@ -16,12 +18,18 @@ public class JoystickButtonMappingConverterTests
 {
     private JoystickButtonMappingConverter converter = null!;
 
+    /// <summary>
+    /// Initializes the converter under test.
+    /// </summary>
     [TestInitialize]
     public void Setup()
     {
         this.converter = new();
     }
 
+    /// <summary>
+    /// Verifies that Convert returns the friendly name for a matching button mapping.
+    /// </summary>
     [TestMethod]
     public void ConvertReturnsFriendlyNameForMatchingMapping()
     {
@@ -36,6 +44,9 @@ public class JoystickButtonMappingConverterTests
         Assert.AreEqual("Toggle Master Battery", result);
     }
 
+    /// <summary>
+    /// Verifies that Convert joins multiple friendly names for the same button mapping.
+    /// </summary>
     [TestMethod]
     public void ConvertReturnsCommaJoinedNamesForMultipleMappings()
     {
@@ -51,6 +62,9 @@ public class JoystickButtonMappingConverterTests
         Assert.AreEqual("Flaps Up, Gear Up", result);
     }
 
+    /// <summary>
+    /// Verifies that Convert returns an empty string when no mapping exists.
+    /// </summary>
     [TestMethod]
     public void ConvertReturnsEmptyStringWhenNoMappingFound()
     {
@@ -65,6 +79,9 @@ public class JoystickButtonMappingConverterTests
         Assert.AreEqual(string.Empty, result);
     }
 
+    /// <summary>
+    /// Verifies that Convert returns an empty string when the parameter is null.
+    /// </summary>
     [TestMethod]
     public void ConvertReturnsEmptyStringWhenParameterIsNull()
     {
@@ -79,6 +96,9 @@ public class JoystickButtonMappingConverterTests
         Assert.AreEqual(string.Empty, result);
     }
 
+    /// <summary>
+    /// Verifies that Convert matches button identifiers without case sensitivity.
+    /// </summary>
     [TestMethod]
     public void ConvertMatchesButtonIdCaseInsensitively()
     {
@@ -93,6 +113,9 @@ public class JoystickButtonMappingConverterTests
         Assert.AreEqual("Strobes Toggle", result);
     }
 
+    /// <summary>
+    /// Verifies that Convert returns an empty string when mappings have not been set.
+    /// </summary>
     [TestMethod]
     public void ConvertReturnsEmptyStringWhenMappingsAreNotSet()
     {
@@ -104,6 +127,9 @@ public class JoystickButtonMappingConverterTests
         Assert.AreEqual(string.Empty, result);
     }
 
+    /// <summary>
+    /// Verifies that ConvertBack throws a <see cref="NotImplementedException"/>.
+    /// </summary>
     [TestMethod]
     public void ConvertBackThrowsNotImplementedException()
     {

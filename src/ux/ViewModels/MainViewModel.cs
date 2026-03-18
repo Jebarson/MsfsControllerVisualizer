@@ -4,7 +4,9 @@
 namespace Msfs.ControllerVisualizer.ViewModels;
 
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Windows.Input;
 using Msfs.ControllerVisualizer.Common;
 using Msfs.ControllerVisualizer.Models;
@@ -16,9 +18,9 @@ using Msfs.ControllerVisualizer.Services;
 /// </summary>
 public class MainViewModel : NotifyPropertyBase
 {
-    private const string relativePathFormat = "..{0}..{0}..";
-    private const string assetsControllersPath = "Assets{0}Controllers";
-    private const string xamlExtension = "*.xaml";
+    private const string RelativePathFormat = "..{0}..{0}..";
+    private const string AssetsControllersPath = "Assets{0}Controllers";
+    private const string XamlExtension = "*.xaml";
 
     private readonly ControllerDiscoveryService discoveryService;
     private readonly ControllerButtonMapper buttonMapper;
@@ -171,7 +173,7 @@ public class MainViewModel : NotifyPropertyBase
     private void LoadSupportedControllers()
     {
         this.SupportedControllers = this.definitionLoader.LoadSupportedControllers();
-        
+
         if (this.SupportedControllers.Count > 0)
         {
             this.StatusMessage = $"Loaded {this.SupportedControllers.Count} supported controller(s): {string.Join(", ", this.SupportedControllers.Select(c => c.Name))}";
@@ -187,7 +189,7 @@ public class MainViewModel : NotifyPropertyBase
         System.Windows.Forms.FolderBrowserDialog dialog = new()
         {
             Description = "Select folder containing exported MSFS profile XML files",
-            ShowNewFolderButton = false
+            ShowNewFolderButton = false,
         };
 
         System.Windows.Forms.DialogResult result = dialog.ShowDialog();
@@ -213,7 +215,7 @@ public class MainViewModel : NotifyPropertyBase
         try
         {
             List<ExportedControllerInfo> supported = this.discoveryService.GetSupportedControllers(
-                this.ExportFolderPath, 
+                this.ExportFolderPath,
                 this.SupportedControllers);
 
             this.ExportedControllers = supported;
@@ -221,14 +223,14 @@ public class MainViewModel : NotifyPropertyBase
             if (supported.Count > 0)
             {
                 this.SelectedExportedController = supported[0];
-                
+
                 string[] uniqueFiles = supported.Select(c => c.FileName).Distinct().ToArray();
                 this.StatusMessage = $"Found {supported.Count} supported controller(s) in {uniqueFiles.Length} file(s)";
             }
             else
             {
                 List<ExportedControllerInfo> allControllers = this.discoveryService.DiscoverControllersInFolder(this.ExportFolderPath);
-                
+
                 if (allControllers.Count > 0)
                 {
                     string foundDevices = string.Join(", ", allControllers.Select(c => c.DisplayName));
@@ -271,7 +273,7 @@ public class MainViewModel : NotifyPropertyBase
 
         // Match controller to definition
         ControllerDefinition? matched = this.discoveryService.MatchController(
-            this.SelectedExportedController, 
+            this.SelectedExportedController,
             this.SupportedControllers);
 
         if (matched == null)
@@ -350,10 +352,10 @@ public class MainViewModel : NotifyPropertyBase
         // AppDomain.CurrentDomain.BaseDirectory is typically: X:\...\bin\Debug\net10.0-windows\
         // We need to go up to the project root
         string binDirectory = AppDomain.CurrentDomain.BaseDirectory;
-        string projectDirectory = Path.GetFullPath(Path.Combine(binDirectory, relativePathFormat));
+        string projectDirectory = Path.GetFullPath(Path.Combine(binDirectory, RelativePathFormat));
 
-        string sourceControllersPath = Path.Combine(projectDirectory, string.Format(assetsControllersPath, Path.DirectorySeparatorChar));
-        string targetControllersPath = Path.Combine(binDirectory, string.Format(assetsControllersPath, Path.DirectorySeparatorChar));
+        string sourceControllersPath = Path.Combine(projectDirectory, string.Format(AssetsControllersPath, Path.DirectorySeparatorChar));
+        string targetControllersPath = Path.Combine(binDirectory, string.Format(AssetsControllersPath, Path.DirectorySeparatorChar));
 
         if (!Directory.Exists(sourceControllersPath))
         {
@@ -364,7 +366,7 @@ public class MainViewModel : NotifyPropertyBase
         Directory.CreateDirectory(targetControllersPath);
 
         // Copy all XAML files
-        string[] xamlFiles = Directory.GetFiles(sourceControllersPath, xamlExtension, SearchOption.TopDirectoryOnly);
+        string[] xamlFiles = Directory.GetFiles(sourceControllersPath, XamlExtension, SearchOption.TopDirectoryOnly);
 
         foreach (string sourceFile in xamlFiles)
         {

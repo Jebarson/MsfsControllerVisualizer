@@ -3,6 +3,8 @@
 
 namespace Msfs.ControllerVisualizer.Common;
 
+using System;
+
 /// <summary>
 /// Static utility class for event handling extensions.
 /// Provides methods to safely invoke event handlers with null-coalescing syntax.
@@ -26,7 +28,8 @@ public static class EventExtensions
     /// <param name="handler">The event handler to raise.</param>
     /// <param name="sender">The object raising the event.</param>
     /// <param name="args">The event arguments.</param>
-    public static void RaiseEvent<T>(this EventHandler<T>? handler, object sender, T args) where T : EventArgs
+    public static void RaiseEvent<T>(this EventHandler<T>? handler, object sender, T args)
+        where T : EventArgs
     {
         handler?.Invoke(sender, args);
     }

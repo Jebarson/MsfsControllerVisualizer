@@ -3,7 +3,10 @@
 
 namespace Msfs.ControllerVisualizer.Tests.Services;
 
+using System;
+using System.Collections.Generic;
 using System.IO;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Msfs.ControllerVisualizer.Models;
 using Msfs.ControllerVisualizer.Services;
 
@@ -15,12 +18,18 @@ public class ControllerDefinitionLoaderTests
 {
     private ControllerDefinitionLoader loader = null!;
 
+    /// <summary>
+    /// Initializes the loader under test.
+    /// </summary>
     [TestInitialize]
     public void Setup()
     {
         this.loader = new();
     }
 
+    /// <summary>
+    /// Verifies that the loader returns the expected number of supported controller definitions.
+    /// </summary>
     [TestMethod]
     public void LoadSupportedControllersReturnsFiveDefinitions()
     {
@@ -29,6 +38,9 @@ public class ControllerDefinitionLoaderTests
         Assert.AreEqual(5, controllers.Count);
     }
 
+    /// <summary>
+    /// Verifies that loaded controller definitions contain non-empty required fields.
+    /// </summary>
     [TestMethod]
     public void LoadSupportedControllersReturnsDefinitionsWithNonEmptyFields()
     {
@@ -43,6 +55,9 @@ public class ControllerDefinitionLoaderTests
         }
     }
 
+    /// <summary>
+    /// Verifies that all loaded controller definitions reference visual files that exist.
+    /// </summary>
     [TestMethod]
     public void LoadSupportedControllersReturnsDefinitionsWithExistingVisualFiles()
     {
@@ -56,6 +71,11 @@ public class ControllerDefinitionLoaderTests
         }
     }
 
+    /// <summary>
+    /// Verifies that GetControllerById finds a controller by product identifier.
+    /// </summary>
+    /// <param name="expectedName">The expected controller name.</param>
+    /// <param name="productId">The product identifier to search for.</param>
     [TestMethod]
     [DataRow("Honeycomb Alpha Flight Control", "6400")]
     [DataRow("Honeycomb Bravo Throttle Quadrant", "6401")]
@@ -72,6 +92,10 @@ public class ControllerDefinitionLoaderTests
         Assert.AreEqual(expectedName, found.Name);
     }
 
+    /// <summary>
+    /// Verifies that GetControllerById also finds a controller when passed its name.
+    /// </summary>
+    /// <param name="name">The controller name to search for.</param>
     [TestMethod]
     [DataRow("Honeycomb Alpha Flight Control")]
     [DataRow("Honeycomb Bravo Throttle Quadrant")]
@@ -88,6 +112,11 @@ public class ControllerDefinitionLoaderTests
         Assert.AreEqual(name, found.Name);
     }
 
+    /// <summary>
+    /// Verifies that GetControllerByName finds a controller by device name.
+    /// </summary>
+    /// <param name="deviceName">The device name to search for.</param>
+    /// <param name="expectedName">The expected controller name.</param>
     [TestMethod]
     [DataRow("Alpha Flight Controls", "Honeycomb Alpha Flight Control")]
     [DataRow("Bravo Throttle", "Honeycomb Bravo Throttle Quadrant")]
@@ -104,6 +133,9 @@ public class ControllerDefinitionLoaderTests
         Assert.AreEqual(expectedName, found.Name);
     }
 
+    /// <summary>
+    /// Verifies that GetControllerById returns null for an unknown identifier.
+    /// </summary>
     [TestMethod]
     public void GetControllerByIdReturnsNullForUnknownId()
     {
@@ -114,6 +146,9 @@ public class ControllerDefinitionLoaderTests
         Assert.IsNull(found);
     }
 
+    /// <summary>
+    /// Verifies that GetControllerByName returns null for an unknown device name.
+    /// </summary>
     [TestMethod]
     public void GetControllerByNameReturnsNullForUnknownName()
     {

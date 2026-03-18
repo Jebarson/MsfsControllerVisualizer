@@ -3,6 +3,8 @@
 
 namespace Msfs.ControllerVisualizer.Services;
 
+using System;
+using System.Collections.Generic;
 using System.Xml.Linq;
 using Msfs.ControllerVisualizer.Models;
 
@@ -56,7 +58,7 @@ public class ControllerButtonMapper
                                 {
                                     ButtonId = identifier,
                                     MsfsCommand = actionName,
-                                    FriendlyName = this.ConvertActionToFriendly(actionName)
+                                    FriendlyName = this.ConvertActionToFriendly(actionName),
                                 };
 
                                 mappings.Add(mapping);
@@ -96,9 +98,9 @@ public class ControllerButtonMapper
     /// <returns>A formatted friendly name (e.g., "Magneto Start").</returns>
     private string ConvertActionToFriendly(string actionName)
     {
-        if (actionName.StartsWith(keyPrefix, StringComparison.OrdinalIgnoreCase))
+        if (actionName.StartsWith(this.keyPrefix, StringComparison.OrdinalIgnoreCase))
         {
-            actionName = actionName.Substring(keyPrefix.Length);
+            actionName = actionName.Substring(this.keyPrefix.Length);
         }
 
         string[] words = actionName.Split('_', StringSplitOptions.RemoveEmptyEntries);

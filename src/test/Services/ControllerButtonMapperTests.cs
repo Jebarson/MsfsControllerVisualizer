@@ -3,7 +3,10 @@
 
 namespace Msfs.ControllerVisualizer.Tests.Services;
 
+using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Msfs.ControllerVisualizer.Models;
 using Msfs.ControllerVisualizer.Services;
 
@@ -16,6 +19,9 @@ public class ControllerButtonMapperTests
     private ControllerButtonMapper mapper = null!;
     private ControllerDefinition dummyDefinition = null!;
 
+    /// <summary>
+    /// Initializes the mapper and dummy controller definition used by the tests.
+    /// </summary>
     [TestInitialize]
     public void Setup()
     {
@@ -25,10 +31,13 @@ public class ControllerButtonMapperTests
             Name = "Test Controller",
             DeviceName = "Test Device",
             ProductId = "1234",
-            VisualFile = "Test.xaml"
+            VisualFile = "Test.xaml",
         };
     }
 
+    /// <summary>
+    /// Verifies that MapButtons extracts valid mappings from XML input.
+    /// </summary>
     [TestMethod]
     public void MapButtonsExtractsValidMappingsFromXml()
     {
@@ -53,6 +62,9 @@ public class ControllerButtonMapperTests
         Assert.AreEqual("Ap Master", mappings[0].FriendlyName);
     }
 
+    /// <summary>
+    /// Verifies that MapButtons returns an empty list when no key elements are present.
+    /// </summary>
     [TestMethod]
     public void MapButtonsReturnsEmptyListWhenNoKeyElements()
     {
@@ -70,6 +82,9 @@ public class ControllerButtonMapperTests
         Assert.AreEqual(0, mappings.Count);
     }
 
+    /// <summary>
+    /// Verifies that MapButtons skips actions with an empty action name.
+    /// </summary>
     [TestMethod]
     public void MapButtonsSkipsActionsWithEmptyActionName()
     {
@@ -91,6 +106,9 @@ public class ControllerButtonMapperTests
         Assert.AreEqual(0, mappings.Count);
     }
 
+    /// <summary>
+    /// Verifies that MapButtons extracts mappings from multiple contexts.
+    /// </summary>
     [TestMethod]
     public void MapButtonsExtractsMappingsFromMultipleContexts()
     {
@@ -121,6 +139,9 @@ public class ControllerButtonMapperTests
         Assert.IsTrue(mappings.Any(m => m.ButtonId == "Joystick_Button_3"));
     }
 
+    /// <summary>
+    /// Verifies that MapButtons normalizes identifiers by replacing spaces with underscores.
+    /// </summary>
     [TestMethod]
     public void MapButtonsNormalizesIdentifierByReplacingSpacesWithUnderscores()
     {
@@ -142,6 +163,9 @@ public class ControllerButtonMapperTests
         Assert.AreEqual("Joystick_Button_24", mappings[0].ButtonId);
     }
 
+    /// <summary>
+    /// Verifies that MapButtons trims trailing spaces from identifiers.
+    /// </summary>
     [TestMethod]
     public void MapButtonsTrimsTrailingSpacesFromIdentifier()
     {
@@ -163,6 +187,9 @@ public class ControllerButtonMapperTests
         Assert.AreEqual("Joystick_L-Axis_X", mappings[0].ButtonId);
     }
 
+    /// <summary>
+    /// Verifies that MapButtons removes the KEY prefix from the friendly name.
+    /// </summary>
     [TestMethod]
     public void MapButtonsRemovesKeyPrefixFromFriendlyName()
     {
@@ -184,6 +211,9 @@ public class ControllerButtonMapperTests
         Assert.AreEqual("Magneto Start", mappings[0].FriendlyName);
     }
 
+    /// <summary>
+    /// Verifies that MapButtons capitalizes each word in the friendly name.
+    /// </summary>
     [TestMethod]
     public void MapButtonsCapitalizesEachWordInFriendlyName()
     {

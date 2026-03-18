@@ -1,11 +1,12 @@
 // Copyright (c) 2024 Jebarson. All rights reserved.
 // Licensed under terms specified in COPYRIGHT.md - Free for personal use only.
 
+namespace Msfs.ControllerVisualizer.Converters;
+
+using System;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
-
-namespace Msfs.ControllerVisualizer.Converters;
 
 /// <summary>
 /// Converts null values to Visibility.Collapsed and non-null values to Visibility.Visible.
@@ -27,14 +28,21 @@ public class NullToVisibilityConverter : IValueConverter
         bool isNull = value == null;
 
         if (isInverted)
+        {
             return isNull ? Visibility.Visible : Visibility.Collapsed;
-        
+        }
+
         return isNull ? Visibility.Collapsed : Visibility.Visible;
     }
 
     /// <summary>
     /// Not implemented - conversion back is not supported.
     /// </summary>
+    /// <param name="value">The value to convert back.</param>
+    /// <param name="targetType">The requested target type.</param>
+    /// <param name="parameter">The converter parameter.</param>
+    /// <param name="culture">Culture information for conversion.</param>
+    /// <returns>This method does not return a value because it always throws.</returns>
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
         throw new NotImplementedException();
