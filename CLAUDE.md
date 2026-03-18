@@ -15,34 +15,69 @@ MSFS Controller Visualizer is a WPF application that visualizes Microsoft Flight
 ## Repository Structure
 
 ```
-X:\Msfs.ControllerVisualizer\
-├── src/
-│   ├── Msfs.ControllerVisualizer.slnx   # Solution file
-│   ├── ux/                               # WPF application project
-│   │   ├── Msfs.ControllerVisualizer.csproj
-│   │   ├── Assets/Controllers/           # Controller definitions and visuals
-│   │   ├── Services/                     # Business logic
-│   │   ├── ViewModels/                   # MVVM view models
-│   │   ├── Converters/                   # WPF value converters
-│   │   ├── Models/                       # Data models
-│   │   └── Common/                       # Shared utilities
-│   └── test/                             # Unit test project
-│       ├── Msfs.ControllerVisualizer.Tests.csproj
-│       ├── UnitTest1.cs
-│       └── Mocks/                        # Sample MSFS XML files for testing
-├── .git/
-└── CLAUDE.md
+
+.github/
+  workflows/
+    Release.yml                   # GitHub Actions release workflow
+src/
+  Msfs.ControllerVisualizer.slnx    # Solution file
+  ux/                               # WPF application project
+    Msfs.ControllerVisualizer.csproj
+    App.xaml / App.xaml.cs
+    MainWindow.xaml / MainWindow.xaml.cs
+    AssemblyInfo.cs
+    Assets/Controllers/             # Controller definitions and visuals
+      controllers.json              # Controller metadata definitions
+      ControllerStyles.xaml         # Shared styles for controller visuals
+      HoneycombAlpha.xaml
+      HoneycombBravo.xaml
+      SaitekProFlightRudderPedals2024.xaml
+      MfdCougar2024Planes.xaml
+      Images/                       # Reference images (not used in app)
+    Common/                         # Shared utilities
+      Command.cs, EventExtensions.cs, NotifyPropertyBase.cs
+    Converters/                     # WPF value converters
+      ControllerVisualConverter.cs
+      JoystickButtonMappingConverter.cs
+      JoystickButtonTruncateConverter.cs
+      NullToVisibilityConverter.cs
+    Models/                         # Data models
+      ButtonMapping.cs, ControllerDefinition.cs
+      ControllersData.cs, ExportedControllerInfo.cs
+    Services/                       # Business logic
+      ControllerButtonMapper.cs
+      ControllerDefinitionLoader.cs
+      ControllerDiscoveryService.cs
+      PrintService.cs
+    ViewModels/
+      MainViewModel.cs
+  test/                             # Unit test project (MSTest)
+    Msfs.ControllerVisualizer.Tests.csproj
+    Converters/                     # Converter tests
+    Models/                         # Model tests
+    Services/                       # Service tests
+    Xaml/                           # XAML loading and integrity tests
+    Mocks/                          # Sample MSFS XML files for testing
+CLAUDE.md                             # This file (Claude Code guidance)
+CodingGuidelines.md                   # Coding standards and conventions
+COPYRIGHT.md                          # Copyright and license terms
+.editorconfig
+.gitignore
 ```
+
+
+## Related Documentation
+
+- **[CodingGuidelines.md](CodingGuidelines.md)** - Coding standards, naming conventions, formatting rules, and style requirements for all code in this project.
+- **[COPYRIGHT.md](COPYRIGHT.md)** - Copyright and license terms. All source files reference this via their copyright header.
 
 ## Build and Run Commands
 
 All commands should be run from the `src/` directory:
 
 ```powershell
-# Navigate to src directory
-cd src
-
 # Build the solution
+cd src
 dotnet build
 
 # Run the application
@@ -58,6 +93,7 @@ dotnet clean
 dotnet publish -c Release --project ux
 ```
 
+
 ## Architecture
 
 ### Data Flow
@@ -70,7 +106,7 @@ dotnet publish -c Release --project ux
 
 2. **Mapping Phase** (ControllerButtonMapper)
    - Extracts button bindings from XML: `Device/Context/Action/Primary/KEY` elements
-   - Converts KEY Information attribute (e.g., "Joystick Button 35") to normalized identifiers (e.g., "Joystick_Button_35")
+   - Converts KEY Information attribute (e.g., `Joystick Button 35`) to normalized identifiers (e.g., `Joystick_Button_35`)
    - Creates ButtonMapping records linking button IDs to MSFS commands
 
 3. **Rendering Phase** (ControllerVisualConverter)
@@ -85,11 +121,13 @@ dotnet publish -c Release --project ux
 - `ControllerDiscoveryService`: XML parsing, device matching, profile merging
 - `ControllerDefinitionLoader`: JSON deserialization of controller definitions
 - `ControllerButtonMapper`: Button binding extraction and normalization
+- `PrintService`: Printing controller layouts via PrintDialogX
 
 **Models:**
 - `ControllerDefinition`: Metadata for supported controllers (name, ProductID, XAML visual file)
 - `ExportedControllerInfo`: Discovered device info with source XML element
 - `ButtonMapping`: Links button ID to MSFS command and friendly name
+- `ControllersData`: Root structure for controllers.json deserialization
 
 **Converters:**
 - `ControllerVisualConverter`: Loads XAML visuals and sets up mapping context (IMultiValueConverter)
@@ -116,7 +154,8 @@ The XML parser handles MSFS export files with multiple root elements by wrapping
 </Device>
 ```
 
-Button identifiers are normalized by replacing spaces with underscores: `"Joystick Button 35"` → `"Joystick_Button_35"`
+
+Button identifiers are normalized by replacing spaces with underscores: `Joystick Button 35` becomes `Joystick_Button_35`
 
 ### XAML Visual System
 
@@ -126,6 +165,7 @@ Controller visuals are UserControl XAML files in `Assets/Controllers/`. Button e
 <TextBlock Text="{Binding Converter={StaticResource JoystickButtonMappingConverter},
                           ConverterParameter=Joystick_Button_35}" />
 ```
+
 
 The converters rely on static state set by ControllerVisualConverter before XAML parsing. This is necessary because XAML binding contexts cannot be easily propagated to converter parameters during dynamic loading.
 
@@ -147,23 +187,6 @@ The converters rely on static state set by ControllerVisualConverter before XAML
    xmlns:converters="clr-namespace:Msfs.ControllerVisualizer.Converters;assembly=Msfs.ControllerVisualizer"
    ```
 
-## Project Structure
-
-### WPF Application (`src/ux/`)
-- `Assets/`: Static resources
-  - `Controllers/controllers.json`: Controller definitions
-  - `Controllers/*.xaml`: Visual representations
-  - `Controllers/Images/`: Controller reference images (not currently used in application)
-- `Services/`: Business logic (discovery, loading, mapping)
-- `Models/`: Data structures
-- `ViewModels/`: MVVM view models
-- `Converters/`: WPF value converters
-- `Common/`: Utilities (Command, NotifyPropertyBase, EventExtensions)
-
-### Test Project (`src/test/`)
-- `Msfs.ControllerVisualizer.Tests.csproj`: Unit test project (xUnit)
-- `UnitTest1.cs`: Sample test file
-- `Mocks/`: Sample MSFS exported XML files for testing (copied to test output)
 
 ## Important Implementation Details
 
@@ -175,4 +198,4 @@ The converters rely on static state set by ControllerVisualConverter before XAML
 
 - **XML Declaration Handling**: The XML parser strips `<?xml ...?>` declarations before wrapping content to avoid parsing errors with multiple root elements.
 
-- **Debug Reload Button**: A 20x20 reload button (⟳) appears in the bottom-right corner of the controller visual area when running in DEBUG mode. Clicking it performs two operations: (1) copies all XAML files from the source project directory (`src/ux/Assets/Controllers/*.xaml`) to the output directory (`src/ux/bin/Debug/net10.0-windows/Assets/Controllers/`), then (2) forces the ControllerVisualConverter to re-run by temporarily clearing the bound properties to null and restoring them. This allows you to edit XAML files in Visual Studio and see changes immediately without rebuilding. The button visibility is controlled by the `IsDebugMode` property in MainWindow.xaml.cs using conditional compilation (`#if DEBUG`). The copy mechanism is in `CopyControllerXamlFiles()` which navigates from `bin/Debug/net10.0-windows/` up to the project root.
+- **Debug Reload Button**: A 20x20 reload button appears in the bottom-right corner of the controller visual area when running in DEBUG mode. Clicking it copies all XAML files from the source project directory to the output directory, then forces the ControllerVisualConverter to re-run by temporarily clearing bound properties. This allows editing XAML files and seeing changes immediately without rebuilding. The button visibility is controlled by `IsDebugMode` in MainWindow.xaml.cs using conditional compilation. The copy mechanism is in `CopyControllerXamlFiles()` which navigates from `bin/Debug/net10.0-windows/` up to the project root.

@@ -12,7 +12,7 @@ using Msfs.ControllerVisualizer.Models;
 /// </summary>
 public class ControllerButtonMapper
 {
-    private const string KeyPrefix = "KEY_";
+    private readonly string keyPrefix = "KEY_";
 
     /// <summary>
     /// Maps all button bindings from a device XML element to a list of button mappings.
@@ -96,9 +96,9 @@ public class ControllerButtonMapper
     /// <returns>A formatted friendly name (e.g., "Magneto Start").</returns>
     private string ConvertActionToFriendly(string actionName)
     {
-        if (actionName.StartsWith(KeyPrefix, StringComparison.OrdinalIgnoreCase))
+        if (actionName.StartsWith(keyPrefix, StringComparison.OrdinalIgnoreCase))
         {
-            actionName = actionName.Substring(KeyPrefix.Length);
+            actionName = actionName.Substring(keyPrefix.Length);
         }
 
         string[] words = actionName.Split('_', StringSplitOptions.RemoveEmptyEntries);

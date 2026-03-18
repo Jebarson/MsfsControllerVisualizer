@@ -1,0 +1,303 @@
+<UserControl xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:converters="clr-namespace:Msfs.ControllerVisualizer.Converters;assembly=Msfs.ControllerVisualizer">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ControllerStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <Style x:Key="MfdFrameStyle" TargetType="Rectangle" BasedOn="{StaticResource BasePanelStyle}">
+                <Setter Property="Opacity" Value="0.55" />
+            </Style>
+
+            <Style x:Key="MfdDisplayStyle" TargetType="Rectangle" BasedOn="{StaticResource BasePanelStyle}">
+                <Setter Property="Opacity" Value="0.30" />
+            </Style>
+
+            <Style x:Key="MfdButtonBindingStyle" TargetType="TextBlock" BasedOn="{StaticResource BindingCenterStyle}">
+                <Setter Property="Width" Value="110" />
+            </Style>
+
+            <Style x:Key="MfdSideButtonBindingStyle" TargetType="TextBlock" BasedOn="{StaticResource BindingCenterStyle}">
+                <Setter Property="Width" Value="130" />
+            </Style>
+
+            <Style x:Key="MfdRockerBindingStyle" TargetType="TextBlock" BasedOn="{StaticResource BindingCenterStyle}">
+                <Setter Property="Width" Value="132" />
+                <Setter Property="TextWrapping" Value="NoWrap" />
+            </Style>
+
+            <Style x:Key="MfdRockerLabelStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseLabelStyle}">
+                <Setter Property="TextAlignment" Value="Center" />
+            </Style>
+
+            <Style x:Key="MfdRockerSwitchStyle" TargetType="Rectangle" BasedOn="{StaticResource ToggleSwitchStyle}">
+                <Setter Property="Width" Value="24" />
+                <Setter Property="Height" Value="52" />
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Canvas Canvas.Left="210" Canvas.Top="40" Width="780" Height="650">
+            <Rectangle Width="640" Height="640" Canvas.Left="70" Canvas.Top="10" Style="{StaticResource MfdFrameStyle}" />
+            <Rectangle Width="320" Height="320" Canvas.Left="230" Canvas.Top="170"
+                    Style="{StaticResource MfdDisplayStyle}" />
+
+            <!-- Top row: single push buttons 1-5 -->
+            <StackPanel Canvas.Left="128" Canvas.Top="30">
+                <Grid Width="26" Height="26">
+                    <Ellipse Style="{StaticResource StandardButtonStyle}" />
+                    <TextBlock Text="1" Style="{StaticResource ButtonNumberStyle}" />
+                </Grid>
+                <TextBlock Style="{StaticResource MfdButtonBindingStyle}"
+                        Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_1}"
+                        ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_1}" />
+            </StackPanel>
+            <StackPanel Canvas.Left="236" Canvas.Top="30">
+                <Grid Width="26" Height="26">
+                    <Ellipse Style="{StaticResource StandardButtonStyle}" />
+                    <TextBlock Text="2" Style="{StaticResource ButtonNumberStyle}" />
+                </Grid>
+                <TextBlock Style="{StaticResource MfdButtonBindingStyle}"
+                        Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_2}"
+                        ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_2}" />
+            </StackPanel>
+            <StackPanel Canvas.Left="344" Canvas.Top="30">
+                <Grid Width="26" Height="26">
+                    <Ellipse Style="{StaticResource StandardButtonStyle}" />
+                    <TextBlock Text="3" Style="{StaticResource ButtonNumberStyle}" />
+                </Grid>
+                <TextBlock Style="{StaticResource MfdButtonBindingStyle}"
+                        Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_3}"
+                        ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_3}" />
+            </StackPanel>
+            <StackPanel Canvas.Left="452" Canvas.Top="30">
+                <Grid Width="26" Height="26">
+                    <Ellipse Style="{StaticResource StandardButtonStyle}" />
+                    <TextBlock Text="4" Style="{StaticResource ButtonNumberStyle}" />
+                </Grid>
+                <TextBlock Style="{StaticResource MfdButtonBindingStyle}"
+                        Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_4}"
+                        ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_4}" />
+            </StackPanel>
+            <StackPanel Canvas.Left="560" Canvas.Top="30">
+                <Grid Width="26" Height="26">
+                    <Ellipse Style="{StaticResource StandardButtonStyle}" />
+                    <TextBlock Text="5" Style="{StaticResource ButtonNumberStyle}" />
+                </Grid>
+                <TextBlock Style="{StaticResource MfdButtonBindingStyle}"
+                        Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_5}"
+                        ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_5}" />
+            </StackPanel>
+
+            <!-- Right column: single push buttons 6-10 -->
+            <StackPanel Canvas.Left="580" Canvas.Top="218">
+                <Grid Width="26" Height="26">
+                    <Ellipse Style="{StaticResource StandardButtonStyle}" />
+                    <TextBlock Text="6" Style="{StaticResource ButtonNumberStyle}" />
+                </Grid>
+                <TextBlock Style="{StaticResource MfdSideButtonBindingStyle}"
+                        Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_6}"
+                        ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_6}" />
+            </StackPanel>
+            <StackPanel Canvas.Left="580" Canvas.Top="274">
+                <Grid Width="26" Height="26">
+                    <Ellipse Style="{StaticResource StandardButtonStyle}" />
+                    <TextBlock Text="7" Style="{StaticResource ButtonNumberStyle}" />
+                </Grid>
+                <TextBlock Style="{StaticResource MfdSideButtonBindingStyle}"
+                        Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_7}"
+                        ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_7}" />
+            </StackPanel>
+            <StackPanel Canvas.Left="580" Canvas.Top="330">
+                <Grid Width="26" Height="26">
+                    <Ellipse Style="{StaticResource StandardButtonStyle}" />
+                    <TextBlock Text="8" Style="{StaticResource ButtonNumberStyle}" />
+                </Grid>
+                <TextBlock Style="{StaticResource MfdSideButtonBindingStyle}"
+                        Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_8}"
+                        ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_8}" />
+            </StackPanel>
+            <StackPanel Canvas.Left="580" Canvas.Top="386">
+                <Grid Width="26" Height="26">
+                    <Ellipse Style="{StaticResource StandardButtonStyle}" />
+                    <TextBlock Text="9" Style="{StaticResource ButtonNumberStyle}" />
+                </Grid>
+                <TextBlock Style="{StaticResource MfdSideButtonBindingStyle}"
+                        Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_9}"
+                        ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_9}" />
+            </StackPanel>
+            <StackPanel Canvas.Left="580" Canvas.Top="442">
+                <Grid Width="26" Height="26">
+                    <Ellipse Style="{StaticResource StandardButtonStyle}" />
+                    <TextBlock Text="10" Style="{StaticResource ButtonNumberStyle}" />
+                </Grid>
+                <TextBlock Style="{StaticResource MfdSideButtonBindingStyle}"
+                        Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_10}"
+                        ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_10}" />
+            </StackPanel>
+
+            <!-- Bottom row: single push buttons 11-15 -->
+            <StackPanel Canvas.Left="560" Canvas.Top="592">
+                <Grid Width="26" Height="26">
+                    <Ellipse Style="{StaticResource StandardButtonStyle}" />
+                    <TextBlock Text="11" Style="{StaticResource ButtonNumberStyle}" />
+                </Grid>
+                <TextBlock Style="{StaticResource MfdButtonBindingStyle}"
+                        Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_11}"
+                        ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_11}" />
+            </StackPanel>
+            <StackPanel Canvas.Left="452" Canvas.Top="592">
+                <Grid Width="26" Height="26">
+                    <Ellipse Style="{StaticResource StandardButtonStyle}" />
+                    <TextBlock Text="12" Style="{StaticResource ButtonNumberStyle}" />
+                </Grid>
+                <TextBlock Style="{StaticResource MfdButtonBindingStyle}"
+                        Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_12}"
+                        ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_12}" />
+            </StackPanel>
+            <StackPanel Canvas.Left="344" Canvas.Top="592">
+                <Grid Width="26" Height="26">
+                    <Ellipse Style="{StaticResource StandardButtonStyle}" />
+                    <TextBlock Text="13" Style="{StaticResource ButtonNumberStyle}" />
+                </Grid>
+                <TextBlock Style="{StaticResource MfdButtonBindingStyle}"
+                        Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_13}"
+                        ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_13}" />
+            </StackPanel>
+            <StackPanel Canvas.Left="236" Canvas.Top="592">
+                <Grid Width="26" Height="26">
+                    <Ellipse Style="{StaticResource StandardButtonStyle}" />
+                    <TextBlock Text="14" Style="{StaticResource ButtonNumberStyle}" />
+                </Grid>
+                <TextBlock Style="{StaticResource MfdButtonBindingStyle}"
+                        Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_14}"
+                        ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_14}" />
+            </StackPanel>
+            <StackPanel Canvas.Left="128" Canvas.Top="592">
+                <Grid Width="26" Height="26">
+                    <Ellipse Style="{StaticResource StandardButtonStyle}" />
+                    <TextBlock Text="15" Style="{StaticResource ButtonNumberStyle}" />
+                </Grid>
+                <TextBlock Style="{StaticResource MfdButtonBindingStyle}"
+                        Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_15}"
+                        ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_15}" />
+            </StackPanel>
+
+            <!-- Left column: single push buttons 16-20 -->
+            <StackPanel Canvas.Left="80" Canvas.Top="442">
+                <Grid Width="26" Height="26">
+                    <Ellipse Style="{StaticResource StandardButtonStyle}" />
+                    <TextBlock Text="16" Style="{StaticResource ButtonNumberStyle}" />
+                </Grid>
+                <TextBlock Style="{StaticResource MfdSideButtonBindingStyle}"
+                        Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_16}"
+                        ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_16}" />
+            </StackPanel>
+            <StackPanel Canvas.Left="80" Canvas.Top="386">
+                <Grid Width="26" Height="26">
+                    <Ellipse Style="{StaticResource StandardButtonStyle}" />
+                    <TextBlock Text="17" Style="{StaticResource ButtonNumberStyle}" />
+                </Grid>
+                <TextBlock Style="{StaticResource MfdSideButtonBindingStyle}"
+                        Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_17}"
+                        ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_17}" />
+            </StackPanel>
+            <StackPanel Canvas.Left="80" Canvas.Top="330">
+                <Grid Width="26" Height="26">
+                    <Ellipse Style="{StaticResource StandardButtonStyle}" />
+                    <TextBlock Text="18" Style="{StaticResource ButtonNumberStyle}" />
+                </Grid>
+                <TextBlock Style="{StaticResource MfdSideButtonBindingStyle}"
+                        Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_18}"
+                        ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_18}" />
+            </StackPanel>
+            <StackPanel Canvas.Left="80" Canvas.Top="274">
+                <Grid Width="26" Height="26">
+                    <Ellipse Style="{StaticResource StandardButtonStyle}" />
+                    <TextBlock Text="19" Style="{StaticResource ButtonNumberStyle}" />
+                </Grid>
+                <TextBlock Style="{StaticResource MfdSideButtonBindingStyle}"
+                        Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_19}"
+                        ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_19}" />
+            </StackPanel>
+            <StackPanel Canvas.Left="80" Canvas.Top="218">
+                <Grid Width="26" Height="26">
+                    <Ellipse Style="{StaticResource StandardButtonStyle}" />
+                    <TextBlock Text="20" Style="{StaticResource ButtonNumberStyle}" />
+                </Grid>
+                <TextBlock Style="{StaticResource MfdSideButtonBindingStyle}"
+                        Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_20}"
+                        ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_20}" />
+            </StackPanel>
+
+            <!-- Up/Down rocker buttons 21-28 -->
+            <StackPanel Canvas.Left="85" Canvas.Top="80">
+                <TextBlock Text="21 (UP)" Style="{StaticResource MfdRockerLabelStyle}" />
+                <TextBlock Style="{StaticResource MfdRockerBindingStyle}"
+                        Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_21}"
+                        ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_21}" />
+                <Canvas Width="24" Height="52" HorizontalAlignment="Center">
+                    <Rectangle Style="{StaticResource MfdRockerSwitchStyle}" />
+                    <Path Data="M 12 6 L 6 14 L 18 14 Z" Fill="{StaticResource StrokeBrush}" />
+                    <Path Data="M 12 46 L 6 38 L 18 38 Z" Fill="{StaticResource StrokeBrush}" />
+                </Canvas>
+                <TextBlock Text="22 (DOWN)" Style="{StaticResource MfdRockerLabelStyle}" />
+                <TextBlock Style="{StaticResource MfdRockerBindingStyle}"
+                        Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_22}"
+                        ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_22}" />
+            </StackPanel>
+
+            <StackPanel Canvas.Left="585" Canvas.Top="80">
+                <TextBlock Text="23 (UP)" Style="{StaticResource MfdRockerLabelStyle}" />
+                <TextBlock Style="{StaticResource MfdRockerBindingStyle}"
+                        Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_23}"
+                        ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_23}" />
+                <Canvas Width="24" Height="52" HorizontalAlignment="Center">
+                    <Rectangle Style="{StaticResource MfdRockerSwitchStyle}" />
+                    <Path Data="M 12 6 L 6 14 L 18 14 Z" Fill="{StaticResource StrokeBrush}" />
+                    <Path Data="M 12 46 L 6 38 L 18 38 Z" Fill="{StaticResource StrokeBrush}" />
+                </Canvas>
+                <TextBlock Text="24 (DOWN)" Style="{StaticResource MfdRockerLabelStyle}" />
+                <TextBlock Style="{StaticResource MfdRockerBindingStyle}"
+                        Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_24}"
+                        ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_24}" />
+            </StackPanel>
+
+            <StackPanel Canvas.Left="580" Canvas.Top="488">
+                <TextBlock Text="25 (UP)" Style="{StaticResource MfdRockerLabelStyle}" />
+                <TextBlock Style="{StaticResource MfdRockerBindingStyle}"
+                        Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_25}"
+                        ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_25}" />
+                <Canvas Width="24" Height="52" HorizontalAlignment="Center">
+                    <Rectangle Style="{StaticResource MfdRockerSwitchStyle}" />
+                    <Path Data="M 12 6 L 6 14 L 18 14 Z" Fill="{StaticResource StrokeBrush}" />
+                    <Path Data="M 12 46 L 6 38 L 18 38 Z" Fill="{StaticResource StrokeBrush}" />
+                </Canvas>
+                <TextBlock Text="26 (DOWN)" Style="{StaticResource MfdRockerLabelStyle}" />
+                <TextBlock Style="{StaticResource MfdRockerBindingStyle}"
+                        Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_26}"
+                        ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_26}" />
+            </StackPanel>
+
+            <StackPanel Canvas.Left="85" Canvas.Top="488">
+                <TextBlock Text="27 (UP)" Style="{StaticResource MfdRockerLabelStyle}" />
+                <TextBlock Style="{StaticResource MfdRockerBindingStyle}"
+                        Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_27}"
+                        ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_27}" />
+                <Canvas Width="24" Height="52" HorizontalAlignment="Center">
+                    <Rectangle Style="{StaticResource MfdRockerSwitchStyle}" />
+                    <Path Data="M 12 6 L 6 14 L 18 14 Z" Fill="{StaticResource StrokeBrush}" />
+                    <Path Data="M 12 46 L 6 38 L 18 38 Z" Fill="{StaticResource StrokeBrush}" />
+                </Canvas>
+                <TextBlock Text="28 (DOWN)" Style="{StaticResource MfdRockerLabelStyle}" />
+                <TextBlock Style="{StaticResource MfdRockerBindingStyle}"
+                        Text="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonTruncateConverter}, ConverterParameter=Joystick_Button_28}"
+                        ToolTip="{Binding Source={x:Null}, Converter={StaticResource JoystickButtonMappingConverter}, ConverterParameter=Joystick_Button_28}" />
+            </StackPanel>
+        </Canvas>
+    </Grid>
+</UserControl>

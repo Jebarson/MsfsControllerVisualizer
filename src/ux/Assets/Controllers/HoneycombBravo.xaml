@@ -11,7 +11,6 @@
             <!-- Controller-specific brushes -->
             <SolidColorBrush x:Key="BlueFillBrush" Color="#4A90E2" />
             <SolidColorBrush x:Key="RedFillBrush" Color="#E24A4A" />
-            <SolidColorBrush x:Key="GreenFillBrush" Color="Green" />
 
             <!-- Override truncation length for Bravo visuals -->
             <converters:JoystickButtonTruncateConverter x:Key="JoystickButtonTruncateConverter" MaxLength="18" />
@@ -25,7 +24,7 @@
             <Style x:Key="GearIndicatorStyle" TargetType="Ellipse">
                 <Setter Property="Width" Value="20" />
                 <Setter Property="Height" Value="20" />
-                <Setter Property="Fill" Value="{StaticResource GreenFillBrush}" />
+                <Setter Property="Fill" Value="{StaticResource BindingTextBrush}" />
                 <Setter Property="Opacity" Value="0.4" />
                 <Setter Property="Stroke" Value="{StaticResource StrokeBrush}" />
                 <Setter Property="StrokeThickness" Value="1" />

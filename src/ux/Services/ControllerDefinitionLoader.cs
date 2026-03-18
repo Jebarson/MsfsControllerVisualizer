@@ -13,7 +13,7 @@ using Msfs.ControllerVisualizer.Models;
 /// </summary>
 public class ControllerDefinitionLoader
 {
-    private const string ControllersJsonPath = "Assets/Controllers/controllers.json";
+    private readonly string controllersJsonPath = "Assets/Controllers/controllers.json";
 
     /// <summary>
     /// Loads all supported controller definitions from the controllers.json configuration file.
@@ -23,7 +23,7 @@ public class ControllerDefinitionLoader
     {
         try
         {
-            string jsonPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ControllersJsonPath);
+            string jsonPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, controllersJsonPath);
             
             if (!File.Exists(jsonPath))
             {
@@ -32,7 +32,7 @@ public class ControllerDefinitionLoader
             }
 
             string json = File.ReadAllText(jsonPath);
-            JsonSerializerOptions options = new JsonSerializerOptions 
+            JsonSerializerOptions options = new() 
             { 
                 PropertyNameCaseInsensitive = true 
             };

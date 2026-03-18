@@ -10,7 +10,7 @@ using System.Linq;
 using System.Windows.Input;
 
 /// <summary>
-/// Class Command. Implements the <see cref="System.Windows.Input.ICommand"/> Implements the
+/// Class for binding all the commands to do filtered command binding. Implements the <see cref="System.Windows.Input.ICommand"/> Implements the
 /// <see cref="System.IDisposable"/>
 /// </summary>
 /// <typeparam name="T">The type of command parameter.</typeparam>
@@ -18,24 +18,9 @@ using System.Windows.Input;
 /// <seealso cref="System.IDisposable"/>
 internal class Command<T> : ICommand, IDisposable
 {
-    /// <summary>
-    /// The can execute
-    /// </summary>
     private readonly Predicate<T>? canExecute;
-
-    /// <summary>
-    /// The execute
-    /// </summary>
     private readonly Action<T> execute;
-
-    /// <summary>
-    /// The is disposed
-    /// </summary>
     private bool isDisposed;
-
-    /// <summary>
-    /// The object to listen
-    /// </summary>
     private INotifyPropertyChanged? objectToListen;
 
     /// <summary>

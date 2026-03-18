@@ -1,0 +1,43 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: src
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+
+      - name: Restore
+        run: dotnet restore
+
+      - name: Test
+        run: dotnet test --configuration Release --no-restore
+
+      - name: Publish
+        run: dotnet publish ux/Msfs.ControllerVisualizer.csproj --configuration Release --runtime win-x64 --self-contained --output ../publish
+
+      - name: Create zip
+        shell: pwsh
+        run: Compress-Archive -Path ../publish/* -DestinationPath ../MSFSControllerVisualizer-${{ github.ref_name }}.zip
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: MSFSControllerVisualizer-${{ github.ref_name }}.zip
+          generate_release_notes: true

@@ -5,11 +5,10 @@ namespace Msfs.ControllerVisualizer.ViewModels;
 
 using System;
 using System.IO;
-using System.Windows;
 using System.Windows.Input;
+using Msfs.ControllerVisualizer.Common;
 using Msfs.ControllerVisualizer.Models;
 using Msfs.ControllerVisualizer.Services;
-using Msfs.ControllerVisualizer.Common;
 
 /// <summary>
 /// MainViewModel manages the primary UI logic for the MSFS Controller Visualizer application.
@@ -17,9 +16,9 @@ using Msfs.ControllerVisualizer.Common;
 /// </summary>
 public class MainViewModel : NotifyPropertyBase
 {
-    private const string RelativePathFormat = "..{0}..{0}..";
-    private const string AssetsControllersPath = "Assets{0}Controllers";
-    private const string XamlExtension = "*.xaml";
+    private const string relativePathFormat = "..{0}..{0}..";
+    private const string assetsControllersPath = "Assets{0}Controllers";
+    private const string xamlExtension = "*.xaml";
 
     private readonly ControllerDiscoveryService discoveryService;
     private readonly ControllerButtonMapper buttonMapper;
@@ -351,10 +350,10 @@ public class MainViewModel : NotifyPropertyBase
         // AppDomain.CurrentDomain.BaseDirectory is typically: X:\...\bin\Debug\net10.0-windows\
         // We need to go up to the project root
         string binDirectory = AppDomain.CurrentDomain.BaseDirectory;
-        string projectDirectory = Path.GetFullPath(Path.Combine(binDirectory, RelativePathFormat));
+        string projectDirectory = Path.GetFullPath(Path.Combine(binDirectory, relativePathFormat));
 
-        string sourceControllersPath = Path.Combine(projectDirectory, string.Format(AssetsControllersPath, Path.DirectorySeparatorChar));
-        string targetControllersPath = Path.Combine(binDirectory, string.Format(AssetsControllersPath, Path.DirectorySeparatorChar));
+        string sourceControllersPath = Path.Combine(projectDirectory, string.Format(assetsControllersPath, Path.DirectorySeparatorChar));
+        string targetControllersPath = Path.Combine(binDirectory, string.Format(assetsControllersPath, Path.DirectorySeparatorChar));
 
         if (!Directory.Exists(sourceControllersPath))
         {
@@ -365,7 +364,7 @@ public class MainViewModel : NotifyPropertyBase
         Directory.CreateDirectory(targetControllersPath);
 
         // Copy all XAML files
-        string[] xamlFiles = Directory.GetFiles(sourceControllersPath, XamlExtension, SearchOption.TopDirectoryOnly);
+        string[] xamlFiles = Directory.GetFiles(sourceControllersPath, xamlExtension, SearchOption.TopDirectoryOnly);
 
         foreach (string sourceFile in xamlFiles)
         {

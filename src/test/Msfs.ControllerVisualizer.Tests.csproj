@@ -5,13 +5,13 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <IsPackable>false</IsPackable>
+    <UseWPF>true</UseWPF>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="coverlet.collector" Version="6.0.4" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
-    <PackageReference Include="MSTest.TestAdapter" Version="3.6.4" />
-    <PackageReference Include="MSTest.TestFramework" Version="3.6.4" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.3.0" />
+    <PackageReference Include="MSTest.TestAdapter" Version="4.1.0" />
+    <PackageReference Include="MSTest.TestFramework" Version="4.1.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,9 +23,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Mocks\**\*.*">
+    <None Remove="Mocks\**\*.xml" />
+    <Content Include="Mocks\**\*.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <Link>Mocks\%(RecursiveDir)%(Filename)%(Extension)</Link>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="..\ux\Assets\Controllers\**\*.*" />
+    <Content Include="..\ux\Assets\Controllers\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>Assets\Controllers\%(RecursiveDir)%(Filename)%(Extension)</Link>
     </Content>
   </ItemGroup>
 

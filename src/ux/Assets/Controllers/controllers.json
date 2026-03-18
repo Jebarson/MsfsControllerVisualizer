@@ -11,6 +11,24 @@
       "deviceName": "Bravo Throttle",
       "productId": "6401",
       "visualFile": "HoneycombBravo.xaml"
+    },
+    {
+      "name": "Saitek Pro Flight Rudder Pedals 2024 Planes",
+      "deviceName": "Saitek Pro Flight Rudder Pedals",
+      "productId": "1891",
+      "visualFile": "SaitekProFlightRudderPedals2024.xaml"
+    },
+    {
+      "name": "MFD COUGAR Left 2024 Planes",
+      "deviceName": "F16 MFD 1",
+      "productId": "45905",
+      "visualFile": "MfdCougar2024Planes.xaml"
+    },
+    {
+      "name": "MFD COUGAR Right 2024 Planes",
+      "deviceName": "F16 MFD 2",
+      "productId": "45906",
+      "visualFile": "MfdCougar2024Planes.xaml"
     }
   ]
 }

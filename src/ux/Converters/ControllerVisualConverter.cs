@@ -3,11 +3,10 @@
 
 using System.Globalization;
 using System.IO;
-using System.Windows;
 using System.Windows.Data;
 using System.Windows.Markup;
-using WpfUserControl = System.Windows.Controls.UserControl;
 using Msfs.ControllerVisualizer.Models;
+using WpfUserControl = System.Windows.Controls.UserControl;
 
 namespace Msfs.ControllerVisualizer.Converters;
 
