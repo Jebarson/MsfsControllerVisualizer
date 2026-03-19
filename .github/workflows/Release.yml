@@ -36,8 +36,17 @@ jobs:
         shell: pwsh
         run: Compress-Archive -Path ../publish/* -DestinationPath ../MSFSControllerVisualizer-${{ github.ref_name }}.zip
 
+      - name: Prepare release notes
+        shell: pwsh
+        run: |
+          $templatePath = Join-Path $env:GITHUB_WORKSPACE ".github/release-notes-template.md"
+          $outputPath = Join-Path $env:GITHUB_WORKSPACE "release-notes.md"
+          $content = Get-Content $templatePath -Raw
+          $content = $content.Replace("{{VERSION}}", "${{ github.ref_name }}")
+          [System.IO.File]::WriteAllText($outputPath, $content)
+
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           files: MSFSControllerVisualizer-${{ github.ref_name }}.zip
-          generate_release_notes: true
+          body_path: release-notes.md
