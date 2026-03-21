@@ -17,6 +17,9 @@ using WpfUserControl = System.Windows.Controls.UserControl;
 /// </summary>
 public class ControllerVisualConverter : IMultiValueConverter
 {
+    private static readonly string ConvertersXmlNamespace =
+        $"clr-namespace:Msfs.ControllerVisualizer.Converters;assembly={typeof(JoystickButtonMappingConverter).Assembly.GetName().Name}";
+
     /// <summary>
     /// Converts controller definition and button mappings to a rendered visual user control.
     /// </summary>
@@ -66,7 +69,7 @@ public class ControllerVisualConverter : IMultiValueConverter
             };
             context.XmlnsDictionary.Add(string.Empty, "http://schemas.microsoft.com/winfx/2006/xaml/presentation");
             context.XmlnsDictionary.Add("x", "http://schemas.microsoft.com/winfx/2006/xaml");
-            context.XmlnsDictionary.Add("converters", "clr-namespace:Msfs.ControllerVisualizer.Converters;assembly=Msfs.ControllerVisualizer");
+            context.XmlnsDictionary.Add("converters", ConvertersXmlNamespace);
 
             WpfUserControl visual = (WpfUserControl)XamlReader.Load(stream, context);
 

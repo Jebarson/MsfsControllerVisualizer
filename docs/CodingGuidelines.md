@@ -3,6 +3,8 @@
 This document defines the coding standards and conventions for the **Msfs.ControllerVisualizer** project.
 All contributors must adhere to these guidelines when writing or modifying code.
 
+**Related Documentation:** See [README.md](README.md) for the complete documentation index.
+
 ---
 
 ## 1. Microsoft C# Naming Conventions

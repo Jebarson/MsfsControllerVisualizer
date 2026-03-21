@@ -1,8 +1,9 @@
 <Solution>
   <Folder Name="/docs/">
-    <File Path="../Copyright.md" />
-    <File Path="../Claude.md" />
-    <File Path="../CodingGuidelines.md" />
+    <File Path="../docs/README.md" />
+    <File Path="../docs/DesignDocument.md" />
+    <File Path="../docs/CodingGuidelines.md" />
+    <File Path="../docs/Copyright.md" />
   </Folder>
   <Folder Name="/test/">
     <Project Path="test/Msfs.ControllerVisualizer.Tests.csproj" />

@@ -85,7 +85,10 @@ public class ControllerDiscoveryServiceTests
     /// <param name="fileName">The mock XML file name.</param>
     /// <param name="expectedDeviceName">The expected device name.</param>
     /// <param name="expectedProductId">The expected product identifier.</param>
-    [TestMethod]
+    [DataTestMethod]
+    [DataRow("Saitek Pro Flight Rudder Pedals 2024 Planes.xml", "Saitek Pro Flight Rudder Pedals", "1891")]
+    [DataRow("Alpha Flight Controls 2024 Planes.xml", "Alpha Flight Controls", "6400")]
+    [DataRow("Bravo Throttle Quadrant 2024 Planes.xml", "Bravo Throttle Quadrant", "6401")]
     public void DiscoverControllersInFileExtractsCorrectDeviceInfo(string fileName, string expectedDeviceName, string expectedProductId)
     {
         string filePath = Path.Combine(this.mocksFolder, fileName);
